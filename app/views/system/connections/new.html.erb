@@ -1,0 +1,27 @@
+  <header class="row">
+    <div class="ten columns mobile-three">
+      <h2>Add Connection</h2> 
+    </div>
+    <div class="two columns mobile-one">
+    </div>    
+  </header>
+  <hr>
+
+  
+  <section>
+    <div class="row">
+      <div class="twelve columns mobile-four">
+        <p>Allow annother site to use this sites channels</p>
+
+        <%= form_for(@connection,url: system_connections_path ) do |f| %>
+          <%= content_tag :div,class:("error" if @connection.errors.has_key?(:site_id)) do %>
+            <%= f.label :site_id%>
+            <%= f.text_field :site_id,size: 30,autofocus: true,placeholder: 'Enter site ID or name' %>          
+            <%= content_tag(:small, @connection.errors[:site_id].to_sentence, class: "error") if @connection.errors.has_key?(:site_id) %>
+          <%end%>
+          <%= f.submit 'Add', class: 'right button radius'%>
+        <%end%>
+        
+      </div>
+    </div>
+  </section>

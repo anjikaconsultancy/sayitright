@@ -1,0 +1,48 @@
+<form class="page-split editor-form" id="form_{{view_id}}">
+  <div class="page-content">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <button class="close-button btn btn-default navbar-btn pull-left"><span class="glyphicon glyphicon-chevron-left"></span></button>
+        <input type="submit" class="btn btn-default navbar-btn pull-right" value="Save" />        
+        <h1 class="unselectable">Page</h1>
+      </div>
+    </div><!--/navbar-->
+  
+  
+    <div class="page-content-body scrollbars">
+      <div id="{{view_id}}_modelContent" style="width:100%;height:100%;">Loading...</div>
+    </div><!--/content-body-->
+  </div><!--/content-->
+
+
+
+  <div class="page-side">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <div class="btn-group clip">
+          <a href="#" class="navbar-btn btn btn-default active btn-clip col-xs-4"><small>Settings</small></a>
+          <a href="#" class="navbar-btn btn btn-default btn-clip col-xs-4"><small>Files</small></a>
+        </div>
+      </div>
+    </div><!--/navbar-->        
+    <div class="page-side-body scrollbars">
+      <div class="grid">
+
+        {{$ "hub/templates/forms/input" title="Title" type="text" id="modelTitle" name="title" placeholder="Enter a title" value=model.title}}
+        {{$ "hub/templates/forms/input" title="Path" type="text" id="modelName" name="name" placeholder="Enter a unique path" value=model.name}}
+        {{$ "hub/templates/forms/text_area" title="Summary" rows="2" id="modelSummary" name="summary" placeholder="Enter a short description for this page" value=model.summary}}
+        {{$ "hub/templates/forms/input" title="Featured" type="number" id="modelFeatured" name="featured" placeholder="Enter a Feature" value=model.featured}}
+           
+        <div class="form-group">
+          <label for="{{view_id}}_modelStatus">Status</label>
+          <select class="form-control" id="{{view_id}}_modelStatus" name="status">
+            <option value="draft">Draft</option>
+            <option value="hidden">Hidden</option>
+            <option value="published">Published</option>
+          </select>              
+        </div>            
+
+      </div>
+    </div><!--/side-body-->
+  </div><!--/side-->    
+</form>

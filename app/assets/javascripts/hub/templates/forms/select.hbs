@@ -1,0 +1,5 @@
+<select id="{{view_id}}_{{hash.id}}" name="{{hash.name}}" class="form-control"{{#is true '==' hash.multiple}} multiple="multiple"{{/is}}>
+  {{#hash.options}}
+  <option value="{{value}}"{{#is value '==' ../hash.value}} selected="selected"{{/is}}>{{name}}</option>
+  {{/hash.options}}
+</select>

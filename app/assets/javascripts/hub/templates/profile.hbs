@@ -1,0 +1,73 @@
+
+  <form id="userForm" class="page-content">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <input type="submit" class="btn btn-default navbar-btn pull-right" value="Save" />        
+        <h1 class="unselectable">Profile</h1>
+      </div>
+    </div><!--/navbar-->
+  
+  
+    <div class="page-content-body scrollbars">
+      <div class="grid">
+        
+        <h4>Your Details</h4>
+        <div class="row">
+          <div class="col-sm-4"><p>Change your login email and password.</p></div>
+          <div class="col-sm-8">
+
+
+
+            <div class="form-group">
+              <label for="userUsername">Username</label>
+              <input type="text" class="form-control" id="userUsername" name="title" placeholder="Choose a username" value="{{user.username}}">
+            </div>
+
+            <div class="form-group">
+              <label for="userName">Name</label>
+              <input type="text" class="form-control" id="userName" name="name" placeholder="Enter Your Name" value="{{user.name}}">
+            </div>
+
+            <div class="form-group">
+              <label for="userBio">Bio</label>
+              <textarea class="form-control" id="userBio" name="bio" placeholder="Enter a few details about yourself." rows="3">{{{user.bio}}}</textarea>
+            </div>
+
+            {{$ "hub/templates/forms/input" title="Website" type="text" id="userWebsite" name="website" placeholder="http://" value=user.website}}
+
+
+            {{$ "hub/templates/forms/input" title="Accept Marketing" type="checkbox" id="userAcceptMarketing" name="accept_marketing" checked=true value=user.accept_marketing}}
+            {{$ "hub/templates/forms/input" title="Accept Marketing From Network Partners" type="checkbox" id="userAcceptMarketingFromPartners" name="accept_marketing_from_partners" checked=true value=user.accept_marketing_from_partners}}
+
+
+            {{#if user.avatar_image_url}}
+              <img id="{{view_id}}_userAvatarImg" src="{{user.avatar_image_url}}/resize/fill/width/256/height/256/format.png" >
+            {{else}}
+              <img id="{{view_id}}_userAvatarImg">
+            {{/if}}
+            
+            <div class="form-group">
+              <label for="{{view_id}}_userAvatarSource">Avatar</label>
+              
+              <input readonly="readonly" type="text" class="form-control" id="{{view_id}}_userAvatarSource" name="avatar_source" placeholder="Image to Import" value="{{user.avatar_source}}">
+              <button class="btn btn-primary choose-avatar-button">Choose Image</button> <button class="btn btn-primary remove-avatar-button">Remove Image</button>
+            </div>
+            
+            {{#if user.header_image_url}}
+              <img id="{{view_id}}_userHeaderImg" src="{{user.header_image_url}}/resize/fill/width/640/height/360/format.jpg">
+            {{else}}
+              <img id="{{view_id}}_userHeaderImg">
+            {{/if}}
+            
+            <div class="form-group">
+              <label for="{{view_id}}_userHeaderSource">Header</label>
+              <input readonly="readonly" type="text" class="form-control" id="{{view_id}}_userHeaderSource" name="header_source" placeholder="Header to Import" value="{{user.header_source}}">
+              <button class="btn btn-primary choose-header-button">Choose Image</button> <button class="btn btn-primary remove-header-button">Remove Image</button>
+            </div>            
+
+
+          </div>
+        </div>
+      </div>
+    </div><!--/content-body-->
+  </form><!--/content-->

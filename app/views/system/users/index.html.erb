@@ -1,0 +1,29 @@
+  <header class="row">
+    <div class="four columns mobile-two">
+      <h2><%=@users.count%> Users</h2> 
+    </div>
+    <div class="eight columns mobile-two"></div>    
+  </header>
+  <hr>
+
+  
+  <section>
+    <%@users.each do |user| %>  
+      <div class="row">
+        <div class="two columns mobile-one">
+          
+        </div>
+        <div class="eight columns mobile-two">
+          <h4><%=user.name.presence || user.username.presence || user.id%></h4>
+          <p><%=user.id%> - <%=user.email%></p>
+        </div>
+        <div class="two columns mobile-one">
+          <%=link_to "Login",edit_system_user_path(user),:class=>"button small radius block" %>        
+        </div>
+      </div>
+      <hr>        
+    <%end%>
+  </section>
+
+
+<%= paginate @users, :theme=>:foundation %>

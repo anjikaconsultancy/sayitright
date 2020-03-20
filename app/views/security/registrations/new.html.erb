@@ -1,0 +1,63 @@
+<%content_for :title do %><%=t ".title",rescue_format: :text %><%end%>
+<br><br><br>
+<div class="row">
+  <div class="six columns centered">
+    <div class="panel radius silver">
+      <h1><%= link_to clean(current_site.title),root_path %></h1>
+      <hr>
+      <h5 class="subheader"><%= t ".with_email_html",site: clean(current_site.title),site_url: root_url,link: new_session_path(resource_name) %></h5>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.hidden_field :site_id,value: current_site.id.to_s %>
+          
+        <% [:notice, :error, :alert].each do |level| %>
+          <% unless flash[level].blank? %>
+            <div class="alert-box alert">
+              <%= flash[level] %>
+            </div>
+          <% end %>
+        <% end %>
+        <% if resource.errors.any? %>
+          <div class="alert-box alert">
+            <%= t(".error_message") %>
+          </div>
+        <% end %>        
+        <%= content_tag :div,class:("error" if resource.errors.has_key?(:name)) do %>
+          <%= f.label :name%>
+          <%= f.text_field :name,size: 30,autofocus: true,placeholder: t('.name_placeholder',rescue_format: :text) %>          
+          <%= content_tag(:small, resource.errors[:name].to_sentence, class: "error") if resource.errors.has_key?(:name) %>
+        <%end%>
+        
+        <%= content_tag :div,class:("error" if resource.errors.has_key?(:email)) do %>
+          <%= f.label :email%> 
+          <%= f.email_field :email,size: 30,placeholder: t('.email_placeholder',rescue_format: :text) %>
+          <%= content_tag(:small, resource.errors[:email].to_sentence, class: "error") if resource.errors.has_key?(:email) %>
+        <%end%>
+
+        <%= content_tag :div,class:("error" if resource.errors.has_key?(:password)) do %>
+          <%= f.label :password%> 
+          <%= f.password_field :password,size: 30,placeholder: t('.password_placeholder',rescue_format: :text) %> 
+          <%= content_tag(:small, resource.errors[:email].to_sentence, class: "password") if resource.errors.has_key?(:password) %>          
+        <%end%>
+
+        <%if current_site.terms_url.present?%>
+          <%= content_tag :div,class:("error" if resource.errors.has_key?(:accept_terms)) do %>
+            <label class="checkbox" for="user_accept_terms"><%= f.check_box :accept_terms %> <%=t(".accept_terms_html",:link=>"/app/terms")%></label>
+          <%end%>
+        <%else%>
+          <%= f.hidden_field :accept_terms,value: "1" %>                
+        <%end%>
+        
+        <label class="checkbox" for="user_accept_marketing"><%= f.check_box :accept_marketing %> <%=t(".accept_marketing_html",site: clean(current_site.title),site_url: root_url)%></label>
+        <label class="checkbox" for="user_accept_marketing_from_partners"><%= f.check_box :accept_marketing_from_partners %> <%=t(".accept_marketing_from_partners")%></label>
+
+        <hr>
+        <div class="row">
+          <div class="five columns push-seven"><%= f.submit t("helpers.submit.user.sign_up"), class: 'right button radius'%></div>      
+          <div class="seven columns pull-five"><span class="inline"><%= t ".or_sign_in_html",link: new_session_path(resource_name) %></span></div>      
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>  

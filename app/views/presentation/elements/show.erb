@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Video Player</title>
+
+    <link href="//vjs.zencdn.net/4.4/video-js.css" rel="stylesheet">
+    <script src="//vjs.zencdn.net/4.4/video.js"></script>
+
+    
+    <style type="text/css">
+    html,body{width:100%;height:100%;position: absolute;overflow: hidden;margin:0;padding:0;}
+    </style>
+  </head>
+  <body>
+    <video id="video_player" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="100%" data-setup="{}" poster="<%="#{@element.clip.limit_1920_url}" %>">
+      <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{@element.clip_id}/hls.m3u8",type: 'application/x-mpegURL'},true %>
+      <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{@element.clip_id}/hls.m3u8",type: 'application/vnd.apple.mpegurl'},true %>
+      <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{@element.clip_id}/hq.mp4",type: 'video/mp4'},true %>
+      <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{@element.clip_id}/mq.mp4",type: 'video/mp4'},true %>
+      <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{@element.clip_id}/sq.mp4",type: 'video/mp4'},true %>      
+      <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{@element.clip_id}/lq.mp4",type: 'video/mp4'},true %>
+    </video>
+  </body>
+</html>

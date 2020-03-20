@@ -1,0 +1,152 @@
+<form id="settingsForm" class="page-content">
+  <div class="navbar navbar-static-top navbar-default">
+    <div class="navbar-content">
+      <button type="submit" class="save-button btn btn-default navbar-btn pull-right" data-loading-text="Saving...">Save</button>                
+      <h1 class="unselectable">Settings</h1>
+    </div>
+  </div><!--/navbar-->
+
+
+  <div class="page-content-body scrollbars">
+    <div class="grid">
+      <h4>Site Information</h4>
+      <div class="row">
+        <div class="col-sm-4">
+          <p>Enter some details for identifying your site. This will be used to locate your site and provide information to networking partners.</p>
+          
+          <h4>Domains Targeting This Station</h4>
+          <div class="site-domains">
+          {{#site.domains}}
+            {{$ "hub/templates/forms/domain" }}
+          {{/site.domains}}
+          </div>
+          <button type="button" class="btn btn-default site-domain-add">Add Domain</button>
+        </div>
+
+
+        <div class="col-sm-8">
+          <div class="form-group">
+            <label for="siteId">Site Host Name</label>
+            <div class="input-group">
+              <span class="input-group-addon" data-toggle="tooltip" data-placement="right" data-container="body" title="Enable host name change"><input type="checkbox" id="siteHostEdit"> <label for="siteHostEdit"> &nbsp;Edit</label></span>
+              <input disabled type="text" class="form-control" id="siteHost" name="host" placeholder="Enter Site ID" value="{{site.host}}">
+              <span class="input-group-addon">.sayitright.com</span>
+            </div>
+            <span class="help-block">Your site host name will make up the URL for your site, if you change this you will not be able to access your site at the old location. You will also be redirected to the new location where you may have to log back in.</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="siteTitle">Site Title</label>
+            <input type="text" class="form-control" id="siteTitle" name="title" placeholder="Enter Site Title" value="{{site.title}}">
+          </div>
+
+
+          {{$ "hub/templates/forms/text_area" title="Summary" rows="2" id="siteSummary" name="summary" placeholder="Enter a short description of your site" value=site.summary}}
+
+          {{$ "hub/templates/forms/input" title="Copyright" type="text" id="siteCopyright" name="copyright" placeholder="Enter Copyright Message" value=site.copyright}}
+
+          {{$ "hub/templates/forms/input" title="Allow Registrations" type="checkbox" id="siteRegisterable" name="registerable" checked=true value=site.registerable}}
+
+          {{$ "hub/templates/forms/input" title="Contact Email" type="email" id="siteEmail" name="contact_email" placeholder="Enter Email Address" value=site.contact_email}}
+
+          {{$ "hub/templates/forms/input" title="Google Analytics Id" type="text" id="siteGoogleAnalyticsId" name="google_analytics_id" placeholder="Enter Google Analytics Id" value=site.google_analytics_id}}
+
+          {{$ "hub/templates/forms/text_area" title="Message" rows="5" id="siteMessage" name="message" placeholder="Content to be shown on users dashboards." value=site.message}}
+
+          {{$ "hub/templates/forms/text_area" title="Warning" rows="2" id="siteWarning" name="warning" placeholder="Warning to be show on users dashboards" value=site.warning}}
+
+          
+          <div class="form-group">
+            <label for="siteHomeUrl">Home Page</label>
+            <input type="text" class="form-control" id="siteHomeUrl" name="home_url" placeholder="http://" value="{{site.home_url}}">
+          </div>
+          <div class="form-group">
+            <label for="siteAboutUrl">About Page</label>
+            <input type="text" class="form-control" id="siteAboutUrl" name="about_url" placeholder="http://" value="{{site.about_url}}">
+          </div>
+          <div class="form-group">
+            <label for="siteTermsUrl">Terms Page</label>
+            <input type="text" class="form-control" id="siteTermsUrl" name="terms_url" placeholder="http://" value="{{site.terms_url}}">
+          </div>
+          <div class="form-group">
+            <label for="sitePrivacyUrl">Privacy Page</label>
+            <input type="text" class="form-control" id="sitePrivacyUrl" name="privacy_url" placeholder="http://" value="{{site.privacy_url}}">
+          </div>
+          <div class="form-group">
+            <label for="siteContactUrl">Contact Page</label>
+            <input type="text" class="form-control" id="siteContactUrl" name="contact_url" placeholder="http://" value="{{site.contact_url}}">
+          </div>
+          {{$ "hub/templates/forms/input" title="Banner Link" type="text" id="siteBannerUrl" name="banner_url" placeholder="http://" value=site.banner_url}}
+
+          {{$ "hub/templates/forms/input" title="Facebook Page Id" type="text" id="siteFacebookPageId" name="facebook_page_id" placeholder="Enter Facebook Page Id" value=site.facebook_page_id}}
+          {{$ "hub/templates/forms/input" title="Twitter Id" type="text" id="siteTwitterId" name="twitter_id" placeholder="Enter Twitter Id" value=site.twitter_id}}
+          {{$ "hub/templates/forms/input" title="Google+ Page Id" type="text" id="siteGooglePageId" name="google_page_id" placeholder="Enter Google+ Page Id" value=site.google_page_id}}
+
+
+          {{#if site.logo_image_url}}
+            <img id="{{view_id}}_siteLogoImg" src="{{site.logo_image_url}}/resize/fill/width/400/height/200/format.png" >
+          {{else}}
+            <img id="{{view_id}}_siteLogoImg">
+          {{/if}}
+          
+          <div class="form-group">
+            <label for="{{view_id}}_siteLogoSource">Logo</label>
+            <input readonly="readonly" type="text" class="form-control" id="{{view_id}}_siteLogoSource" name="logo_source" placeholder="Logo to Import" value="{{site.logo_source}}">
+            <button class="btn btn-primary choose-logo-button">Choose Image</button> <button class="btn btn-primary remove-logo-button">Remove Image</button>
+          </div>
+
+          {{#if site.icon_image_url}}
+            <img id="{{view_id}}_siteIconImg" src="{{site.icon_image_url}}/resize/fill/width/256/height/256/format.png" >
+          {{else}}
+            <img id="{{view_id}}_siteIconImg">
+          {{/if}}
+          
+          <div class="form-group">
+            <label for="{{view_id}}_siteIconSource">Icon</label>
+            
+            <input readonly="readonly" type="text" class="form-control" id="{{view_id}}_siteIconSource" name="icon_source" placeholder="Icon to Import" value="{{site.icon_source}}">
+            <button class="btn btn-primary choose-icon-button">Choose Image</button> <button class="btn btn-primary remove-icon-button">Remove Image</button>
+          </div>
+
+
+          {{#if site.background_image_url}}
+            <img id="{{view_id}}_siteBackgroundImg" src="{{site.background_image_url}}/resize/fill/width/640/height/360/format.jpg">
+          {{else}}
+            <img id="{{view_id}}_siteBackgroundImg">
+          {{/if}}
+          
+          <div class="form-group">
+            <label for="{{view_id}}_siteBackgroundSource">Background</label>
+            <input readonly="readonly" type="text" class="form-control" id="{{view_id}}_siteBackgroundSource" name="background_source" placeholder="Background to Import" value="{{site.background_source}}">
+            <button class="btn btn-primary choose-background-button">Choose Image</button> <button class="btn btn-primary remove-background-button">Remove Image</button>
+          </div>
+
+          {{#if site.banner_image_url}}
+            <img id="{{view_id}}_siteBannerImg" src="{{site.banner_image_url}}/resize/fill/width/728/height/90/format.png">
+          {{else}}
+            <img id="{{view_id}}_siteBannerImg">
+          {{/if}}
+          
+          <div class="form-group">
+            <label for="{{view_id}}_siteBannerSource">Banner</label>
+            <input readonly="readonly" type="text" class="form-control" id="{{view_id}}_siteBannerSource" name="banner_source" placeholder="Banner to Import" value="{{site.banner_source}}">
+            <button class="btn btn-primary choose-banner-button">Choose Image</button> <button class="btn btn-primary remove-banner-button">Remove Image</button>
+          </div>
+
+          {{#if site.header_image_url}}
+            <img id="{{view_id}}_siteHeaderImg" src="{{site.header_image_url}}/resize/fill/width/640/height/360/format.jpg">
+          {{else}}
+            <img id="{{view_id}}_siteHeaderImg">
+          {{/if}}
+          
+          <div class="form-group">
+            <label for="{{view_id}}_siteHeaderSource">Header</label>
+            <input readonly="readonly" type="text" class="form-control" id="{{view_id}}_siteHeaderSource" name="header_source" placeholder="Header to Import" value="{{site.header_source}}">
+            <button class="btn btn-primary choose-header-button">Choose Image</button> <button class="btn btn-primary remove-header-button">Remove Image</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div><!--/content-body-->
+</form><!--/content-->

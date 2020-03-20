@@ -1,0 +1,43 @@
+<form class="page-split editor-form">
+  <div class="page-content">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <button class="close-button btn btn-default navbar-btn pull-left"><span class="glyphicon glyphicon-chevron-left"></span></button>
+        <button type="submit" class="save-button btn btn-default navbar-btn pull-right" data-loading-text="Saving...">Save</button>        
+        <h1 class="unselectable">Theme</h1>
+      </div>
+    </div><!--/navbar-->
+  
+  
+    <div class="page-content-body scrollbars">
+      <div id="{{view_id}}_modelTemplate" style="width:100%;height:100%;"></div>
+    </div><!--/content-body-->
+  </div><!--/content-->
+
+
+
+  <div class="page-side">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <div class="btn-group clip">
+          <a href="#" class="navbar-btn btn btn-default active btn-clip col-xs-4"><small>Settings</small></a>
+          <a href="#" class="navbar-btn btn btn-default btn-clip col-xs-4"><small>Files</small></a>
+        </div>
+      </div>
+    </div><!--/navbar-->        
+    <div class="page-side-body scrollbars">
+      <div class="grid">
+        <div class="form-group">
+          <label for="{{view_id}}_modelTitle">Title</label>
+          <input type="text" class="form-control" id="{{view_id}}_modelTitle" name="title" placeholder="Choose a title" value="{{model.title}}">
+        </div>
+  
+        <div class="form-group">
+          <label for="{{view_id}}_modelDescription">Description</label>
+          <textarea class="form-control scrollbars" id="{{view_id}}_modelDescription" name="description" placeholder="Enter a short description" rows="3">{{model.description}}</textarea>
+        </div>
+
+      </div>
+    </div><!--/side-body-->
+  </div><!--/side-->    
+</form>

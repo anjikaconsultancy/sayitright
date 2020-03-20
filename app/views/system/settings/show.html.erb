@@ -1,0 +1,25 @@
+  <header class="row">
+    <div class="four columns mobile-two">
+      <h2>System Settings</h2> 
+    </div>
+    <div class="eight columns mobile-two"></div>    
+  </header>
+  <hr>
+
+  <section>
+    <div class="row">
+      <div class="twelve columns mobile-four">
+
+        <%= form_for(@system,url: system_settings_path ) do |f| %>
+          <%= f.label :message %>
+          <%= f.text_area :message ,rows:5,size: 30,autofocus: true,placeholder: 'Enter system message' %>   
+
+          <%= f.label :warning %>
+          <%= f.text_area :warning ,rows:3,size: 30,autofocus: true,placeholder: 'Enter system warning' %>   
+        
+          <%= f.submit 'Save', class: 'right button radius'%>
+        <%end%>
+        
+      </div>
+    </div>
+  </section>

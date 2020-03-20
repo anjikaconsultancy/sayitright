@@ -1,0 +1,97 @@
+<form class="page-split editor-form" id="form_{{view_id}}">
+  <div class="page-content">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <button type="button" class="close-button btn btn-default navbar-btn pull-left"><span class="glyphicon glyphicon-chevron-left"></span></button>
+        <button type="submit" class="save-button btn btn-default navbar-btn pull-right" data-loading-text="Saving...">Save</button>        
+        <h1 class="unselectable">Program</h1>
+      </div>
+    </div><!--/navbar-->
+    <div class="page-content-body scrollbars">
+      <div class="program-editor-segments-container scrollbars">
+        <div class="program-editor-segments">
+          {{#model.segments}}
+            {{$ "hub/templates/segments/:1" kind}}
+          {{/model.segments}} 
+          <div class="program-editor-segment program-editor-segment-buttons" style="margin-top:10px;">
+            <div class="program-editor-segment-insert" style="display:block!important;">
+              <button type="button" class="btn btn-default btn-lg btn-block program-editor-item-add" data-kind="clip" data-target="segment">Import</button>
+              <button type="button" class="btn btn-default btn-lg btn-block program-editor-item-add" data-kind="external" data-target="segment">Embed</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="program-editor-fragments">
+        {{#model.fragments}}
+          {{$ "hub/templates/fragments/:1" kind}}
+        {{/model.fragments}}
+      </div>
+      <div class="text-center program-editor-fragment-buttons">
+        <div class="btn-group">
+          <button type="button" class="program-editor-item-add btn btn-info" data-kind="text" data-target="fragment"><span class="glyphicon glyphicon-font"></span></button>
+          <button type="button" class="program-editor-item-add btn btn-info" data-kind="external" data-target="fragment"><span class="glyphicon glyphicon-embed"></span></button>
+          <button type="button" class="program-editor-item-add btn btn-info" data-kind="clip" data-target="fragment"><span class="glyphicon glyphicon-upload"></span></button>
+        </div>          
+      </div>
+    </div><!--/content-body-->
+  </div><!--/content-->
+
+
+
+  <div class="page-side">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <div class="btn-group clip">
+          <a href="#" data-tab data-show="#programSideSettings" data-hide="#programSideNetwork" class="navbar-btn btn btn-default active btn-clip col-xs-4"><small>Settings</small></a>
+          <a href="#" data-tab data-show="#programSideNetwork" data-hide="#programSideSettings" class="navbar-btn btn btn-default btn-clip col-xs-4"><small>Network</small></a>
+        </div>
+      </div>
+    </div><!--/navbar-->        
+    <div id="programSideSettings" class="page-side-body scrollbars">
+      <div class="grid">
+        {{$ "hub/templates/forms/input" title="Title" type="text" id="modelTitle" name="title" placeholder="Enter a title" value=model.title}}
+        {{$ "hub/templates/forms/input" title="Path" type="text" id="modelName" name="name" placeholder="Enter a unique path" value=model.name}}
+        {{$ "hub/templates/forms/text_area" title="Summary" rows="2" id="modelSummary" name="summary" placeholder="Enter a short description for this program" value=model.summary}}
+        {{$ "hub/templates/forms/input" title="Tags" type="text" id="modelTags" name="tags" placeholder="Enter tags" value=model.tags}}
+        {{$ "hub/templates/forms/input" title="Publish Date" type="text" id="modelPublishAt" name="publish_at" placeholder="Enter a date" value=model.publish_at}}
+        {{$ "hub/templates/forms/input" title="Related Content" type="url" id="modelRel" name="rel" placeholder="http://" value=model.rel}}
+
+        <div class="form-group">
+          <label for="{{view_id}}_modelStatus">Status</label>
+          <select class="form-control" id="{{view_id}}_modelStatus" name="status">
+            <option value="draft">Draft</option>
+            <option value="hidden">Hidden</option>
+            <option value="published">Published</option>
+          </select>              
+        </div>          
+      </div>
+    </div>
+    <div id="programSideNetwork" style="display:none;" class="page-side-body scrollbars">
+      <div class="grid">
+        <label>Allocations</label>
+        <div class="programs-editor-allocations-list">
+          <select id="programEditorAllocationsFilter" style="width:100%;margin-bottom:5px;">
+            <optgroup label="Filter">
+              <option value="all">Show All</option>
+              <option value="allocated">Where Allocated</option>
+              <option value="unallocated">Where Unallocated</option>
+            </optgroup>
+            <optgroup label="Sites">
+            {{#allocatedSites}}
+            <option value="{{site.id}}">{{site.title}}</option>
+            {{/allocatedSites}}
+            </optgroup>
+          </select>
+          <div class="program-editor-allocations">
+          {{#allocations}}
+            {{$ "hub/templates/forms/allocation-new" }}
+          {{/allocations}}
+          </div>
+        </div>
+
+        
+      </div>
+    </div><!--/side-body-->
+  </div><!--/side-->    
+</form>
+

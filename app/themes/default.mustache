@@ -1,0 +1,47 @@
+<h1>Hello from <a href="/">{{site.title}}</a> Path:{{request.path}} Active Path:{{request.active_path}}</h1>
+
+<a href='/users'>Users</a>
+<a href='/programs'>Programs</a>
+<a href='/channels'>Channels</a>
+
+<a href='{{site.sign_in_path}}'>Sign In</a>
+{{#site.sign_up_path}}<a href='{{site.sign_up_path}}'>Sign Up</a>{{/site.sign_up_path}}
+
+<a href='{{request.active_path}}.json'>JSON</a>
+
+
+<p>
+Custom URLs
+
+{{#site.home_url}}<a href='{{site.home_url}}'>Home</a>{{/site.home_url}}
+{{#site.about_url}}<a href='{{site.about_url}}'>About</a>{{/site.about_url}}
+{{#site.terms_url}}<a href='{{site.terms_url}}'>Terms</a>{{/site.terms_url}}
+{{#site.privacy_url}}<a href='{{site.privacy_url}}'>Privacy</a>{{/site.privacy_url}}
+{{#site.contact_url}}<a href='{{site.contact_url}}'>Contact</a>{{/site.contact_url}}  
+{{#site.help_url}}<a href='{{site.help_url}}'>Help</a>{{/site.help_url}} 
+
+</p>
+
+{{#channels}}
+Channel: <a href="{{path}}">{{title}}</a><br>
+{{/channels}}
+
+{{#channel}}
+<h1>Hello {{title}}</h1>
+{{/channel}}
+
+{{#programs}}
+Program: <a href="{{path}}">{{title}}</a><br>
+{{/programs}}
+
+{{#program}}
+<h1>Hello {{title}}</h1>
+{{/program}}
+
+{{#users}}
+User: <a href="{{path}}">{{name}}</a><br>
+{{/users}}
+
+{{#user}}
+<h1>Hello {{name}}</h1>
+{{/user}}

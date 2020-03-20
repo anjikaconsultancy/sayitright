@@ -1,0 +1,31 @@
+<div class="program-editor-segment" style="margin-top:10px;">
+  <div class="program-editor-segment-insert">
+    <button type="button" class="btn btn-default btn-lg btn-block program-editor-item-add" data-kind="clip" data-target="segment">Import</button>
+    <button type="button" class="btn btn-default btn-lg btn-block program-editor-item-add" data-kind="external" data-target="segment">Embed</button>
+    <button type="button" class="btn btn-default btn-lg btn-block program-editor-item-cancel">Cancel</button>
+  </div>
+  <div style="float:left;width:390px;height:180px;"> 
+    <div class="clearfix">
+      <input class="pull-left program-editor-segment-caption" type="text" name="segments[{{id}}][content]" value="{{content}}" placeholder="Enter Caption">
+      <button type="button" class="program-editor-item-remove btn btn-default pull-right close" data-target="segment" aria-hidden="true">&times;</button>
+    </div> 
+    
+    <button type="button" class="btn program-editor-segment-add">+</button>
+
+    <div class="program-editor-segment-item">
+      {{#unless is_new}}
+      <input type="hidden" name="segments[{{id}}][id]" value="{{id}}">
+      {{/unless}}
+      <input type="hidden" name="segments[{{id}}][_destroy]" value="false">
+      <input type="hidden" name="segments[{{id}}][kind]" value="{{kind}}">
+      <input type="hidden" name="segments[{{id}}][position]" value="{{position}}">
+      <input type="hidden" name="segments[{{id}}][clip][id]" value="{{clip.id}}">
+    
+      <div id="modelSegmentsPreview_{{id}}" class="program-editor-segment-clip" data-clip-id="{{clip.id}}" data-url="{{clip.base_url}}" data-preview="{{clip.preview_url}}" data-kind="{{clip.kind}}" data-status="{{clip.status}}" data-encoded="{{clip.encoded}}">
+      </div>
+      <button class="program-editor-item-move btn btn-segment-left" data-move="up" data-target="segment"><span class="glyphicon glyphicon-left_arrow"></span></button>
+      <button class="program-editor-item-move btn btn-segment-right" data-move="down" data-target="segment"><span class="glyphicon glyphicon-right_arrow"></span></button>
+  
+    </div>
+  </div>   
+</div>

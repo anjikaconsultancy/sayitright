@@ -1,0 +1,33 @@
+
+  <div class="page-content">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <a href="channels/new" class="btn btn-default navbar-btn pull-right">
+          <span class="glyphicon glyphicon-plus"></span>
+        </a>
+        
+        <h1 class="unselectable">Channels</h1>
+      </div>
+    </div><!--/navbar-->
+  
+  
+    <div class="page-content-body scrollbars">
+      <div class="grid">
+        {{#channels}}
+        <div class="media">
+          {{#if preview_url}}
+          <a class="pull-left" href="channels/{{id}}">
+            <img width="160" height="90" src="{{preview_url}}/resize/fill/width/320/height/180/format.jpg" >
+          </a>
+          {{/if}}
+          <div class="media-body">
+            <h4 class="media-heading"><a href="channels/{{id}}">{{title}}</a></h4>
+            <p>{{description}}</p>
+          </div>
+        </div>
+        {{/channels}}
+      
+      </div>
+
+    </div><!--/content-body-->
+  </div><!--/content-->

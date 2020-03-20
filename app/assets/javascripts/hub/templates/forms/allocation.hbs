@@ -1,0 +1,17 @@
+<div class="program-editor-allocations-item">
+  <div class="program-editor-allocations-content">{{site.title}} {{#channel}}/ {{title}}{{/channel}} <button type="button" class="close" aria-hidden="true">&times;</button></div>
+  {{#unless is_new}}
+    <input type="hidden" value="{{id}}" name="allocations[{{id}}][id]">
+  {{/unless}}
+
+  <input type="hidden" value="{{status}}" name="allocations[{{id}}][status]">
+  <input type="hidden" value="false" name="allocations[{{id}}][_destroy]">
+  
+  <input type="hidden" value="{{site.id}}" name="allocations[{{id}}][site][id]">
+  <input type="hidden" value="{{site.link}}" name="allocations[{{id}}][site][link]">
+  <input type="hidden" value="{{site.title}}" name="allocations[{{id}}][site][title]">
+  
+  <input type="hidden" value="{{channel.id}}" name="allocations[{{id}}][channel][id]">
+  <input type="hidden" value="{{channel.link}}" name="allocations[{{id}}][channel][link]">
+  <input type="hidden" value="{{channel.title}}" name="allocations[{{id}}][channel][title]">
+</div>

@@ -1,0 +1,6 @@
+{
+  "name":"SayitRight",
+  "dependencies": {
+    "medium-editor": "~1.5.0"
+  }
+}

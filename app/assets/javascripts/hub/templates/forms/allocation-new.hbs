@@ -1,0 +1,25 @@
+<div class="program-editor-allocations-item" style="position:relative;" data-cid="{{cid}}" data-site="{{site.id}}" data-allocated="{{#allocation}}{{^destroy}}true{{/destroy}}{{/allocation}}" >
+  
+  <div class="program-editor-allocations-content">
+    <div style="font-size:0.75em;font-weight:100;margin-bottom:-2px;">{{site.title}}</div>
+    <b>{{#channel}}{{title}}{{/channel}}{{^channel}}Default{{/channel}}</b>
+  </div>
+  
+  
+  <input class="program-editor-allocations-check" style="position:absolute; top:1px; right:4px;" type="checkbox" {{#allocation}}{{^destroy}}checked{{/destroy}}{{/allocation}} />
+
+  {{#allocation}}
+    {{#id}}
+      <input type="hidden" value="{{.}}" name="allocations[{{.}}][id]">
+    {{/id}}
+  
+    <input type="hidden" value="{{status}}" name="allocations[{{nid}}{{id}}][status]">
+    <input type="hidden" value="{{#destroy}}true{{/destroy}}{{^destroy}}false{{/destroy}}" name="allocations[{{nid}}{{id}}][_destroy]">
+    <input type="hidden" value="{{site.id}}" name="allocations[{{nid}}{{id}}][site][id]">
+    <input type="hidden" value="{{site.link}}" name="allocations[{{nid}}{{id}}][site][link]">
+    <input type="hidden" value="{{site.title}}" name="allocations[{{nid}}{{id}}][site][title]">
+    <input type="hidden" value="{{channel.id}}" name="allocations[{{nid}}{{id}}][channel][id]">
+    <input type="hidden" value="{{channel.link}}" name="allocations[{{nid}}{{id}}][channel][link]">
+    <input type="hidden" value="{{channel.title}}" name="allocations[{{nid}}{{id}}][channel][title]">
+  {{/allocation}}
+</div>

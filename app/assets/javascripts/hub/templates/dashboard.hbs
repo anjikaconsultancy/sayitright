@@ -1,0 +1,128 @@
+
+  <div class="page-content">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <div class="btn-group pull-left">
+          <button type="button" class="btn btn-default dropdown-toggle navbar-btn" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-plus"></span> 
+          </button>
+          {{#is user.role 'in' 'publisher,moderator,manager,administrator'}}
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="programs/new">Create Program</a></li>
+            {{#is user.role 'in' 'manager,administrator'}}            
+              <li><a href="channels/new">Create Channel</a></li>
+            {{/is}}            
+          </ul>
+          {{/is}}
+        </div>
+        <button type="button" class="btn navbar-btn pull-left btn-warning hidden">
+          #
+        </button>
+        
+        <div class="pull-right">
+          <a href="#save" class="hidden btn navbar-btn btn-default">Save</a>
+
+          <div class="btn-group navbar-btn hidden-xs">
+            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>&nbsp; {{user.name}}</button>
+
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="dashboard">Dashboard</a></li>
+              <li><a href="profile">Profile</a></li>
+              <li><a href="account">Account</a></li>
+              <li class="divider"></li>
+              <li><a href="/users/sign_out">Sign Out</a></li>
+            </ul>
+          </div>
+          <div class="btn-group navbar-btn visible-xs">
+            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span></button>
+
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Account</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Sign Out</a></li>
+            </ul>
+          </div>
+        </div>
+        <h1 class="unselectable">Dashboard</h1>
+      </div>
+    </div><!--/navbar-->
+  
+  
+    <div class="page-content-body scrollbars">
+      <div class="grid">
+        {{#if system.warning}}
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{{system.warning}}}
+        </div>
+        {{/if}}
+        {{#if site.warning}}
+        <div class="alert alert-info alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{{site.warning}}}
+        </div>
+        {{/if}}
+        {{#if system.message}}
+        <div>
+          {{{system.message}}}
+        </div>
+        <hr>
+        {{/if}}
+        {{#if site.message}}
+        <div>
+          {{{site.message}}}
+        </div>
+        <hr>
+        {{/if}}
+      </div>
+
+    </div><!--/content-body-->
+  </div><!--/content-->
+
+  <div class="page-side">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <div class="btn-group clip">
+          <a href="#" class="navbar-btn btn btn-default active btn-clip col-xs-4"><small>Settings</small></a>
+          <a href="#" class="navbar-btn btn btn-default btn-clip col-xs-4"><small>Share</small></a>
+          <a href="#" class="navbar-btn btn btn-default btn-clip col-xs-4"><small>Network</small></a>
+        </div>
+      </div>
+    </div><!--/navbar-->        
+    <div class="page-side-body scrollbars">
+      <div class="grid">
+        <div class="form-group has-warning">
+          <label for="exampleInputEmail1" class="control-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+        </div>
+        <div class="form-group has-error">
+          <label for="exampleInputPassword1" class="control-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group clip">
+          <label for="exampleInputFile">File input</label>
+          <input type="file" id="exampleInputFile">
+          <p class="help-block">Example block-level help text here.</p>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Check me out
+          </label>
+        </div>      
+        <hr>    
+        <div class="form-group">
+          <label for="exampleInputtext1">Some Text</label>
+          <textarea class="form-control" rows="8"></textarea>
+        </div>
+        
+      </div>
+    </div><!--/side-body-->
+  </div><!--/side-->    

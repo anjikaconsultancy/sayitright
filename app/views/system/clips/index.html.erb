@@ -1,0 +1,31 @@
+  <header class="row">
+    <div class="four columns mobile-two">
+      <h2><%=@clips.count%> Clips</h2> 
+    </div>
+    <div class="eight columns mobile-two"></div>    
+  </header>
+  <hr>
+
+  
+  <section>
+    <%@clips.each do |clip| %>  
+      <div class="row">
+        <div class="two columns mobile-one">
+          <%if clip.preview_url.present? %>
+            <img src="<%=clip.preview_url%>/resize/fill/width/320/height/180/format.jpg">
+          <%end%>
+        </div>
+        <div class="eight columns mobile-two">
+          <h4><%=clip.name%></h4>
+          <p><%=clip.id%> <br>Status: <%=clip.status %> Encoded: <%=clip.encoded %> Size: <%=clip.storage%> Dimensions: <%=clip.width%>x<%=clip.height%> Mime: <%=clip.mime%> Kind:<%=clip.kind%>  </p>
+        </div>
+        <div class="two columns mobile-one">
+          <%=link_to "Reprocess",system_clip_path(clip,status: :imported),:class=>"button small radius block" %>        
+        </div>
+      </div>
+      <hr>        
+    <%end%>
+  </section>
+
+
+<%= paginate @clips, :theme=>:foundation %>

@@ -1,0 +1,39 @@
+<%content_for :title do %><%=t ".title",rescue_format: :text %><%end%>
+<br><br><br>
+
+<div class="row">
+  <div class="six columns centered">
+    <div class="panel radius silver">
+      <h1><%= link_to clean(current_site.title),root_path %></h1>
+      <hr>
+        <h5 class="subheader">
+          <% if current_site.registerable %>
+            <%= t ".sign_in_with_email_or_register_html",site: clean(current_site.title),home_url: root_path,register_url: new_registration_path(resource_name)%>                
+          <% else %>
+            <%= t ".sign_in_with_email_html",site: clean(current_site.title),home_url: root_path%>
+          <% end %>
+        </h5>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= f.hidden_field :site_id,value: current_site.id%>
+        <% [:notice, :error, :alert].each do |level| %>
+          <% unless flash[level].blank? %>
+            <div class="alert-box alert">
+              <%= flash[level] %>
+            </div>
+          <% end %>
+        <% end %>
+        <%=f.label :email %>
+        <%= f.email_field :email, size: 30,autofocus: true,placeholder: t(".email_placeholder",rescue_format: :text) %>
+        <%=f.label :password %>
+        <%= f.password_field :password,size: 30,placeholder: t(".password_placeholder",rescue_format: :text)   %>  
+        <hr>
+        <div class="row">
+          <div class="five columns push-seven"><%= f.submit t(".sign_in",rescue_format: :text), class: 'right button radius'%></div>      
+          <div class="seven columns pull-five"><%= link_to(t(".request_password"), new_password_path(resource_name), class:"inline left") if devise_mapping.recoverable?%></div>      
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>  

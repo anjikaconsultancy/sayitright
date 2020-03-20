@@ -1,0 +1,31 @@
+  <header class="row">
+    <div class="four columns mobile-two">
+      <h2><%=@sites.count%> Sites</h2> 
+    </div>
+    <div class="eight columns mobile-two"></div>    
+  </header>
+  <hr>
+
+  
+  <section>
+    <%@sites.each do |site| %>  
+      <div class="row">
+        <div class="two columns mobile-one">
+          
+        </div>
+        <div class="eight columns mobile-two">
+          <h4><%=site.title%> <span class="label"><%=site.status%></span></h4>
+          <p><%=site.id%> - <%=site.title%></p>
+        </div>
+        <div class="two columns mobile-one">
+          <%=link_to "Switch",system_root_url(:host=>site.default_host, protocol: 'http'),:class=>"button small radius block" %>        
+          
+          <%=link_to "Edit",edit_system_site_path(site.id),:class=>"button small radius block" %>        
+
+        </div>
+      </div>
+      <hr>        
+    <%end%>
+  </section>
+
+<%= paginate @sites, :theme=>:foundation %>

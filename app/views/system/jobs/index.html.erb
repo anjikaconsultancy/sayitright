@@ -1,0 +1,84 @@
+  <header class="row">
+    <div class="four columns mobile-two">
+      <h2>Run Jobs</h2> 
+    </div>
+    <div class="eight columns mobile-two"></div>    
+  </header>
+  <hr>
+
+  
+  <section>
+    <div class="row">
+      <div class="eight columns mobile-two">
+        <h4>Update Sites</h4>
+        <p>Runs the site save.</p>
+      </div>
+      <div class="two columns mobile-one">
+        <%=link_to "Run",system_job_path("update_sites"),:class=>"button small radius block" %>        
+      </div>
+    </div>
+    <hr>  
+
+    <div class="row">
+      <div class="eight columns mobile-two">
+        <h4>Update Channels</h4>
+        <p>Runs the channel save method on each channel.</p>
+      </div>
+      <div class="two columns mobile-one">
+        <%=link_to "Run",system_job_path("update_channels"),:class=>"button small radius block" %>        
+      </div>
+    </div>
+    <hr>  
+    
+    <div class="row">
+      <div class="eight columns mobile-two">
+        <h4>Update Programs</h4>
+        <p>Runs the program updater to refresh any previews, indexing, caches etc.</p>
+      </div>
+      <div class="two columns mobile-one">
+        <%=link_to "Run",system_job_path("update_programs"),:class=>"button small radius block" %>        
+      </div>
+    </div>
+    <hr>        
+
+    <div class="row">
+      <div class="eight columns mobile-two">
+        <h4>Update Clips</h4>
+        <p>Resave the clips, will continue from the last status. WARNING - this is expensice as will re-encode all videos!</p>
+      </div>
+      <div class="two columns mobile-one">
+        <%=link_to "Continue",system_job_path("update_clips"),:class=>"button small radius block" %>        
+        <%=link_to "Import",system_job_path("update_clips",status:"created"),:class=>"button small radius block" %>        
+        <%=link_to "Encode",system_job_path("update_clips",status:"imported"),:class=>"button small radius block" %>        
+        <%=link_to "Verify",system_job_path("update_clips",status:"encoding"),:class=>"button small radius block" %>        
+      </div>
+    </div>
+    <hr>        
+
+    <div class="row">
+      <div class="eight columns mobile-two">
+        <h4>Retry Clips</h4>
+        <p>Retry failed clips from status given.</p>
+      </div>
+      <div class="two columns mobile-one">
+        <%=link_to "Import",system_job_path("retry_clips",status:"created"),:class=>"button small radius block" %>        
+        <%=link_to "Encode",system_job_path("retry_clips",status:"imported"),:class=>"button small radius block" %>        
+        <%=link_to "Verify",system_job_path("retry_clips",status:"encoding"),:class=>"button small radius block" %>        
+      </div>
+    </div>
+    <hr>  
+
+    <div class="row">
+      <div class="eight columns mobile-two">
+        <h4>Fix Clips</h4>
+        <p>Retry failed or non-encoded clips from status given.</p>
+      </div>
+      <div class="two columns mobile-one">
+        <%=link_to "Import",system_job_path("fix_clips",status:"created"),:class=>"button small radius block" %>        
+        <%=link_to "Encode",system_job_path("fix_clips",status:"imported"),:class=>"button small radius block" %>        
+        <%=link_to "Verify",system_job_path("fix_clips",status:"encoding"),:class=>"button small radius block" %>        
+      </div>
+    </div>
+    <hr>  
+    
+  </section>

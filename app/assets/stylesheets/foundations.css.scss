@@ -1,0 +1,87 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+$rowWidth: 100%;
+$mobileTotalColumns: 6;
+$columnGutter: 20px;
+
+$headerFontFamily: "Open Sans","Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$headerFontWeight:	bold;
+$bodyFontFamily:  "Open Sans","Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+
+$labelFontWeight: bold;
+$inputFontSize: 13px;
+
+$mainColor: #2a76f4;
+$secondaryColor: #e0e0e0;
+$alertColor: #991717;
+
+$ratio: 1.4; /* default golden_ratio makes h1 to big, this is much better */
+
+@import "foundation";
+
+header .subheader{
+  margin-top: -10px;
+}
+
+.button{
+  -webkit-box-shadow: inset 0px 1em 1em 0px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0px 1em 1em 0px rgba(255, 255, 255, 0.2);
+  text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button.secondary{
+  text-shadow: 0px -1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.button.block{
+  display: inline-block;
+  width: 100%;
+}
+
+/* panel with plain background */
+.panel.silver{
+  background: #fff;
+  background: -moz-linear-gradient(top,  rgb(255,255,255) 0%, rgb(242,242,251) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,255,255)), color-stop(100%,rgb(242,242,251)));
+  background: -webkit-linear-gradient(top,  rgb(255,255,255) 0%,rgb(242,242,251) 100%);
+  background: -o-linear-gradient(top,  rgb(255,255,255) 0%,rgb(242,242,251) 100%);
+  background: -ms-linear-gradient(top,  rgb(255,255,255) 0%,rgb(242,242,251) 100%);
+  background: linear-gradient(to bottom,  rgb(255,255,255) 0%,rgb(242,242,251) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2fb',GradientType=0 );
+  -webkit-box-shadow:  0px 0px 40px 0px rgba(0, 0, 0, 0.1);      
+  box-shadow:  0px 0px 40px 0px rgba(0, 0, 0, 0.1);
+  border-color: #ccc;
+}
+
+/* give content same height as buttons */
+a.inline,span.inline {
+  line-height: 32px;
+}
+
+/* fix rails errors */
+.field_with_errors{display: inline;}
+.error a{color: $alertColor;text-decoration: underline;}
+.error ::-webkit-input-placeholder {color:$alertColor;}
+.error :-moz-placeholder {color:$alertColor;}
+.error :-ms-input-placeholder {color:$alertColor;}
+
+/* nicer scroll bars */
+::-webkit-scrollbar{
+  height: 4px; width: 4px;
+}
+::-webkit-scrollbar-track,::-webkit-scrollbar-corner{
+  background: #ccc;
+}
+::-webkit-scrollbar-thumb {  
+  background: #666;
+}
+
+/* fix topbar button */ 
+.top-bar .has-button .button {
+    display: inline-block;
+}
+
+/* make list buttons inline*/
+ul,ol{
+  list-style-position: inside;
+}

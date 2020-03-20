@@ -1,0 +1,64 @@
+
+  <div class="page-content">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <a href="programs/new" class="btn btn-default navbar-btn pull-right">
+          <span class="glyphicon glyphicon-plus"></span>
+        </a>
+        
+        <h1 class="unselectable">Programs</h1>
+      </div>
+    </div><!--/navbar-->
+  
+  
+    <div class="page-content-body scrollbars">
+      <div class="grid">
+        {{#programs}}
+        <div class="media">       
+          {{#if preview_url}}
+          <a class="pull-left" href="programs/{{id}}">
+            <img width="160" height="90" src="{{preview_url}}/resize/fill/width/320/height/180/format.jpg" >
+          </a>
+          {{/if}}          
+          <div class="media-body">
+            <h4 class="media-heading"><a href="programs/{{id}}">{{title}}</a></h4>
+            <p>{{description}}</p>
+          </div>
+          <div class="pull-right">
+            <a href="programs/{{id}}" class="btn btn-default">Edit</a>
+            <a href="{{path}}" target="preview" class="btn btn-default">Preview</a>
+          </div>
+        </div>
+        {{/programs}}
+      
+      </div>
+      {{#is pages.pages '>' 1}}
+        <ul class="pagination pagination_center" role="menubar" aria-label="Pagination">
+          {{#is pages.page '>' 1}}
+            <li class="arrow" aria-disabled="true">
+              <a href="#" class="prev">&laquo; Previous</a>
+            </li>
+          {{/is}}
+
+          {{#is pages.page '<=' 1}}
+            <li class="arrow disabled" aria-disabled="true">
+              <a href="#" class="prev">&laquo; Previous</a>
+            </li>
+          {{/is}}
+
+          {{#pageList pages.page pages.pages}}
+            <li><a href="#" class="current" id={{this}}>{{this}}</a></li>
+          {{/pageList}}
+
+          {{#is pages.page '<' pages.pages}}
+           <li class="arrow"><a href="#" class="next">Next &raquo;</a></li>
+          {{/is}}
+
+          {{#is pages.page '>=' pages.pages}}
+            <li class="arrow disabled"><a href="#" class="next">Next &raquo;</a></li>
+          {{/is}}
+        </ul>
+      {{/is}}
+
+    </div><!--/content-body-->
+  </div><!--/content-->

@@ -1,0 +1,42 @@
+
+  <div class="page-content">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <a href="themes/new" class="btn btn-default navbar-btn pull-right">
+          <span class="glyphicon glyphicon-plus"></span>
+        </a>
+        
+        <h1 class="unselectable">Themes</h1>
+      </div>
+    </div><!--/navbar-->
+  
+  
+    <div class="page-content-body scrollbars">
+      <div class="grid">
+      
+        {{#themes}}
+        <div class="media">       
+          {{#if previews}}
+          <a class="pull-left" href="themes/{{id}}">
+            <img width="160" height="90" class="media-object" src="{{previews.crop_160x90_url}}" alt="{{title}}">
+          </a>
+          {{/if}}
+          <div class="media-body">
+            <h4 class="media-heading"><a href="themes/{{id}}">{{title}}</a></h4>
+            <p>{{description}}</p>
+            {{#is ../site.theme.id '==' id}}
+            <button type="button" class="btn btn-default pull-right btn-remove-theme">Remove</button>
+            {{else}}
+            <button type="button" class="btn btn-default pull-right btn-apply-theme" data-theme="{{id}}">Apply</button>
+            {{/is}}
+
+            
+            
+          </div>
+        </div>
+        {{/themes}}
+      
+      </div>
+
+    </div><!--/content-body-->
+  </div><!--/content-->

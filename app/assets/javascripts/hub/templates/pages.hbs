@@ -1,0 +1,28 @@
+
+  <div class="page-content">
+    <div class="navbar navbar-static-top navbar-default">
+      <div class="navbar-content">
+        <a href="pages/new" class="btn btn-default navbar-btn pull-right">
+          <span class="glyphicon glyphicon-plus"></span>
+        </a>
+        
+        <h1 class="unselectable">Pages</h1>
+      </div>
+    </div><!--/navbar-->
+  
+  
+    <div class="page-content-body scrollbars">
+      <div class="grid">
+        {{#pages}}
+        <div class="media">       
+          <div class="media-body">
+            <h4 class="media-heading"><a href="pages/{{id}}">{{title}}</a></h4>
+            <p>{{description}}</p>
+          </div>
+        </div>
+        {{/pages}}
+      
+      </div>
+
+    </div><!--/content-body-->
+  </div><!--/content-->

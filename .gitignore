@@ -1,0 +1,17 @@
+.bundle
+.env
+.ruby-version
+mongod.lock
+.c9
+db/*.sqlite3
+log/*.log
+tmp/
+.DS_Store
+work/
+public/assets/
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

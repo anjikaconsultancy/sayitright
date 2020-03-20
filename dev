@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+rails server -p 3000 --debugger
+# rails server thin -p 3000 --debugger
+# foreman start -p 3000

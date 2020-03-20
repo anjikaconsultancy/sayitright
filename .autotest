@@ -1,0 +1,12 @@
+require "autotest/restart"
+require "autotest/growl"
+require 'autotest/fsevent'
+
+Autotest.add_hook :initialize do |autotest|
+  autotest.add_mapping(%r%^test/(integration)/.*rb$%) {|filename, _|
+    filename
+  } 
+  %w{.git .svn .hg .DS_Store ._* vendor tmp log doc public}.each do |exception|
+    autotest.add_exception(exception) 
+  end
+end

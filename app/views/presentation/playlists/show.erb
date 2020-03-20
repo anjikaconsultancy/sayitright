@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Playlist</title>
+    
+    <link href="//vjs.zencdn.net/4.4/video-js.css" rel="stylesheet">
+    <script src="//vjs.zencdn.net/4.4/video.js"></script>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdn.iframe.ly/embed.js?api_key=<%=ENV['IFRAMELY_API_KEY']%>"></script>
+    
+    <style type="text/css">
+    html,body,#container{width:100%;height:100%;position: absolute;overflow: hidden;margin:0;padding:0;}
+    html *{-webkit-user-select: none;-moz-user-select: none; -ms-user-select: none; -o-user-select: none;user-select: none;    }
+    #slider{position: absolute;z-index: 9; }
+    .slide{position: absolute;display:none;z-index: 99; }
+    .slide.image img{width:100%;height:100%;border:0;margin: 0;padding: 0;}
+    .slide.external iframe{width:100%;height:100%;border:0;margin: 0;padding: 0;}
+    
+    #prev{z-index: 9999; position: absolute;left:0;top:0;height:100%;width:40px;cursor: pointer;
+          background: -moz-linear-gradient(left,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+          background: linear-gradient(to right,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */    
+    }
+    #next{z-index: 9999; position: absolute;right:0;top:0;height:100%;width:40px;cursor: pointer;
+          background: -moz-linear-gradient(left,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* IE10+ */
+          background: linear-gradient(to right,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 ); /* IE6-9 */    
+    }
+    #prev img{
+      margin: auto;position: absolute;top:0;bottom: 0; z-index:999;
+    }
+    #next img{
+      margin: auto;position: absolute;top:0;bottom: 0; right: 0; z-index:999;
+    }
+    </style>
+    <script type="text/javascript">
+        
+    var topMargin = 0;
+    var bottomMargin = 0;
+    var edgeWidth = 50;
+    var spacingWidth = 20;
+    
+		$(document).ready(function(){
+		  //Lets us set the slide from a hash e.g. /playlist#2
+		  //But, maybe this should be by element id?
+      // var currentSlide = parseInt(window.location.hash.substr(1))||0;
+      var slideCount = $(".slide").length;
+      if(currentSlide >= slideCount){
+        currentSlide = slideCount -1;
+      }
+      if(currentSlide < 0){
+        currentSlide = 0;
+      }        
+
+      
+		  $(window).resize(function(){
+  		  $("#slider").finish();
+                        
+		    var width = $(document).width();
+		    var height = $(document).height();
+
+        // Max size of a slide
+        var maxWidth = width - edgeWidth - edgeWidth - spacingWidth - spacingWidth;
+        var maxHeight = height - topMargin - bottomMargin;
+        var aspect = maxWidth/maxHeight;
+        
+  		  var left=0;
+
+        $(".slide").each(function(){
+          //Stop any animations that are running
+          
+          //Calculate a size that fits into max size
+          var slideWidth = $(this).data("max-width");
+          var slideHeight = $(this).data("max-height");
+          var slideAspect = slideWidth/slideHeight;
+        
+          if(slideAspect > aspect){
+            if(slideWidth > maxWidth){
+              slideWidth = maxWidth;
+              slideHeight = maxWidth / slideAspect;
+            }        
+          }else{
+            if(slideHeight > maxHeight){
+              slideHeight = maxHeight;
+              slideWidth = maxHeight * slideAspect;
+            }
+          }
+          
+          //Position clip relative to slider
+          $(this).css({
+            display: "block",
+            top: topMargin + ((maxHeight - slideHeight)/2) + "px",
+            left: left + "px",
+            width: slideWidth + 'px',
+            height:slideHeight + 'px'
+          });
+                
+          left = left + slideWidth + spacingWidth + spacingWidth;
+        });
+        
+        //Position the slider at the center of the current slide
+        var $slide = $(".slide").eq(currentSlide);
+                        
+        $("#slider").css("left",((width / 2)-$slide.position().left-($slide.width()/2)) + "px");
+		    
+		    //Position the overlay buttons to the edge of the current slide
+		    var overlayWidth = ((width - $slide.width())/2);
+		    $("#prev").css("width",overlayWidth+"px");
+		    $("#next").css("width",overlayWidth+"px");
+		    
+		    if(currentSlide==0){
+		      $("#prev").hide();
+		    }else{
+  		    $("#prev").show();
+		    }
+
+		    if(currentSlide==slideCount-1){
+		      $("#next").hide();
+		    }else{
+  		    $("#next").show();
+		    }
+
+		    
+		  });
+		  
+		  $(window).trigger("resize");
+		  
+		  $("#prev").click(function(){		  
+		    currentSlide = currentSlide - 1;
+		    if(currentSlide<0){currentSlide=0;}
+        var $slide = $(".slide").eq(currentSlide);        
+        $("#slider").animate({left: (($(document).width() / 2)-$slide.position().left-($slide.width()/2)) + "px"}, 200)
+        
+		    var overlayWidth = (($(document).width() - $slide.width())/2);
+		    $("#prev").animate({width:overlayWidth+"px"},200);
+		    $("#next").animate({width:overlayWidth+"px"},200);
+		    
+		    if(currentSlide==0){
+		      $("#prev").hide();
+		    }else{
+  		    $("#prev").show();
+		    }
+		    if(currentSlide==slideCount-1){
+		      $("#next").hide();
+		    }else{
+  		    $("#next").show();
+		    }
+		    
+		  });
+		  $("#next").click(function(){
+		    currentSlide = currentSlide + 1;
+		    if(currentSlide>=slideCount){currentSlide=slideCount-1;}
+        var $slide = $(".slide").eq(currentSlide);        
+        $("#slider").animate({left: (($(document).width() / 2)-$slide.position().left-($slide.width()/2)) + "px"}, 200)
+		    var overlayWidth = (($(document).width() - $slide.width())/2);
+		    $("#prev").animate({width: overlayWidth+"px"},200);
+		    $("#next").animate({width: overlayWidth+"px"},200);        
+
+		    if(currentSlide==0){
+		      $("#prev").hide();
+		    }else{
+  		    $("#prev").show();
+		    }
+		    
+		    if(currentSlide==slideCount-1){
+		      $("#next").hide();
+		    }else{
+  		    $("#next").show();
+		    }
+		    
+		  });
+
+
+		});
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="slider">
+        <% @program.segments.each do |segment| %>
+          <!-- KIND:<%= segment.kind%><%if segment.clip.present?%> CLIP.KIND:<%= segment.clip.kind%> CLIP.ENCODED:<%= segment.clip.encoded %> CLIP.WIDTH:<%= segment.clip.width %> CLIP.HEIGTH:<%= segment.clip.height %> <%end%>-->
+          <% if segment.kind == :external %>
+            <div class="slide external" id="segment_<%=segment.id%>" data-max-width="1280" data-max-height="720">
+              <a class="embedly-card" href="<%=segment.url%>" data-iframely-url></a>
+            </div>    
+          <% elsif segment.kind == :clip and segment.clip.kind == :image and segment.clip.encoded %>
+            <div class="slide image" id="segment_<%=segment.id%>" data-max-width="<%=segment.clip.width%>" data-max-height="<%=segment.clip.height%>">
+              <%=image_tag(segment.clip.limit_1920_url)%>
+            </div>    
+          <% elsif segment.kind == :clip and segment.clip.kind == :video and segment.clip.encoded %>
+            <div class="slide video" id="segment_<%=segment.id%>" data-max-width="<%=segment.clip.width%>" data-max-height="<%=segment.clip.height%>">
+              <video id="video_<%=segment.id%>" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="100%" data-setup="{}" poster="<%="#{segment.clip.limit_1920_url}" %>">
+                <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{segment.clip_id}/hls.m3u8",type: 'application/x-mpegURL'},true %>
+                <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{segment.clip_id}/hls.m3u8",type: 'application/vnd.apple.mpegurl'},true %>
+                <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{segment.clip_id}/sq.mp4",type: 'video/mp4'},true %>
+                <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{segment.clip_id}/hq.mp4",type: 'video/mp4'},true %>
+                <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{segment.clip_id}/mq.mp4",type: 'video/mp4'},true %>
+                <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{segment.clip_id}/sq.mp4",type: 'video/mp4'},true %>      
+                <%=tag :source,{src:"//#{ENV['S3_CLOUD_FRONT']}/clips/#{segment.clip_id}/lq.mp4",type: 'video/mp4'},true %>
+              </video>
+            </div>    
+          <% end%>
+        <%end%>
+      </div>
+      <div id="prev"><img width="40" height="80" title="" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAABQCAYAAABrjzfBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhNJREFUeNrs29FtwyAQBmDSCTyCu4FHyAgdwSNkhG6QETxCRiCZgGyQdgJ3gyu0INmJY2NzcP9DkE5RpCj6hA0c5rxTSpH6b2f/+WXj23+/2vhRwo0W4majs/Fho0IE3sfJY2GBw579LNGrlBh9bigxhYO2yMAQ2kaDDAxxQAeGEV8hA10YGzUyMAygBhmYhCR0JKEjSSDMmtFNQnFCB5Jfw6GBFHM/SgMNOnDxUiMA+7lRTSBxnMLtBrs6hPbud5WQPfj0XmT586ZpSGtNVVWx34ssuL7vyTVjTCqyZQUOcaElIjUbcArHhKyTgXM4BuQhCRiDc63rOpZMBw0XRvN6YCHcQ5aDiBtNN4i40aqCiBvNh4i4USKLiKNhloWKmwYC4R6BYLg/4NtwxrZAZdfOxbT3crnIHUO0bUsxzf2u+CUGRD6fZkCQ8xO1MNJELXWCSB2dLAghj6vSLQHkYXXCWhi535TyF0Ru3zQVQOrkbWcM0q3rItvOGKTDueRDbOM+h0zEGfaHR0NkIm7yGJe4kAw4yvL4LUTiYzfy5S+vR8BsvYcGrF8HOQkVTBUycI98VndEPo6NPnWXOjyMrqV5FVUsnSQhATeV75W6rJtrC6HrtlSBqaROTXFyTsIsda051lbWMmbIXuMGdhz3Wg5gVthW4M1vDbPD1gC1z3obVbjd7+rcqxlXNX5l4yy5zfsVYAAAoCGezktbgwAAAABJRU5ErkJggg==" /></div>
+      <div id="next"><img width="40" height="80" title="" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAABQCAYAAABrjzfBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAk9JREFUeNrUmt1RwkAQx4/IuykhHXhWIHSQDggVqB1gBWoFKYES8I3HpAPsIL7ydN4xdxlQCGRvd7P5z+zoMM754+72M5mq4ZVa09Zm1u7978r/TKcDQeXWnjyU7vpDTkAHs/BwqRIiB1JY21kzQCPTyloTAUYGmEfuGBlgZm2DCIYKmCMd5z/D8OLSOwKJppEeurkWx2KVRN43TR2nIDuoPRxLsE2AO8eWCZKed27Nnab6ALLcOShgOQTcrYA5ZZyLBcz87impgOXQtVty5WhnQxeUXYDvEirepKPYzKQCujv3LKVnSC7cPTFNzd2Zz8DpLE1Ttd1u1X6/V3Vdk7WGoMrXwpmqqkxQURQkJX+JAYcMeaIGCw4R8sQ5ei/QBYcEeRKYey/g/vktioBsVUG/JTFkG5yj7gohZFx4YYBsc68RCgl3ECbItiEyQiFpABEhYRmEEfIgQ2mRkPSAMZCJGonEH7F4JxEfZsQH6lJ6qhNfLIgvt8QXrCrm+RpHyQ92FM6mqYAs0DQNW9sJuoda605IzMY9DI7QIClGHzl0ob+QVMOjKG8OkIhw5tL4F7ygGyZhps3JhRHwTsqU9VxF/WPtU/KM2unDg4oFdHBvY+hVKsXQ8XXZta5uKflRmJN7lvA6hqNeSz3i46OuJR7xsVcvhwg9fUYfbgfn3JB9ZzPskJDhESskdLoVIL+lAgbIR2tfUgGDd8/HkrdnCvfdVbKXbFfI80YSZYgTM1IF0EYq4HGf8wKsL9mVedibproTId7v3k188PDBDvoVYABOpsAYfcGVgwAAAABJRU5ErkJggg==" /></div>
+    </div>
+  </body>
+</html>

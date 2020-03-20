@@ -1,0 +1,25 @@
+<html>
+<body></body>
+<script type="text/javascript">
+var y = 0;
+for(var w=1;w<=1920;w++){
+  var h = w*9/16;
+  if(h % 1 == 0){ 
+    var s = h * 4 / 3;
+    console.log(w+"x"+h+" - " + s +"x"+h);
+    var d = document.createElement("div");
+    d.innerHTML =(w+"x"+h);
+    d.style.backgroundColor="red";
+    d.style.color="white";
+    d.style.position="absolute";
+    d.style.top = y + "px";
+    d.style.left = 0+"px";
+    d.style.width = w + "px";
+    d.style.height = h + "px";
+    document.body.appendChild(d);
+    
+    y=y+h+1;
+  }
+}
+</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%if current_site.present? %><%=current_site.title %> / <%end%><%=@error[:title] %> [<%=@error[:status] %>]</title>
+
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <%if current_site.present? and current_site.background_image_url.present?%>
+      <style>
+        body{
+          background:url(<%=current_site.background_image_url%>) no-repeat center center fixed;;             
+          -webkit-background-size: cover;   -moz-background-size: cover;   -o-background-size: cover;   background-size: cover; 
+          padding-top:50px;
+        }
+      </style>
+    <%end %>
+    
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container" role="main">
+      <div class="modal show">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><%=@error[:title] %> [<%=@error[:status] %>]</h4>
+            </div>
+            <div class="modal-body">
+              <p><%=@error[:message] %></p>
+            </div>
+            <div class="modal-footer">
+              <a href="/" class="btn btn-default" role="button">Home</a> <%if current_site.contact_email.present? %><a href="mailto:<%=current_site.contact_email%>" class="btn btn-default" role="button">Contact</a><%end%>  
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->      
+    </div>      
+  </body>
+</html>

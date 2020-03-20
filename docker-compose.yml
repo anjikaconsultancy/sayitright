@@ -1,0 +1,19 @@
+# Run SayitRight with nginx proxy in development
+proxy:
+  image: jwilder/nginx-proxy
+  ports:
+    - "80:80"
+  volumes:
+    # This is inside the boot2docker VM 
+    - /var/run/docker.sock:/tmp/docker.sock
+  links:
+    - sayitright
+
+sayitright:
+  build: .
+  environment:
+    - VIRTUAL_HOST=*.sayitright.dev
+    - VIRTUAL_PORT=3000
+  env_file: .env    
+  volumes:
+    - ./:/usr/src/app

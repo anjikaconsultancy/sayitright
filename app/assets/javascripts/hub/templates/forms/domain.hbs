@@ -1,0 +1,13 @@
+<div class="site-domain">
+  {{#unless is_new}}
+  <input type="hidden" name="domains[{{id}}][id]" value="{{id}}">
+  {{/unless}}
+  <input type="hidden" name="domains[{{id}}][_destroy]" value="false">
+  <input type="hidden" name="domains[{{id}}][host]" value="{{host}}">
+  <input type="hidden" name="domains[{{id}}][path]" value="{{path}}">
+  <a href="http://{{host}}" target="_blank">{{host}}</a> 
+  <button type="button" class="close" aria-hidden="true">&times;</button>
+  <br>
+  <small class="text-muted">Path: /{{path}}</small>
+  <hr>
+</div>

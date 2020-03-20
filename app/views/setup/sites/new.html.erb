@@ -1,0 +1,68 @@
+<%content_for :title do %><%=t ".title",rescue_format: :text %><%end%>
+<br><br><br>
+<div class="row">
+  <div class="six columns centered">
+    <div class="panel radius silver">
+      <h1><%= link_to clean(current_site.title),root_path %></h1>
+      <hr>
+      <h5 class="subheader"><%= t ".create_new_site" %></h5>
+
+      <%= form_for(@site,url: site_path) do |f| %>
+          
+        <% [:notice, :error, :alert].each do |level| %>
+          <% unless flash[level].blank? %>
+            <div class="alert-box alert">
+              <%= flash[level] %>
+            </div>
+          <% end %>
+        <% end %>
+        <% if @site.errors.any? %>
+          <div class="alert-box alert">
+            <%= t(".error_message") %>
+          </div>
+        <% end %>        
+
+        <%= content_tag :div,class:("error" if @site.errors.has_key?(:title)) do %>
+          <%= f.label :title%> 
+          <%= f.text_field :title,size: 30,placeholder: t('.title_placeholder',rescue_format: :text) %>
+          <%= content_tag(:small, @site.errors[:title].to_sentence, class: "error") if @site.errors.has_key?(:title) %>
+        <%end%>
+        
+        
+        <%= content_tag :div,class:("error" if @site.errors.has_key?(:host)) do %>
+          <%= f.label :host%>
+          <%= f.text_field :host,size: 30,autofocus: true,placeholder: t('.name_placeholder',rescue_format: :text) %>          
+          <%= content_tag(:small, @site.errors[:host].to_sentence, class: "error") if @site.errors.has_key?(:host) %>
+        <%end%>
+      
+
+        <%= f.fields_for :users do |user| %>
+          <%= content_tag :div,class:("error" if user.object.errors.has_key?(:name)) do %>
+            <%= user.label :name%>
+            <%= user.text_field :name,size: 30,autofocus: true,placeholder: t('.name_placeholder',rescue_format: :text) %>          
+            <%= content_tag(:small, user.object.errors[:name].to_sentence, class: "error") if user.object.errors.has_key?(:name) %>
+          <%end%>
+          
+          <%= content_tag :div,class:("error" if user.object.errors.has_key?(:email)) do %>
+            <%= user.label :email%> 
+            <%= user.email_field :email,size: 30,placeholder: t('.email_placeholder',rescue_format: :text) %>
+            <%= content_tag(:small, user.object.errors[:email].to_sentence, class: "error") if user.object.errors.has_key?(:email) %>
+          <%end%>
+  
+          <%= content_tag :div,class:("error" if user.object.errors.has_key?(:password)) do %>
+            <%= user.label :password%> 
+            <%= user.password_field :password,size: 30,placeholder: t('.password_placeholder',rescue_format: :text) %> 
+            <%= content_tag(:small, user.object.errors[:email].to_sentence, class: "password") if user.object.errors.has_key?(:password) %>          
+          <%end%>
+        <% end %>
+
+        <hr>
+        <div class="row">
+          <div class="five columns push-seven"><%= f.submit t(".create_site",rescue_format: :text), class: 'right button radius'%></div>      
+          <div class="seven columns pull-five"><span class="inline"><%= t ".cancel",link: root_path %></span></div>      
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>  

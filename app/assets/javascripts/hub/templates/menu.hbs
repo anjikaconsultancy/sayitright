@@ -1,0 +1,65 @@
+{{#is user.role 'in' 'user,publisher,moderator,manager,administrator'}}
+  <div class="nav-menu-group">
+    <button class="nav-menu-group-btn btn btn-block btn-link" data-toggle="collapse" data-target="#dashboard_menu_group"><h6>Logged in as <span id="menu_user_name">{{user.name}}</span></h6><i class="glyphicon glyphicon-minus"></i></button>
+    <ul class="nav nav-stacked nav-menu collapse in" id="dashboard_menu_group">
+      <li><a href="dashboard"><span class="glyphicon glyphicon-dashboard" data-toggle="tooltip" data-placement="right" data-container="body" title="Dashboard"></span> Dashboard</a></li>
+      <li><a href="account"><span class="glyphicon glyphicon-user " data-toggle="tooltip" data-placement="right" data-container="body" title="Account"></span> Account</a></li>
+      <li><a href="profile"><span class="glyphicon glyphicon-nameplate" data-toggle="tooltip" data-placement="right" data-container="body" title="Profile"></span> Profile</a></li>
+    </ul>
+  </div>
+{{/is}}
+
+{{#is user.role 'in' 'publisher,moderator,manager,administrator'}}
+  <div class="nav-menu-group">
+    <button class="nav-menu-group-btn btn btn-block btn-link" data-toggle="collapse" data-target="#programs_menu_group"><h6>Programs</h6><i class="glyphicon glyphicon-minus"></i></button>
+    <ul class="nav nav-stacked nav-menu collapse in" id="programs_menu_group">
+      <li><a href="programs"><span class="glyphicon glyphicon-book" data-toggle="tooltip" data-placement="right" data-container="body" title="All Programs"></span> All Programs</a></li>
+    </ul>
+  </div>
+{{/is}}
+
+{{#is user.role 'in' 'manager,administrator'}}
+  <div class="nav-menu-group">
+    <button class="nav-menu-group-btn btn btn-block btn-link" data-toggle="collapse" data-target="#channels_menu_group"><h6>Channels</h6><i class="glyphicon glyphicon-minus"></i></button>
+    <ul class="nav nav-stacked nav-menu collapse in" id="channels_menu_group">
+      <li><a href="channels"><span class="glyphicon glyphicon-tags" data-toggle="tooltip" data-placement="right" data-container="body" title="All Channels"></span> All Channels</a></li>
+    </ul>
+  </div>
+{{/is}}
+
+{{#is user.role 'in' 'manager,administrator'}}
+  <div class="nav-menu-group hidden">
+    <button class="nav-menu-group-btn btn btn-block btn-link" data-toggle="collapse" data-target="#pages_menu_group"><h6>Pages</h6><i class="glyphicon glyphicon-minus"></i></button>
+    <ul class="nav nav-stacked nav-menu collapse in" id="pages_menu_group">
+      <li><a href="pages"><span class="glyphicon glyphicon-more_items" data-toggle="tooltip" data-placement="right" data-container="body" title="All Pages"></span> All Pages</a></li>
+    </ul>
+  </div>
+{{/is}}
+
+{{#is user.role 'in' 'manager,administrator'}}
+  <div class="nav-menu-group">
+    <button class="nav-menu-group-btn btn btn-block btn-link" data-toggle="collapse" data-target="#users_menu_group"><h6>Users</h6><i class="glyphicon glyphicon-minus"></i></button>
+    <ul class="nav nav-stacked nav-menu collapse in" id="users_menu_group">
+      <li><a href="users"><span class="glyphicon glyphicon-group" data-toggle="tooltip" data-placement="right" data-container="body" title="All Users"></span> All Users</a></li>
+    </ul>
+  </div>
+{{/is}}
+
+{{#is user.role 'in' 'manager,administrator'}}  
+  <div class="nav-menu-group">
+    <button class="nav-menu-group-btn btn btn-block btn-link" data-toggle="collapse" data-target="#site_menu_group"><h6>Site</h6><i class="glyphicon glyphicon-minus"></i></button>
+    <ul class="nav nav-stacked nav-menu collapse in" id="site_menu_group">
+      <li><a href="settings"><span class="glyphicon glyphicon-adjust_alt" data-toggle="tooltip" data-placement="right" data-container="body" title="Settings"></span> Settings</a></li>
+      <li class="hidden"><a href="themes"><span class="glyphicon glyphicon-tint" data-toggle="tooltip" data-placement="right" data-container="body" title="Themes"></span> Themes</a></li>
+    </ul>
+  </div>
+{{/is}}
+
+
+<div class="nav-menu-group">
+  <button class="nav-menu-group-btn btn btn-block btn-link" data-toggle="collapse" data-target="#info_menu_group"><h6>About</h6><i class="glyphicon glyphicon-minus"></i></button>
+  <ul class="nav nav-stacked nav-menu collapse in" id="info_menu_group">
+    <li><a href="http://www.sayitright.com"><span class="glyphicon glyphicon-link" data-toggle="tooltip" data-placement="right" data-container="body" title="Version"></span> SayitRight v3.0</a></li>
+  </ul>
+</div>
+  

@@ -1,0 +1,20 @@
+  <header class="row">
+    <div class="twelve columns">
+      <h1><%=Sirn::Application::APP_NAME%> <sup><small><%=Sirn::Application::APP_VERSION%></small></sup></h1>    
+      <h4 class="subheader">System Administration</h4>
+      <hr>
+    </div>
+  </header>
+  
+  <section class="row">
+    <div class="twelve columns">
+      <h3>Current Site is '<%=current_site.title.presence || current_site.name %>'</h3>
+      <ul class="side-nav">
+        <li><h4><%=link_to("#{current_site.users.count} Users",system_users_path)%></h4></li>
+        <li><h4><%=link_to("#{current_site.programs.count} Programs",system_programs_path)%></h4></li>
+      </ul>
+    </div>
+  </section>
+
+
+

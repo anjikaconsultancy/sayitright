@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html>  
+  <head>
+    <title>{{site.title}} {{#channel.title}} - {{channel.title}}{{/channel.title}} {{#program.title}} - {{program.title}}{{/program.title}} {{#page.title}} - {{page.title}}{{/page.title}}</title>
+    <meta name="description" content="{{site.description}}">
+    <meta name="robots" content="index,follow">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" >
+	<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" type="text/css">
+	<link href="//fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" rel="stylesheet" type="text/css">
+	<link href="//weloveiconfonts.com/api/?family=brandico" rel="stylesheet" type="text/css">
+	<link href="//s3.amazonaws.com/fdn.sayitright.com/shared/glyphicons_social/css/social.css" rel="stylesheet" type="text/css">
+	<!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> -->
+	
+	<!--link href="http://cdn.sayitright.com/themes/521bc8bf350380957500000d/styles/style.css?v={{request.request_time}}" rel="stylesheet" type="text/css"-->
+
+	<!--[if lt IE 9]>
+	  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+	  <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.min.js"></script>
+	<![endif]-->
+
+	<!--link href="http://vjs.zencdn.net/4.0/video-js.css" rel="stylesheet">
+	<script src="{{theme.path}}/scripts/video.min.js"></script>
+	<link href="//vjs.zencdn.net/4.2/video-js.css" rel="stylesheet">
+
+<!--  ================ START OF MY CHANNEL CODE ATTEMPT ================ -->
+<style>
+/*================================================
+* Minor Reset
+================================================*/
+body {
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+	/*font-family: 'Lato', sans-serif;*/
+	font-family:"Helvetica Neue", Arial, adelle-sans, sans-serif;
+	font-size: 14px;
+	line-height: 24px;
+	font-weight: 400;
+	letter-spacing: 0.4px;
+	margin-top:50px;
+}
+h1, h2, h3, h4, h5, h6 {
+	/*font-family:'Roboto', sans-serif;*/
+	/*font-family: 'Lato', sans-serif;*/
+	font-family:"Helvetica Neue", Arial, adelle-sans, sans-serif;
+	font-weight: 300;
+	word-spacing: 1px;
+}
+
+h2{
+    font-size:18px;
+    font-weight:400;
+    text-transform:uppercase;
+}
+
+iframe{
+	border: 0;
+}
+a,
+.navbar-default .navbar-nav>li>a {
+	font-weight: 400;
+	color:#333;
+}
+a:hover, a:focus, a:active {
+	text-decoration:none;
+	color:#222;
+}
+span[class*="brandico-"]:before {
+	font-family:'brandico';
+	font-weight:normal!important;
+	font-style:normal!important;
+}
+img {
+	max-width:100%;
+	height:auto;
+}
+.middle-align {
+	float:left;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.lead {
+	font-weight:300;
+}
+
+/*================================================
+* Font Awesome
+================================================*/
+/*@font-face {
+  font-family: 'FontAwesome';
+  src: url('http://s3.amazonaws.com/fdn.sayitright.com/sites/50d3870bc58585a387000001/fontawsome/fontawesome-webfont.eot?v=4.0.3');
+  src: url('http://s3.amazonaws.com/fdn.sayitright.com/sites/50d3870bc58585a387000001/fontawsome/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), 
+	url('http://s3.amazonaws.com/fdn.sayitright.com/sites/50d3870bc58585a387000001/fontawsome/fontawesome-webfont.woff?v=4.0.3') format('woff'), 
+	url('http://s3.amazonaws.com/fdn.sayitright.com/sites/50d3870bc58585a387000001/fontawsome/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), 
+	url('http://s3.amazonaws.com/fdn.sayitright.com/sites/50d3870bc58585a387000001/fontawsome/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}*/
+
+*[role="contentinfo"] .social-links {
+	display:block;
+	width:100%;
+	text-align:center;
+	margin-top:10px;
+}
+*[role="contentinfo"] .social:before {
+	color: #eee;
+}
+*[role="contentinfo"] .social-links a{
+	display:inline-block;
+	height: 35px;
+}
+
+/*================================================
+* Navbar
+================================================*/
+.navbar-default {
+	margin-bottom:0;
+	box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+	background-color:#fff;
+	border:none;
+    border-radius:0;
+    opacity:0.95;
+}
+nav[role="navigation"] {
+	border-top:solid 1px #ddd;
+	/*border-bottom:solid 1px #ddd;*/
+}
+.navbar-default .navbar-header {
+	width:100%;
+	position:relative;
+	padding:10px;
+}
+.navbar-default .navbar-header>.brand {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	margin-top:-5px;
+	margin-right:-10px;
+	width: 50px;
+	float: left;
+}
+.navbar-default .navbar-collapse{
+    margin-left:10px;
+}
+.navbar-default .navbar-header .navbar-nav>li>a {
+	line-height: 30px;
+	padding: 0 15px;
+}
+
+.navbar-header .brand img {
+    width:50px;
+    height:50px;
+    
+}
+
+
+a.sir i {
+	background:url(http://s3.amazonaws.com/fdn.sayitright.com/sites/50d3870bc58585a387000001/img/sir-icon.png) no-repeat 50% 50%;
+	width:22px;
+	height:22px;
+	background-size:100%;
+}
+a.sir i,
+a.sir span {
+	display:inline-block;
+	vertical-align: middle;
+}
+
+.sir-header-chevron {
+	background:url(http://s3.amazonaws.com/fdn.sayitright.com/sites/50d3870bc58585a387000001/img/sir-header-chevron.png) no-repeat 0 50%;
+	width:20px;
+	height:40px;
+	margin-right:10px;
+	display:inline-block;
+	vertical-align: middle;
+}
+
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:active,
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+	background-color:#eee;
+}
+
+.sir-actions {
+	float:right;
+	width:100%;
+}
+.menu-btn, form.sir-search {
+	float:left;
+	margin-right:10px;
+	border-bottom:none;
+}
+
+.navbar-toggle {
+	margin-top:2px;
+}
+.navbar-default .navbar-header .menu-btn {
+	line-height:1.428571429 !important;
+	float:right;
+	margin-right:10px;
+    padding:6px 12px;
+    font-size:14px;
+}
+.sir-nav {
+	position:absolute;
+	display:none;
+	background: #fff;
+	top: 30px;
+	left: 0;
+	border-radius: 2px;
+}
+.sir-nav.in {
+	display:block;
+	padding:10px;
+}
+.sir-nav ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.sir-nav ul li {
+	padding;5px 0;
+}
+.navbar-default .navbar-header>.sir-social-icon,
+*[class*='brandico'] {
+	font-family: 'brandico';
+	font-weight: normal!important;
+	font-style: normal!important;
+	color:#333;
+	font-size:20px;
+	margin-right: 10px;
+}
+.navbar-default .navbar-header>.sir-search {
+	float:right;
+}
+.sir-search .form-control {
+	border:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-transition:none;
+	line-height: 40px;
+	height: 50px;
+}
+.sir-search .form-control-feedback{
+    font-size:18px;
+}
+
+.nav-justified {
+	width: 100%;
+}
+.nav-justified>li>a:hover, 
+.nav-justified>li>a:focus {
+	text-decoration: none;
+	background-color: transparent;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+	background-color: transparent;
+}
+.navbar-default .navbar-toggle:hover .icon-bar, 
+.navbar-default .navbar-toggle:focus .icon-bar {
+	background-color: transparent;
+}
+
+.sir-tab {
+	background-color: #fff;
+	padding: 4px 10px;
+	border-bottom: solid 1px #ddd;
+}
+.sir-tab .container {position:relative;}
+.sir-tab a {color:#333;}
+.sir-tab .sir-nav a {color:#333;}
+
+.navbar-default .navbar-nav>li>a {
+	text-transform:uppercase;
+    font-size:18px;
+    font-family:Roboto;
+    font-weight:500;
+}
+
+.nav-login {
+	float:right;
+	font-size: 20px;
+}
+
+#bs-example-navbar-collapse .navbar-nav {
+    margin: 7.5px 10px;
+}
+
+
+/*================================================
+* Sections
+================================================*/
+.section,
+.section-grey {
+	padding:40px 0;
+}
+
+.section {
+	border-top:solid 1px #e7e7e7;
+	border-bottom:solid 1px #e7e7e7;
+}
+.section-grey {
+	background-color:#fafafa;
+	border-top:solid 1px #e7e7e7;
+	border-bottom:solid 1px #e7e7e7;
+}
+.section-header {
+    background-color:#5b4cd8;
+	padding-top:0;
+	margin-top:0;
+	overflow:hidden;
+}
+
+.section-head {
+	padding:5px;
+}
+
+.playlist {
+	background-color:#333;
+	/*max-height:400px;
+	height:200px;*/
+}
+
+/*================================================
+* Default Header
+================================================*/
+.jumbotron{
+    height:100%;
+    text-shadow:0 0 3px rgba(0,0,0,0.5);
+    text-align:center;
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(40%,rgba(0,0,0,0.2)), color-stop(60%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 40%,rgba(0,0,0,0.2) 60%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 40%,rgba(0,0,0,0.2) 60%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 40%,rgba(0,0,0,0.2) 60%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 40%,rgba(0,0,0,0.2) 60%,rgba(0,0,0,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000022',GradientType=0 ); /* IE6-9 */
+}
+.jumbotron .container{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.jumbotron h1{
+    font-family:'Roboto', sans-serif; 
+    font-size:60px;
+    font-weight:300; /*Roboto:100,300,400,500,700,900*/
+    color:#fff;
+}
+.jumbotron p{
+    font-family:'Roboto', sans-serif; 
+    font-size:28px;
+    font-weight:400;
+    color:#eee;
+}
+
+/*================================================
+* Video Header
+================================================*/
+.before-video {
+	position:absolute;
+	z-index:900;
+}
+.vjs-tech, .after-video {
+	position:relative;
+	z-index:1000;
+}
+.vjs-tech {
+	width:100%;
+	height:auto;
+}
+
+/*================================================
+* Feature
+================================================*/
+.feature {
+	color:#fff;
+	position:relative;
+	padding:0;
+	overflow: hidden;
+	display:block;
+}
+.feature:hover {
+	color:#f5d46c;
+}
+.feature img {
+	width:100%;
+	display: block;
+}
+.feature .headline {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	right: 0;
+	bottom: 0;
+	z-index:1000;
+}
+.feature .headline h3 {
+	margin-top:0;
+}
+
+.program-header {
+	margin-top:0;
+}
+.program-page {
+	margin-top:30px;
+}
+
+/*================================================
+* Feature
+================================================*/
+.section-featured-channels{
+    background-color:#444;
+}
+
+.section-featured-channels .col-md-2{
+    padding:0;
+}
+
+
+/*================================================
+* Flex boxes that maintain aspect ratio
+================================================*/
+.flex {
+	position: relative;
+	height: 0;
+	overflow: hidden;
+	padding-bottom:100%;
+}
+.flex-16x9 {
+	padding-bottom: 56.25%;
+}
+.flex-4x3 {
+	padding-bottom: 75%;
+}
+.flex-2x1 {
+	padding-bottom: 50%;
+}
+.flex iframe, .flex object, .flex embed, .flex video ,.flex-content{
+	display:block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/*================================================
+* Cover fill background
+================================================*/
+.bg-cover{
+    background-position:center center; 
+    background-repeat:no-repeat;
+    background-attachment:scroll;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+.share-bar *{
+	box-sizing:content-box;
+	margin-bottom:15px;
+}
+
+.featured-results {
+	display: block;
+	margin: 0 auto;
+	float: none;
+	text-align: center;
+}
+.featured-results .featured-channel {
+	width: 28%;
+	margin: 1%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+/*================================================
+* Thumbnails
+================================================*/
+.thumbnail {
+	margin-bottom:30px;
+}
+/*================================================
+* Results
+================================================*/
+.featured-channels {
+	text-align: center;
+}
+.results {
+	margin-top:20px;
+}
+.result {
+	position:relative;
+	margin-bottom:20px;
+	display: block;
+}
+.result img {
+	width:100%;
+	height:auto;
+	display:block;
+    border: 1px solid #ddd;
+}
+.results .img-circle {
+	overflow:hidden;
+	display:inline-block;
+	position: relative;
+	width:270px;
+	height:270px;
+}
+.featured-channel h3 {
+	text-align:center;
+	font-size: 18px;
+	text-transform: uppercase;
+}
+/*.results .img-circle h3 {
+	position: absolute;
+	display: inline-block;
+	text-align: center;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: 0;
+	padding-top: 40%;
+	background-color:#fff;
+	filter:alpha(opacity=50);
+	opacity:0.5;
+	font-size:18px;
+}
+.results .img-circle:hover h3 {
+	filter:alpha(opacity=80);
+	opacity:0.8;
+}*/
+.result-advert{
+	overflow: hidden;
+	border-radius:3px;
+	border:1px solid #333;
+	box-shadow: 0 0 4px rgba(0,0,0,0.3);
+	background: #444;
+}
+.result-advert:hover{
+	opacity: 0.8;
+	box-shadow: 0 0 4px rgba(255,155,0,1.0);
+}
+.result-overlay {
+	position:relative;
+	padding:0;
+	overflow: hidden;
+	border-radius:3px;
+	border:1px solid #ccc;
+}
+.result-overlay .caption {
+	padding:0px 8px;
+	color:#fff;
+	position:absolute;
+	bottom: 0px;
+	left:0px;
+	width:100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+.result-overlay .caption h5 {
+	font-weight:400;
+}
+.result-overlay .caption h6 {
+	font-weight:400;
+}
+.result-overlay:hover{
+	opacity:0.8;
+}
+.result-overlay:hover .caption {
+	color:#f5d46c;
+}
+.result-borderless {
+	padding:0;
+	border:none;
+	border-radius:none;
+}
+
+.programs .program-result {
+	padding:12px;
+	/*border: solid 1px #ddd;*/
+	border-radius:5px;
+	margin-bottom: 30px;
+}
+.programs .program-result date {
+	display:block;
+	font-size:12px;
+	color:#888;
+}
+.programs>div:first-child,
+.programs>div:nth-child(2) {
+	width: 50%;
+}
+.programs>div:first-child {
+	float: right;
+	height: 500px;
+}
+.programs>div:nth-child(2) {
+
+}
+
+.text-clip {
+	overflow:hidden;
+	overflow: hidden;
+	height: 23px;
+	margin: 7px 0;
+	line-height:22px;
+}
+
+.program-description {
+	height:50px;
+	color: #888;
+	overflow:hidden;
+}
+
+
+/*================================================
+* Footer
+================================================*/
+footer[role="contentinfo"] {
+	background-color:#3e3e3e;
+	color:#e5e5e5;
+}
+footer[role="contentinfo"] a {
+	color:#e5e5e5;
+}
+
+.copy {
+	text-align:center;
+}
+.copy p {
+	margin-bottom: 0;
+	padding: 8px 0;
+	background-color: #333;
+	color: #eee;
+	font-size: 12px;
+}
+
+
+.ads {
+	display:inline-block;
+	width:100%;
+}
+.sidebar-ad {
+	background:#333;
+	height:100px;
+}
+
+
+.has-feedback {
+	position: relative;
+}
+.has-feedback .form-control-feedback {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	display: block;
+	width: 34px;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	margin-top: -17px;
+}
+
+.tags {
+	display:block;
+}
+
+.user-profile {
+	padding: 10px;
+	background-color: #f7f7f7;
+	border: solid 1px #eee;
+	margin-bottom: 30px;
+}
+.user-profile img,
+.user-profile p {
+	display:inline-block;
+	vertical-align: middle;
+}
+.user-profile img {
+	margin-right:3%;
+	width:30%;
+}
+.user-profile p {
+	width:65%;
+}
+
+.section-marketing {
+	/*margin-bottom: 0px;
+	position: fixed;
+	bottom: 0px;
+	background-color: rgb(255, 255, 255);
+	left: 0px;
+	right: 0px;
+	box-shadow: 0px -2px 3px rgba(0,0,0,0.3);
+	padding:5px 0;
+	z-index:10000;*/
+	padding:15px 0;
+}
+
+/*================================================
+* Helpres
+================================================*/
+.text-center {text-align:center;}
+.text-left {text-align:left;}
+.text-right {text-align:right;}
+
+/*================================================
+* Media Queries
+================================================*/
+@media (min-width: 768px){
+	.navbar-default .navbar-collapse {
+		margin-left:35px;
+	}
+    #bs-example-navbar-collapse .navbar-nav {
+       margin: 0;
+    }
+	.middle-align {
+		float:none;
+	}
+    .playlist {
+    /*height:400px;*/
+    }
+    .sidebar-ad {
+		height:100px;
+	}
+	.navbar-default .navbar-header {
+		padding:0;
+	}
+	.nav-login {
+		display:inline-block;
+		border-right: solid 1px #ddd;
+		float:left;
+	}
+	.navbar-default .navbar-header .navbar-nav>li>a,
+	.nav-login {
+		line-height: 50px;
+		padding: 0 15px;
+		border-left: solid 1px #ddd;
+	}
+	.navbar-default .navbar-header>.brand {
+		position:absolute;
+		left:0;
+		top:5px;
+		float:none;
+	}
+	.sir-actions {
+		width:auto;
+	}
+	.results .img-circle {
+		width:100%;
+		height:100%;
+	}
+	.featured-results .featured-channel {
+		width: 14%;
+		margin: 1%;
+	}
+}
+@media (min-width: 992px) {
+	.sidebar-ad {
+		height:100px;
+	}
+	/*.featured-results .featured-channel {
+		width: 14%;
+		margin: 1%;
+	}*/
+}
+@media (min-width: 1200px) {
+	
+}
+</style>
+
+</head>
+<body>
+
+<!--=========== NAVIGATION ===========-->
+<nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<!-- {{#site.icon_image_url}} -->
+			<a class="brand" href="http://{{request.host}}">
+				<img src="{{site.icon_image_url}}/resize/fill/width/50/height/50/format.jpg" title="Icon" alt="Icon" />
+			</a>
+			<!-- {{/site.icon_image_url}} -->
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="{{#request.is_home}}active{{/request.is_home}}"><a href="http://{{request.host}}">Home</a></li>
+					<li class="{{#request.is_channels}}active{{/request.is_channels}}"><a href="http://{{request.host}}/channels/">Channels</a></li>
+					<li class="{{#request.is_programs}}active{{/request.is_programs}}"><a href="http://{{request.host}}/programs/">Programs</a></li>
+				</ul>
+				<div class="sir-actions">
+					<a href="http://{{request.host}}/hub/" class="nav-login"><span class="glyphicon glyphicon-user"></span></a>
+					<form class="form-inline sir-search">
+						<div class="form-group has-feedback">							
+							<input type="text" name="search" class="form-control" placeholder="Search" />
+							<span class="glyphicon glyphicon-search form-control-feedback"></span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+<!--=========== / NAVIGATION ===========-->
+
+<!-- {{^request.is_pages}} -->
+
+
+<!--=========== PROGRAM PLAYLIST ===========-->
+<!-- {{#program.playlist}} -->
+<section class="playlist">
+	<div class="flex flex-2x1">{{{program.playlist}}}</div>
+</section>
+<!-- {{/program.playlist}} -->
+<!--=========== / PROGRAM PLAYLIST ===========-->
+
+
+<!-- {{#request.is_home}} -->
+{{#site.background_image_url}}
+<section class="section-header bg-cover" style="background-image:url('{{site.background_image_url}}')">
+    <div class="flex flex-2x1">
+        <div class="flex-content">
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="row">
+                        <div class=".col-md-8 .col-md-offset-2">
+                            <h1>{{site.title}}</h1>
+                            <p class="lead">{{{site.summary}}}</p>        
+                        </div>
+                    </div>
+                    
+                </div>                    
+            </div>
+            <!--
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 text-center">
+                        <div style="background-color:#fff;opacity:0.9;margin-top:25px;padding:15px;">
+                        <a href="{{site.home_url}}">
+                         {{#site.logo_image_url}}
+                				<img src="{{site.logo_image_url}}/format.jpg" title="Site Logo" alt="Site Logo" />
+                				 {{/site.logo_image_url}} 
+                				 {{^site.logo_image_url}} 
+                				<h1>{{site.title}}</h1>
+                			      {{/site.logo_image_url}} 
+                        </a>
+                        <p>{{{site.summary}}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>    
+    </div>
+
+    
+</section>
+{{/site.background_image_url}}
+
+<!--=========== NETWORK LOGO & BANER ===========-->
+<section class="section-marketing" style="background-color:#667;">
+	<div class="container">
+		<div class="row site-banner">
+			<div class="col-xs-12 col-sm-6 col-md-3 middle-align" style="background-color:#fff;">
+				<a href="{{network.url}}">
+				<!-- {{#network.logo_image_url}} -->
+				<img src="{{network.logo_image_url}}/format.jpg" title="Network Logo" alt="Network Logo" />
+				<!-- {{/network.logo_image_url}} -->
+				<!-- {{^network.logo_image_url}} -->
+				<h1>{{network.title}}</h1>
+				<!-- {{/network.logo_image_url}} -->
+				</a>
+			</div>
+			<!-- {{#site.banner_image_url}} -->
+			<div class="col-xs-12 col-sm-8 .col-md-9 middle-align">
+					<!-- {{#site.banner_url}} --><a href="{{site.banner_url}}"><!-- {{/site.banner_url}} -->
+						<img style="width:100%;max-width:auto;" src="{{site.banner_image_url}}/resize/fill/width/730/height/90/format.jpg" title="Site Banner" alt="Site Banner" />
+					<!-- {{#site.banner_url}} --></a><!-- {{/site.banner_url}} -->
+			</div>
+			<!-- {{/site.banner_image_url}} -->
+		</div>
+	</div>
+</section>
+<!--=========== / LOGO & BANER ===========-->
+
+<!-- {{/request.is_home}} -->
+
+
+<!--******************************************************** Premium Sponsors ********************************************************-->
+
+
+<!-- {{#request.is_home}} -->
+
+<!--===========  4 CHANNELS WIDGET ================-->
+<!--section class="section">
+	<div class="container">
+		<div class="row results">
+			<h2><a href="http://{{request.host}}/channels/">Explore all Channels</a></h2>
+			<div class="channel-results"><p>Loading...</p></div>
+		</div>
+	</div>
+</section-->
+<!--===========  / 4 CHANNELS WIDGET ================-->
+
+
+
+<!--===========  FEATURES LIST WIDGET ================-->
+<!--section class="section-grey">
+	<div class="container">
+		<h3>Features <a href="/channels/features" class="pull-right text-small">More <span class="glyphicon glyphicon-chevron-right"></span></a></h3>
+		<div id="features-list" class="row results">
+			<div class="col-sm-6 col-sm-offset-3 filler">
+				<h6>Loading...</h6>
+				<div class="progress progress-striped active">
+					<div class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section-->
+<!--===========  / FEATURES LIST WIDGET ================-->
+
+
+<!--===========  FEATURED CHANNELS ================-->
+
+<!-- New Channels Test
+<section class="section-featured-channels">
+    <div class="row">
+        {{#featured_channels}}
+            <div class="col-md-2">
+                <div class="flex flex-16x9">
+                    <div class="flex-content bg-cover" style="background-image:url('{{preview_url}}/resize/fill/width/300/height/300/format.jpg')">{{title}}</div>
+                </div>
+            </div>
+        {{/featured_channels}}
+    </div>
+</section>
+-->
+
+<section class="section-grey">
+	<div class="container">
+		<h2 class="text-center clearfix">Channels <a href="http://{{request.host}}/channels/" class="btn btn-default pull-right">View All <span class="glyphicon glyphicon-chevron-right"></span></a></h2>
+		<div class="featured-results">
+			{{#featured_channels}}
+			<div class="featured-channel">
+				{{#preview_url}}
+				<a href="http://{{request.host}}{{path}}">
+					<img src="{{preview_url}}/resize/fill/width/300/height/300/format.jpg" class="img-circle" />
+				</a>
+				<h3>{{title}}</h3>
+				{{/preview_url}}
+				{{^preview_url}}
+				<a href="{{site.home_url}}{{path}}" class="img-circle"><h3>{{title}}</h3></a>
+				{{/preview_url}}
+			</div>
+			{{/featured_channels}}
+		</div>
+	</div>
+</section>
+
+<!-- {{/request.is_home}} -->
+
+<!--===========  CHANNELS ================-->
+{{#channels}}
+<section>
+	<div class="container">
+		<h2>Channels</h2>
+		<div class="row results">
+			<div class="col-xs-12">
+				<div class="row">
+					{{#channel}}
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<a class="result result-borderless" href="{{path}}">
+							{{#preview_url}}
+							<img src="{{preview_url}}/resize/fill/width/360/height/203/format.jpg" />
+							{{/preview_url}}
+							<h5 class="text-clip">{{title}}</h5>
+						</a>
+					</div>
+					{{/channel}}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{{/channels}}
+<!--===========  / CHANNELS ================-->
+
+
+<!--===========  PROGRAMS ================-->
+{{#programs}}
+<section class="section-shadow">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- {{^channel}} -->
+				{{#request.is_home}}
+				<h2>Recent Programs<a href="http://{{request.host}}/programs/" class="pull-right btn btn-default">View All <span class="glyphicon glyphicon-chevron-right"></span></a></h2>
+				{{/request.is_home}}
+				{{^request.is_home}}
+				<h2>Programs{{#programs.next_page}} <a href="{{programs.next_page}}" class="pull-right text-small">More <span class="glyphicon glyphicon-chevron-right"></span></a>{{/programs.next_page}}</h2>
+				{{/request.is_home}}
+				<!-- {{/channel}} -->
+				<!-- {{#channel}} -->
+				<h3>{{channel.title}} programs</h3>
+				<!-- {{/channel}}-->
+
+				<div class="row results programs">
+					{{#program}}
+					<div class="col-xs-12 col-sm-4">
+						<div class="program-result">
+                            {{#preview_url}}
+							<a class="result result-borderless" href="{{path}}"><img src="{{preview_url}}/resize/fill/width/480/height/270/format.jpg"></a>
+                            {{/preview_url}}
+							<div class="result-content">
+								<date>{{publish_at.full_date}}</date>
+								<a href="{{path}}"><h4 class="text-clip">{{title}}</h4></a>
+								<p class="program-description">{{description}}</p>
+							</div>
+						</div>
+					</div>
+					{{/program}}
+				</div>
+				<ul class="pager">
+					<!-- {{#previous_page}}--><li class="previous"><a href="{{previous_page}}">&larr; Newer</a></li><!-- {{/previous_page}}-->
+					<!-- {{#next_page}}--><li class="next"><a href="{{next_page}}">Older &rarr;</a></li><!-- {{/next_page}}-->
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+{{/programs}}
+<!--===========  / PROGRAMS ================-->
+
+<!--===========  PROGRAM ================-->
+{{#program}}
+<section>
+	<div class="container">
+		<div class="row program-page">
+			<div class="col-xs-12 col-sm-9">
+				<h1 class="program-header">{{title}}</h1>
+				<h4>Published by <a href="{{user.url}}">{{user.name}}</a></h4>
+				<date>Published on {{publish_at.full_date}}</date>
+				<div class="tags">{{tags}}</div>
+
+				{{#channel.title}}
+				<h4><em>In: <a href="http://{{request.host}}/channels/{{channel.id}}">{{channel.title}}</a></em></h4>
+				{{/channel.title}}
+				<!-- {{#summary}}--><p class="lead">{{{summary}}}</p><!-- {{/summary}}-->
+				<div class="content">{{{content}}}</div>
+	  			<hr>
+				<div class="share-bar">
+					<span class='st_sharethis_hcount' displayText='ShareThis'></span>
+					<span class='st_fblike_hcount' displayText='Facebook Like'></span>
+					<span class='st_facebook_hcount' displayText='Facebook'></span>
+					<span class='st_twitter_hcount' displayText='Tweet'></span>
+					<span class='st_linkedin_hcount' displayText='LinkedIn'></span>
+					<span class='st_googleplus_hcount' displayText='Google +'></span>
+					<span class='st_email_hcount' displayText='Email'></span>          
+				</div>
+			</div>
+			<aside class="col-xs-12 col-sm-3">
+				<div class="user-profile">
+					<img src="{{user.avatar_image_url}}" /></a>
+					<p><a href="{{user.url}}">{{user.name}}</a><br />{{user.bio}}</p>
+				</div>
+
+				<a href="http://{{request.host}}/channels/" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Back to Channels</a>
+
+			</aside>
+		</div>
+	</div>
+</section>
+{{/program}}
+<!--===========  / PROGRAMS ================-->
+	  
+
+
+<!--******************************************************** Secondary Sponsors 2 ********************************************************-->
+
+			
+
+<!-- {{/request.is_pages}} -->
+
+
+<!-- {{#request.is_pages}} -->
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				{{{page.content}}}
+			</div>
+		</div>
+	</div>
+</section>
+<!-- {{/request.is_pages}} -->
+
+
+<footer role="contentinfo">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="social-links">
+					{{#site.facebook_page_id}}
+					<a target="_blank" href="http://facebook.com/{{site.facebook_page_id}}" class="social facebook" data-name="facebook" data-type="" data-prefix="social" data-utf="E031"></a>
+					{{/site.facebook_page_id}}
+					{{#site.twitter_id}}
+					<a target="_blank" href="http://twitter.com/{{site.twitter_id}}" class="social twitter" data-name="twitter" data-type="" data-prefix="social" data-utf="E031"></a>
+					{{/site.twitter_id}}
+					{{#site.google_page_id}}
+					<a target="_blank" href="http://google.com/{{site.twitter_id}}" class="social google_plus" data-name="google_plus" data-type="" data-prefix="social" data-utf="E031"></a>
+					{{/site.google_page_id}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="copy">
+		<p>{{site.copyright}}</p>
+	</div>
+</footer>
+
+
+	<script type="text/javascript">
+	// function downloadJSAtOnload() {
+	// 	var files = [
+	// 		"http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js",
+	// 		"http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js",
+	// 		"//vjs.zencdn.net/4.2/video.js",
+	// 		"http://cdn.sayitright.com/themes/521bc8bf350380957500000d/scripts/script.js?v={{theme.version}}"
+	// 	];
+	// 	files.forEach(function(entry) {
+	// 		var element = document.createElement("script");
+	// 		element.src = entry;
+	// 		document.body.appendChild(element);
+	// 	});
+	// }
+	// if (window.addEventListener){
+	// 	window.addEventListener("load", downloadJSAtOnload, false);
+	// } else if (window.attachEvent){
+	// 	window.attachEvent("onload", downloadJSAtOnload);
+	// } else {
+	// 	window.onload = downloadJSAtOnload;
+	// }
+	</script>
+
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="//vjs.zencdn.net/4.2/video.js"></script>
+	<!--script type="text/javascript" src="http://cdn.sayitright.com/themes/521bc8bf350380957500000d/scripts/script.js?v={{theme.version}}"></script-->
+
+	<script>
+	// shim layer with setTimeout fallback
+	window.requestAnimFrame = (function(){
+		return  window.requestAnimationFrame       ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame    ||
+			window.oRequestAnimationFrame      ||
+			window.msRequestAnimationFrame     ||
+			function( callback ){
+				window.setTimeout(callback, 1000 / 60);
+			};
+	})();
+	!(function( $ ){
+		var app = {
+			settings: {
+				domain: location.host,
+				pathname: window.location.pathname,
+				ticking: false,
+				lastScrollY: 0,
+				win: window,
+				nav_pos: $('.scroll-with').offset().top,
+				nav_height: $('.scroll-with').height(),
+				scroll_with: false
+			},
+			init: function() {
+				s = this.settings;
+				this.bindUIActions();
+			},
+			allow_feature_link: function(){
+				$('.feature').on('click', function(event) {
+					var link = $('img.after-video').data('link');
+					window.location = link;
+				});
+			},
+			getChannels: function( el ){
+				var response = '';
+				$.getJSON('http://'+s.domain+'/channels.json', function(data) {
+					$.each(data.channels.channel, function(i, value) {
+							var id = value.id,
+							title = value.title,
+							name = value.name,
+							path = value.path;
+							response += '<li><a href="'+path+'">'+title+'</a></li>';
+					});
+				}).success(function(){
+
+				}).error(function(){
+					el.html('<p>There seems to have been an error somewhere.</p>');
+				}).complete(function(){
+					el.html(response).append('<li><a class="btn" href="http://'+s.domain+'/channels">View All</a></li>');
+
+				});
+			},
+			getFourChannels: function( el ){
+				var response = '',
+					count = 0;
+				$.getJSON('http://'+s.domain+'/channels.json', function(data) {
+					$.each(data.channels.channel, function(i, value) {
+						if(count < 4){
+							var id = value.id,
+							title = value.title,
+							name = value.name,
+							path = value.path;
+							response += '<div class="col-xs-6 col-sm-3">';
+							response += '<a class="result result-borderless" href="'+path+'">';
+							response += '<img src="'+value.preview_url+'" />';
+							response += '<h5 class="text-clip">'+title+'</h5>';
+							response += '</a>';
+							response += '</div>';
+						}
+						count++;
+					});
+				}).success(function(){
+
+				}).error(function(){
+					el.html('<p>There seems to have been an error somewhere.</p>');
+				}).complete(function(){
+					el.html(response);
+
+				});
+			},
+			buildVideoHeader: function( el ){
+				player = _V_(el);
+				player.ready(function(){
+					// On Video End
+					player.on('ended', function(){
+						$('.feature img.after-video').removeClass('hidden');
+						$('.feature img.before-video').addClass('hidden');
+						$.when(
+							$('#'+el+' video').fadeOut(300)
+						).then(function(){
+							$('#'+el+' video').remove();
+							allow_feature_link();
+						});
+					});
+				});
+			},
+			loadChannel: function(channel, target, limit, template) {
+				var $t = $(target);
+				$.getJSON(channel + '?callback=?').done(function(data) {
+					$t.empty();
+					$.each(data.programs.program, function(key, item) {
+						if (key < limit) {
+							if (template == 0) {
+								$t.append('<div class="col-xs-12 col-sm-6 col-md-4"><a class="result result-borderless" href="' + item.path + '"><img src="' + item.previews.crop_480x270_url + '"><h5 class="text-clip">' + item.title + '</h5></a></div>');
+							} else if (template == 1) {
+								$t.append('<li><a href="' + item.path + '" class="block"><h4>' + item.title + '</h4></a></li>');
+							}
+						}
+					});
+				});
+			},
+			headerAspectRatio: function(){
+				if( $('.section-header')[0] ){
+					var win_w = $(window).width(),
+						h_h = ( win_w / 728 ) * 90;
+					$('.section-header').css({'height':h_h+'px'});
+				}
+			},
+			onResize: function() {
+				app.updateElements(s.win.scrollY);
+			},
+			onScroll: function(evt) {
+				if(!s.ticking) {
+					s.ticking = true;
+					requestAnimFrame(app.updateElements);
+					s.lastScrollY = s.win.scrollY;
+				}
+			},
+			updateElements: function() {
+				//if( s.scroll_with ){
+				//	var relativeY = s.lastScrollY / 3000;
+				//	if( s.lastScrollY > s.nav_pos){
+				//		$('.scroll-with').addClass('navbar-fixed-top');
+				//		$('.sir-tab').css({'margin-bottom': s.nav_height+'px'});
+				//	} else {
+				//		$('.scroll-with').removeClass('navbar-fixed-top');
+				//		$('.sir-tab').css({'margin-bottom': '0'});
+				//	}
+				//}
+				s.ticking = false;
+			},
+			pos: function(base, range, relY, offset){
+				return base + this.getLimit(0, 1, relY - offset) * range;
+			},
+			prefix: function(obj, prop, value){
+				var prefs = ['webkit', 'moz', 'o', 'ms'];
+				for (var pref in prefs) {
+					obj[prefs[pref] + prop] = value;
+				}
+			},
+			getLimit: function(min, max, value){
+				return Math.max(min, Math.min(max, value));
+			},
+			bindUIActions: function() {
+				if( $('.scroll-with')[0] )
+					s.scroll_with = true;
+				this.updateElements(s.win.scrollY);
+
+				s.win.addEventListener('resize', this.onResize, false);
+				s.win.addEventListener('scroll', this.onScroll, false);
+
+				// $('footer[role="contentinfo"]').css({"margin-bottom": s.marketing_height+'px'});
+
+				if( $('.widget-channel-list')[0] ){
+					this.getChannels( $('.widget-channel-list') );
+				}
+
+				if( $('.channel-results')[0] ){
+					this.getFourChannels( $('.channel-results') );
+				}
+
+				if( $('#video1')[0] ){
+					this.buildVideoHeader( 'video1' );
+				}
+
+				// this.headerAspectRatio();
+				// $(window).resize( this.headerAspectRatio );
+
+				$('.sir').on('click', function(e){
+					e.preventDefault();
+					$('.sir-nav').toggleClass('in');
+				});
+				if( $('.tags')[0] ){
+					var t = $('.tags').text(),
+						tags = t.split(','),
+						tags_content = '';
+					tags.forEach(function(entry){
+						console.log(entry);
+						tags_content += '<span class="label label-info">'+entry.replace(' ', '')+'</span>&nbsp;';
+					});
+					$('.tags').html(tags_content);
+				}
+			},
+		};
+		$(document).ready(function(){
+
+			//{{#request.is_home}}
+			// if( $('#features-list')[0] )
+				// app.loadChannel('http://{{request.host}}/channels/features.json', '#features-list', 6, 0);
+			//{{/request.is_home}}
+			//{{^request.is_home}}
+			// if( $('#recents-list')[0] )
+				// app.loadChannel('http://{{request.host}}/programs.json', '#recents-list', 10, 1);
+			//{{/request.is_home}}
+			app.init();
+
+			// if( $('#video1')[0] ){
+			// 	player = _V_("video1");
+			// 	player.ready(function() {
+			// 		// On Video End
+			// 		player.on('ended', function(){
+			// 			$('.feature img.after-video').removeClass('hidden');
+			// 			$('.feature img.before-video').addClass('hidden');
+			// 			$.when(
+			// 				$('#video1 video').fadeOut(300)
+			// 			).then(function(){
+			// 				$('#video1 video').remove();
+			// 				allow_feature_link();
+			// 			});
+			// 		});
+			// 	});
+			// }
+		});
+	})( jQuery );
+	</script>
+
+	<script type="text/javascript">var switchTo5x=true;</script>
+	<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+	<script type="text/javascript">stLight.options({publisher: "ur-9fb3aef7-ea5b-9df3-ff6c-cebc124cf50f", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+	<!-- **********************  GOOGLE ANALYTICS FOR MarineMotion (ROOT )  **************************-->
+	
+	<script type="text/javascript">
+	
+	</script>
+
+	<!-- *************************  END GOOGLE ANALYTICS SCRIPT ************************ -->
+
+
+
+
+</body>
+</html>

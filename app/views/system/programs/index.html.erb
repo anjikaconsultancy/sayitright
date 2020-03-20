@@ -1,0 +1,29 @@
+  <header class="row">
+    <div class="four columns mobile-two">
+      <h2><%=@programs.count%> Programs</h2> 
+    </div>
+    <div class="eight columns mobile-two"></div>    
+  </header>
+  <hr>
+
+  
+  <section>
+    <%@programs.each do |program| %>  
+      <div class="row">
+        <div class="two columns mobile-one">
+          
+        </div>
+        <div class="eight columns mobile-two">
+          <h4><%=program.title%></h4>
+          <p><%=program.id%> - <%=program.name%> - <%=link_to program.user.name.presence || program.user.email ,edit_system_user_path(program.user)%></p>
+        </div>
+        <div class="two columns mobile-one">
+          <%=link_to "Edit",edit_system_program_path(program),:class=>"button small radius block" %>        
+        </div>
+      </div>
+      <hr>        
+    <%end%>
+  </section>
+
+
+<%= paginate @programs, :theme=>:foundation %>

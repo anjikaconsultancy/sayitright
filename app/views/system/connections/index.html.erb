@@ -1,0 +1,30 @@
+  <header class="row">
+    <div class="ten columns mobile-three">
+      <h2><%=@connections.count%> Connections</h2> 
+    </div>
+    <div class="two columns mobile-one">
+      <%=link_to "Add",new_system_connection_path,:class=>"button small radius block" %>            
+    </div>    
+  </header>
+  <hr>
+
+  
+  <section>
+    <%@connections.each do |connection| %>  
+      <div class="row">
+        <div class="two columns mobile-one">
+          
+        </div>
+        <div class="eight columns mobile-two">
+          <h4><%=connection.site.title %></h4>
+          <p><%=connection.site_id%></p>
+        </div>
+        <div class="two columns mobile-one">
+          <%=link_to "Delete",system_connection_path(connection),:method=>:delete,:class=>"button small radius block" %>        
+        </div>
+      </div>
+      <hr>        
+    <%end%>
+  </section>
+
+

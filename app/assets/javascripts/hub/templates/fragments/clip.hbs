@@ -1,0 +1,31 @@
+<div class="program-editor-fragment">
+  <div class="text-center program-editor-fragment-buttons">
+    <div class="btn-group">
+      <button type="button" class="program-editor-item-add btn btn-info" data-kind="text" data-target="fragment"><span class="glyphicon glyphicon-font"></span></button>
+      <button type="button" class="program-editor-item-add btn btn-info" data-kind="external" data-target="fragment"><span class="glyphicon glyphicon-embed"></span></button>
+      <button type="button" class="program-editor-item-add btn btn-info" data-kind="clip" data-target="fragment"><span class="glyphicon glyphicon-upload"></span></button>
+    </div>  
+  </div>
+
+  <div class="clearfix">
+    <div class="btn-group pull-left">
+      <button type="button" class="program-editor-item-move btn btn-default" data-move="up" data-target="fragment"><span class="glyphicon glyphicon-up_arrow"></span></button>
+      <button type="button" class="program-editor-item-move btn btn-default" data-move="down" data-target="fragment"><span class="glyphicon glyphicon-down_arrow"></span></button>
+    </div>
+    <h4 class="pull-left uppercase">&nbsp;{{kind}}</h4>
+    <button type="button" class="program-editor-item-remove btn btn-default pull-right" data-target="fragment"><span class="glyphicon glyphicon-remove_2"></span></button>
+  </div>
+  
+  
+  {{#unless is_new}}
+  <input type="hidden" name="fragments[{{id}}][id]" value="{{id}}">
+  {{/unless}}
+  <input type="hidden" name="fragments[{{id}}][_destroy]" value="false">
+  <input type="hidden" name="fragments[{{id}}][kind]" value="{{kind}}">
+  <input type="hidden" name="fragments[{{id}}][position]" value="{{position}}">
+  <input type="hidden" name="fragments[{{id}}][clip][id]" value="{{clip.id}}">
+
+  <textarea id="modelFragmentsContent_{{id}}" name="fragments[{{id}}][content]" class="form-control">{{{content}}}</textarea>
+  <div id="modelFragmentsPreview_{{id}}" class="program-editor-fragment-clip" data-clip-id="{{clip.id}}" data-url="{{clip.base_url}}" data-preview="{{clip.preview_url}}" data-kind="{{clip.kind}}" data-status="{{clip.status}}" data-encoded="{{clip.encoded}}">
+  </div>
+</div>
