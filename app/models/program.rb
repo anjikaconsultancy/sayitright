@@ -1,5 +1,6 @@
 class Program
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps
   include ActiveModel::ForbiddenAttributesProtection
     
@@ -9,23 +10,23 @@ class Program
 
   # Scope for content
   belongs_to :site
-  validates_presence_of :site_id 
+  # validates_presence_of :site_id 
 
   # Owner
   belongs_to :user
-  validates_presence_of :user_id  
+  # validates_presence_of :user_id  
   
   # The unique id for everything which maps to url paths
   field :name, type: String  
   before_save do
     self.name = self.name.downcase.parameterize if self.name.present?
   end
-  validates_uniqueness_of :name, case_sensitive: false, scope: :site_id, allow_blank: true
-  validates_length_of :name, within: 4..40, allow_blank: true
+  # validates_uniqueness_of :name, case_sensitive: false, scope: :site_id, allow_blank: true
+  # validates_length_of :name, within: 4..40, allow_blank: true
   # validates_format_of :name, with: /^([[:alnum:]][-]?)+$/ , allow_blank: true, message: "must contain only letters, numbers or dashes"
   # validates_format_of :name, with: /^[[:alpha:]]/, allow_blank: true, message: "must start with a letter"
   # validates_format_of :name, with: /[[:alnum:]]$/, allow_blank: true, message: "must end with a letter or number"
-  validates_exclusion_of :name,  in: %w(edit new index),message: "that name is not allowed"
+  # validates_exclusion_of :name,  in: %w(edit new index),message: "that name is not allowed"
 
 
   # Get the path to this program
@@ -57,13 +58,13 @@ class Program
       # First attempt to find by a bson id, if its not valid it will throw an error and try with the name
       begin
         if external_site
-          external_site.programs.find(Moped::BSON::ObjectId(program_id))
+          external_site.programs.find(BSON::ObjectId(program_id))
         elsif current_site.present?
           current_site.programs.find(program_id)
         else
-          find(Moped::BSON::ObjectId(program_id))
+          find(BSON::ObjectId(program_id))
         end
-      rescue Mongoid::Errors::DocumentNotFound,Moped::Errors::InvalidObjectId
+      rescue Mongoid::Errors::DocumentNotFound#,Moped::Errors::InvalidObjectId
         if external_site
           external_site.programs.find_by(name: program_id)
         elsif current_site.present?
@@ -110,7 +111,7 @@ class Program
 
   # Settings
   field :title, type: String
-  validates_presence_of :title
+  # validates_presence_of :title
   field :summary, type: String
 
   field :language, type: String, default: I18n.locale.to_sym
@@ -144,7 +145,7 @@ class Program
   # :published - published and visible in listings
   STATES = [:draft,:deleted,:disabled,:hidden,:published,'draft','deleted','disabled','hidden','published']  
   field :status, type: Symbol, default: :published
-  validates_inclusion_of :status, in: Program::STATES
+  # validates_inclusion_of :status, in: Program::STATES
 
   # Tags
   field :tags, type: Array, default: []

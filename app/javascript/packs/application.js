@@ -16,3 +16,8 @@
 // const imagePath = (name) => images(name, true)
 
 console.log('Hello World from Webpacker')
+
+require("@rails/ujs").start()
+require("turbolinks").start()
+require("channels")
+require("custom/hub")

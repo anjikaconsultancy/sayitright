@@ -49,12 +49,13 @@ class ApplicationController < ActionController::Base
         # Count parts so we can detect subdomain on either .com .co.uk etc.
         parts = ENV['DEFAULT_HOST'].count "."
         sub_domain = request.subdomain(parts)
-      
+        sub_domain = 'localhost'
         if request.domain(parts) == ENV['DEFAULT_HOST'] and sub_domain != "www"
-          @current_site = Site.find_by(host: request.subdomain(parts))
+          # @current_site = Site.find_by(host: request.subdomain(parts))
+          @current_site =  Site.find_by(host: "localhost")
         else
           #Site.elem_match(domains: { host: domain.host})  
-          # @current_site = Site.find_by(:domains.elem_match => { host: request.host })
+          @current_site = Site.find_by(:domains.elem_match => { host: request.host })
         end  
 
       end

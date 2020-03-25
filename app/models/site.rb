@@ -3,6 +3,7 @@
 
 class Site
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps
   include ActiveModel::ForbiddenAttributesProtection
 
@@ -40,9 +41,9 @@ class Site
     
   # The unique id for this station and host on our domain
   field :host, :type=>String  
-  validates_presence_of :host 
-  validates_uniqueness_of :host, :case_sensitive => false
-  validates_length_of :host, :within => 4..40 
+  # validates_presence_of :host 
+  # validates_uniqueness_of :host, :case_sensitive => false
+  # validates_length_of :host, :within => 4..40 
   # validates_format_of :host, :with => /^([[:alnum:]][-]?)+$/ ,:message=>"must contain only letters, numbers or dashes"
   # validates_format_of :host, :with => /^[[:alpha:]]/,:message=>"must start with a letter"
   # validates_format_of :host, :with => /[[:alnum:]]$/,:message=>"must end with a letter or number"
@@ -76,8 +77,8 @@ class Site
   def self.find_from_path(id)
     if id.present?
       begin
-        find(Moped::BSON::ObjectId(id))
-      rescue Mongoid::Errors::DocumentNotFound,Moped::Errors::InvalidObjectId
+        find(BSON::ObjectId(id))
+      rescue Mongoid::Errors::DocumentNotFound#,Moped::Errors::InvalidObjectId
         find_by(host: id)
       end
     else
@@ -95,7 +96,7 @@ class Site
 
   # Site Settings ===================================================================
   field :title, :type=>String  
-  validates_presence_of :title 
+  #validates_presence_of :title 
 
 
   field :summary, :type=>String  

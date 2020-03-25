@@ -1,5 +1,6 @@
 class System
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
   field :message, type: String
   field :warning, type: String
   

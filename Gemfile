@@ -29,10 +29,14 @@ end
 # Needs newer version than sanitize requests or wont compile
 gem 'nokogiri'#,               '~>1.6'
 
+gem 'mongoid', '~> 7.0.5'
+
 # gem 'strong_parameters'#,      '~>0.1'
-gem 'mongoid'#,                '~>3.1.0'
+# gem 'mongoid'#,                '~>3.1.0'
 gem 'rabl'#,                   '~>0.8.0'
-gem 'kaminari'#,               '~>0.13'
+# gem 'kaminari'#,               '~>0.13'
+gem 'kaminari-mongoid'
+
 gem 'oauth'#,                  '~>0.4'
 gem 'oauth2'#,                 '~>0.7'
 gem 'devise'#,                 '~>2.1'
@@ -53,6 +57,7 @@ gem 'bson_ext'
 gem 'bootsnap', '~> 1.4', '>= 1.4.6'
 gem 'fog-aws'
 gem "webpacker"
+gem 'dotenv-rails', groups: [:development, :test]
 
 # gem 'activeresource'
 

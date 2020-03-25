@@ -1,5 +1,6 @@
 class Clip
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps
     
   # Version for encoding updates
@@ -23,13 +24,13 @@ class Clip
   field :source, type: String
   
   # Validates that this is a valid S3 url, note that we need to encode before we pass to parse or urls with spaces etc fail.
-  validates_each :source, on: :create do |record, attr, value|
-    begin
-      # record.errors.add attr, 'Source file must be an S3 url.' unless URI.parse(URI.encode(value.strip)).host == 's3.amazonaws.com'
-    rescue URI::InvalidURIError
-      record.errors.add attr, 'Source file must be a valid S3 url.'
-    end
-  end
+  # validates_each :source, on: :create do |record, attr, value|
+  #   begin
+  #     # record.errors.add attr, 'Source file must be an S3 url.' unless URI.parse(URI.encode(value.strip)).host == 's3.amazonaws.com'
+  #   rescue URI::InvalidURIError
+  #     record.errors.add attr, 'Source file must be a valid S3 url.'
+  #   end
+  # end
   
   def source_bucket
     # Parse for the bucket, we need to make sure fog gets the decoded url as it encodes again!

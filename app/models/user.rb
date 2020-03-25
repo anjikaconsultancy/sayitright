@@ -1,11 +1,12 @@
 class User
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps  
   include ActiveModel::ForbiddenAttributesProtection
     
   # Relations 
   belongs_to :site
-  validates_presence_of :site_id
+  #validates_presence_of :site_id
 
   has_many :programs
   has_many :clips 
@@ -14,7 +15,7 @@ class User
   # Role
   ROLES = [:user,:publisher,:moderator,:manager,:administrator,'user','publisher','moderator','manager','administrator']
   field :role, type: Symbol, default: :user
-  validates_inclusion_of :role, in: User::ROLES
+  # validates_inclusion_of :role, in: User::ROLES
 
   # Status
   # :active - all ok
@@ -22,7 +23,7 @@ class User
   # :suspended - you may login but your profile and content is hidden (usually when you need to fix something)
   # :deleted - schedule for delete
   field :status, :type=>Symbol, default: :active
-  validates_inclusion_of :status, in: [:active,:disabled,:deleted,'active','disabled','deleted']
+  # validates_inclusion_of :status, in: [:active,:disabled,:deleted,'active','disabled','deleted']
 
   # Username for profile
   field :username, type: String
@@ -30,12 +31,12 @@ class User
     self.username = self.username.downcase if self.username.present?
   end
 
-  validates_length_of :username, minimum: 4, maximum: 20, allow_blank: true
-  validates_uniqueness_of :username, scope: :site_id, case_sensitive:  false, allow_blank: true
+  # validates_length_of :username, minimum: 4, maximum: 20, allow_blank: true
+  # validates_uniqueness_of :username, scope: :site_id, case_sensitive:  false, allow_blank: true
   # validates_format_of :username, with: /^([[:alnum:]][-]?)+$/, allow_blank: true, message: "must contain only letters, numbers or dashes"
   # validates_format_of :username, with: /^[[:alpha:]]/, allow_blank: true, message: "must start with a letter"
   # validates_format_of :username, with: /[[:alnum:]]$/, allow_blank: true, message: "must end with a letter or number"
-  validates_exclusion_of :username, in: %w(edit new index), message: "that name is not allowed"
+  # validates_exclusion_of :username, in: %w(edit new index), message: "that name is not allowed"
 
   # Path to this user
   def path
@@ -57,23 +58,23 @@ class User
 
   # Users display name
   field :name, type: String
-  validates_length_of :name, minimum: 4, maximum: 40
-  validates_presence_of :name  
+  # validates_length_of :name, minimum: 4, maximum: 40
+  # validates_presence_of :name  
   
   # A short bio
   field :bio, :type=>String
-  validates_length_of :bio, minimum: 4, maximum: 120, allow_blank: true
+  # validates_length_of :bio, minimum: 4, maximum: 120, allow_blank: true
 
   # Users website
   field :website, type: String
-  validates_format_of :website, with: URI::regexp(%w(http https)), allow_blank: true
+  # validates_format_of :website, with: URI::regexp(%w(http https)), allow_blank: true
 
 
   # Marketing & Terms
   field :accept_marketing, type: Boolean, default: true
   field :accept_marketing_from_partners, type: Boolean, default: true
   field :accept_terms, type: Boolean
-  validates_acceptance_of :accept_terms, accept: true, allow_nil: false
+  # validates_acceptance_of :accept_terms, accept: true, allow_nil: false
 
   # Settings
   field :language, type: String, default: I18n.locale.to_sym
@@ -91,7 +92,7 @@ class User
          authentication_keys: {email: true,site_id: true}
         #:request_keys, :validatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable           
 
-  before_save :ensure_authentication_token
+  # before_save :ensure_authentication_token
 
   # Database authenticatable
   field :email,              type: String
@@ -132,14 +133,14 @@ class User
   field :invitation_token, type: String
     
   # We remove default validatable to scope to site_id - note we use Devise.config_var to get the config
-  validates_presence_of   :email, if: :email_required?
-  validates_uniqueness_of :email, scope: :site_id, case_sensitive: (Devise.case_insensitive_keys != false), allow_blank: true, if: :email_changed?
-  validates_format_of     :email, with: Devise.email_regexp, allow_blank: true, if: :email_changed?
+  # validates_presence_of   :email, if: :email_required?
+  # validates_uniqueness_of :email, scope: :site_id, case_sensitive: (Devise.case_insensitive_keys != false), allow_blank: true, if: :email_changed?
+  # validates_format_of     :email, with: Devise.email_regexp, allow_blank: true, if: :email_changed?
 
-  validates_presence_of     :password, if: :password_required?
-  validates_confirmation_of :password, if: :password_required?
-  validates_presence_of     :password_confirmation, on: :update, if: :password_required?
-  validates_length_of       :password, within: Devise.password_length, allow_blank: true
+  # validates_presence_of     :password, if: :password_required?
+  # validates_confirmation_of :password, if: :password_required?
+  # validates_presence_of     :password_confirmation, on: :update, if: :password_required?
+  # validates_length_of       :password, within: Devise.password_length, allow_blank: true
 
 
   # This will be set if image has been uploaded

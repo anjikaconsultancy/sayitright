@@ -1,11 +1,12 @@
 class Channel 
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps
   include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :site
-  validates_presence_of :site_id 
-  validates :featured, presence: true, numericality: { only_integer: true }
+  #validates_presence_of :site_id 
+  #validates :featured, presence: true, numericality: { only_integer: true }
 
   # Connections authorised to post
   embeds_many :connections, as: :connectable
@@ -17,12 +18,12 @@ class Channel
     self.name = self.name.downcase.parameterize if self.name.present?
   end
 
-  validates_uniqueness_of :name, case_sensitive: false, scope: :site_id, allow_blank: true
-  validates_length_of :name, within: 4..40, allow_blank: true
+  # validates_uniqueness_of :name, case_sensitive: false, scope: :site_id, allow_blank: true
+  # validates_length_of :name, within: 4..40, allow_blank: true
   # validates_format_of :name, with: /^([[:alnum:]][-]?)+$/, allow_blank: true ,message: "must contain only letters, numbers or dashes"
   # validates_format_of :name, with: /^[[:alpha:]]/, allow_blank: true,message: "must start with a letter"
   # validates_format_of :name, with: /[[:alnum:]]$/, allow_blank: true,message: "must end with a letter or number"
-  validates_exclusion_of :name,  in: %w(edit new index),message: "that name is not allowed"
+  # validates_exclusion_of :name,  in: %w(edit new index),message: "that name is not allowed"
 
   # Path to this program
   def path
@@ -33,8 +34,8 @@ class Channel
   def self.find_from_path(id)
     if id.present?
       begin
-        find(Moped::BSON::ObjectId(id))
-      rescue Mongoid::Errors::DocumentNotFound,Moped::Errors::InvalidObjectId
+        find(BSON::ObjectId(id))
+      rescue Mongoid::Errors::DocumentNotFound#,#Moped::Errors::InvalidObjectId
         find_by(name: id)
       end
     else
@@ -44,7 +45,7 @@ class Channel
 
   # Settings
   field :title, type: String
-  validates_presence_of :title
+  #validates_presence_of :title
   
   field :summary, type: String
 
@@ -63,7 +64,7 @@ class Channel
   # Status
   STATES = [:draft,:deleted,:disabled,:hidden,:published,'draft','deleted','disabled','hidden','published']   
   field :status, type: Symbol, default: :published
-  validates_inclusion_of :status, in: Channel::STATES
+  #validates_inclusion_of :status, in: Channel::STATES
 
   # Publicity
   field :public, type: Boolean, default: false

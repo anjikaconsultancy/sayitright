@@ -1,12 +1,3 @@
-development:
-  clients:
-    default:
-      database: sayitright_development
-      hosts:
-        - localhost:27017
-      options:
-        server_selection_timeout: 1
-
 # development:
 #   sessions:
 #     default:

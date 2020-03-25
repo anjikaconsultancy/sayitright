@@ -11,6 +11,10 @@ development:
       hosts:
         - localhost:27017
       options:
+        # Note that all options listed below are Ruby driver client options (the mongo gem).
+        # Please refer to the driver documentation of the version of the mongo gem you are using
+        # for the most up-to-date list of options.
+        #
         # Change the default write concern. (default = { w: 1 })
         # write:
         #   w: 1
@@ -34,11 +38,13 @@ development:
         #   - 'dbOwner'
 
         # Change the default authentication mechanism. Valid options are: :scram,
-        # :mongodb_cr, :mongodb_x509, and :plain. (default on 3.0 is :scram, default
-        # on 2.4 and 2.6 is :plain)
+        # :mongodb_cr, :mongodb_x509, and :plain. Note that all authentication
+        # mechanisms require username and password, with the exception of :mongodb_x509.
+        # Default on mongoDB 3.0 is :scram, default on 2.4 and 2.6 is :plain.
         # auth_mech: :scram
 
-        # The database or source to authenticate the user against. (default: admin)
+        # The database or source to authenticate the user against.
+        # (default: the database specified above or admin)
         # auth_source: admin
 
         # Force a the driver cluster to behave in a certain manner instead of auto-
@@ -103,10 +109,10 @@ development:
   # Configure Mongoid specific options. (optional)
   options:
     # Includes the root model name in json serialization. (default: false)
-    # include_root_in_json: false
+    include_root_in_json: false
 
     # Include the _type field in serialization. (default: false)
-    # include_type_for_serialization: false
+    include_type_for_serialization: false
 
     # Preload all models in development, needed when models use
     # inheritance. (default: false)
@@ -114,26 +120,38 @@ development:
 
     # Raise an error when performing a #find and the document is not found.
     # (default: true)
-    # raise_not_found_error: true
+    raise_not_found_error: false
 
     # Raise an error when defining a scope with the same name as an
     # existing method. (default: false)
-    # scope_overwrite_exception: false
+    scope_overwrite_exception: false
+
+    # Raise an error when defining a field with the same name as an
+    # existing method. (default: false)
+    # duplicate_fields_exception: false
 
     # Use Active Support's time zone in conversions. (default: true)
-    # use_activesupport_time_zone: true
+    use_activesupport_time_zone: true
 
     # Ensure all times are UTC in the app side. (default: false)
-    # use_utc: false
+    use_utc: false
 
     # Set the Mongoid and Ruby driver log levels when not in a Rails
     # environment. The Mongoid logger will be set to the Rails logger
     # otherwise.(default: :info)
-    # log_level: :info
+    log_level: :info
+
+    # Control whether `belongs_to` association is required. By default
+    # `belongs_to` will trigger a validation error if the association
+    # is not present. (default: true)
+    belongs_to_required_by_default: true
 
     # Application name that is printed to the mongodb logs upon establishing a
     # connection in server versions >= 3.4. Note that the name cannot exceed 128 bytes.
     # app_name: MyApplicationName
+
+    # Use background indexes by default if `background` option not specified. (default: false)
+    # background_indexing: false
 test:
   clients:
     default:

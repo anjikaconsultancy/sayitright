@@ -1,33 +1,181 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  name: "English"
+  
+
+  security:
+    sessions:
+      new:
+        title: "Sign In"
+        sign_in_with_email_or_register_html: "Sign in to <a href=\"%{home_url}\">%{site}</a> with your email and password or <a href=\"%{register_url}\">Sign Up</a> if you don't have an account..."
+        sign_in_with_email_html: "Sign in to <a href=\"%{home_url}\">%{site}</a> with your email and passsword..."
+        email_placeholder: "Email"
+        password_placeholder: "Password"
+        sign_in: "Sign In"
+        request_password: "Forgotten Password?"
+        terms: "Terms"
+        privacy: "Privacy"
+  
+    registrations:
+      new:
+        title: "Sign Up"
+        with_email_html: "Create a new <a href=\"%{site_url}\">%{site}</a> account or <a href=\"%{link}\">Sign In</a> if you already have an account..."
+        accept_terms_html: "I accept the <a href=\"%{link}\">Terms &amp; Conditions</a>"
+        accept_marketing_html: "I accept marketing from <a href=\"%{site_url}\">%{site}</a>"
+        accept_marketing_from_partners: "I accept marketing from network partners."
+        name_placeholder: "Enter Your Name"
+        email_placeholder: "Your Email Address"
+        password_placeholder: "Choose A Password"
+        error_message: "There were problems with your registration..."
+        or_sign_in_html: "Have an account? <a href=\"%{link}\">Sign In</a>."
+  
+    passwords:
+      new:
+        title: "Reset Password"
+        email_password: "Enter your email address associated with your account and we will send you your password reset instructions..."
+        email_placeholder: "Registered Email"
+        reset_password: "Reset Password"
+        need_help: "Need Help?"
+        error_message: "There was a problem, please check the email address..."
+
+  helpers:
+    submit:
+      user:
+        sign_in: "Sign In"
+        sign_up: "Sign Up"
+        update: "Update"
+
+
+  mongoid:
+    attributes:
+      model:  
+        field: "Translation"
+
+
+
+
+
+  power: "powered by"
+  menu:
+    overview: "Overview"
+    notifications: "Notifications"
+    things: "Things"
+    users: "Users"
+    sites: "Sites"
+
+
+  copyright: "Copyright %{year} %{company}"
+  menu:
+    help: "Help"
+    terms: "Terms & Conditions"
+    privacy: "Privacy Statement"
+    about: "About Us"
+    knowledge_base: "Knowledge Base"
+
+    sign_in: "Sign In"
+    sign_up: "Sign Up"
+    sign_out: "Sign Out"
+    
+    logged_in_as: "Logged in as"
+    administering: "Administering"
+    managing: "Managing"
+
+    user:
+      messages: "Messages"
+      posts: "Posts"
+      favorites: "Favorites"
+      settings: "Settings"
+      account: "Account"
+      notifications: "Notifications"
+      last_sign_in: "Last sign in:"
+      
+  users:
+    show: 
+      title: "%{name} Dashboard"
+      activity:
+        menu:
+          all: "All Activity"
+          comments: "Comments"
+          favorites: "Favorites"
+
+        missing: "You have no recent activity."
+  programs:
+    new:
+      title: "Create a program"
+    edit:
+      title: "Program Editor"
+    
+  notifications:
+    index:
+      title: "Notifications"
+
+  notifications:
+    messages:
+      time: "ago"
+      post: "on"
+      from: "from"
+      by: "by"
+      
+    actions:
+      sysadmin: "System Login"
+              
+        
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+    error_notification:
+      default_message: "Some errors were found, please take a look:"
+    
+    labels:
+      user: 
+        email: "Email"
+        password: "Password"
+
+        remember_me: "Remember Me?"
+
+        new:
+          password_confirmation: "Confirm "
+          password: "Password"
+          accept_terms_html: "I accept the <a href=\"%{link}\">Terms &amp; Conditions</a>"
+          accept_marketing_html: "I accept marketing from <strong>%{site}</strong>"
+          accept_marketing_from_partners: "I accept marketing from network partners."
+          current_password: "Current Password"
+          new_password: "New Password"
+    
+    placeholders:
+      user:
+        email: "Email"
+        password: "Password"
+        new:
+          name: "Your Name"
+          email: "Your Email Address"
+          password_confirmation: "Confirm Password"
+          password: "Choose a Password"
+          current_password: "Current Password"
+          new_password: "New Password"             
+    hints:
+      user:
+        new:
+          
+
+
+      
+
+        
+  error_messages: "There were errors!"
+
+  errors:
+    title: "Error"
+    heading: "There was an error"
+    not_found:
+      title: "Not Found"   
+    messages:
+      site_missing: "There is no website registered at this location."
+      page_not_found: "There is no page at this location."
+      
+

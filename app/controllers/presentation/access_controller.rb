@@ -16,7 +16,7 @@ class Presentation::AccessController < ApplicationController
 
   before_action do
     # Disable any non-live site
-    unless current_site.status == :live
+    unless current_site&.status == :live
       render :text=> "Sorry, this site has been disabled. Contact support@sayitright.com form more information."
       false
     else
@@ -28,9 +28,8 @@ class Presentation::AccessController < ApplicationController
     # Redirect if not on domain when present and not development server
 
     # Count parts so we can detect subdomain on either .com .co.uk etc.
-    parts = ENV['DEFAULT_HOST'].count "."
+    parts = ENV['DEFAULT_HOST']&.count "."
     sub_domain = request.subdomain(parts)
-  
     if ENV["RACK_ENV"] != "development" and request.domain(parts) == ENV['DEFAULT_HOST'] and sub_domain != "www"
       if current_site.domains.present?
         # redirect_to request.fullpath, host: current_site.domains.first.host
@@ -46,9 +45,8 @@ class Presentation::AccessController < ApplicationController
     pages = (count / limit.to_f).ceil
     # pages start at 1
     page = [[(params[:page].presence || 1).to_i,1].max,pages].min #>0 <pages
-    
     OpenStruct.new({
-      items: items.page(page).per(limit).cache.entries,  
+      items: items&.page(page).per(limit).cache.entries,  
       count: count,
       page: page,
       pages: pages,
@@ -91,14 +89,13 @@ class Presentation::AccessController < ApplicationController
   
   def render_mustache(template,data)
     #This renders a mustache template and injects our footer code
-    insertion_index = template.index("</body") || template.length
+    insertion_index = template&.index("</body") || template&.length
     template = template[0...insertion_index] << render_footer << template[insertion_index..-1]
     
     Mustache.render(template,data)    
   end
   
   def render_with(locals)
-  
     respond_with do |format|
       format.html { # This needs to be first for IE
         rabl = Rabl::Renderer.new("presentation/#{controller_name}/#{action_name}",nil,:locals=>locals,:scope=>self, :view_path => 'app/views', :format => 'hash').render

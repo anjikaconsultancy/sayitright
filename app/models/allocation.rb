@@ -1,5 +1,6 @@
 class Allocation
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps
   include ActiveModel::ForbiddenAttributesProtection
 
@@ -8,11 +9,11 @@ class Allocation
   # Can be listed on a site or site and channel
   # - You must also set the parent heirachy e.g. :site or :site and :channel
   belongs_to :site
-  validates_presence_of :site_id
+  #validates_presence_of :site_id
   
   belongs_to :channel
 
-  validate :channel_is_public_or_owned_by_site 
+  #validate :channel_is_public_or_owned_by_site 
 
   def channel_is_public_or_owned_by_site
     if (channel && channel.public) || (channel && channel.site_id == site_id) || channel == nil # TODO: Publicity on Sites
@@ -29,7 +30,7 @@ class Allocation
   # :published - this program has been accepted and published at this location
   STATES = [:disabled,:blocked,:shared,:published,'disabled','blocked','shared','published']  
   field :status, type: Symbol, default: :published
-  validates_inclusion_of :status, in: Allocation::STATES
+  #validates_inclusion_of :status, in: Allocation::STATES
     
   # Featured priority
   field :featured, type: Integer, default: 0
