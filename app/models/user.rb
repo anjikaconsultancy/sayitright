@@ -48,7 +48,7 @@ class User
     if id.present?
       begin
         find(Moped::BSON::ObjectId(id))
-      rescue Mongoid::Errors::DocumentNotFound,Moped::Errors::InvalidObjectId
+      rescue Mongoid::Errors::DocumentNotFound#,Moped::Errors::InvalidObjectId
         find_by(username: id)
       end
     else

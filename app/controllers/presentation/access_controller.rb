@@ -90,8 +90,8 @@ class Presentation::AccessController < ApplicationController
   def render_mustache(template,data)
     #This renders a mustache template and injects our footer code
     insertion_index = template&.index("</body") || template&.length
-    template = template[0...insertion_index] << render_footer << template[insertion_index..-1]
-    
+    template = template[0...insertion_index] << render_footer << template[insertion_index..-1] rescue ''
+
     Mustache.render(template,data)    
   end
   
