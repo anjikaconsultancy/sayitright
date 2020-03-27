@@ -28,6 +28,8 @@ Bundler.require(*Rails.groups)
 
 module Sirn
   class Application < Rails::Application
+    APP_NAME = "SayitRight"
+    APP_VERSION = "5.0.0"
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.generators do |g|

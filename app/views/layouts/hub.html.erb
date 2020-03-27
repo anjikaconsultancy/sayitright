@@ -33,14 +33,14 @@
     <!-- <script src="httsp://cdn.iframe.ly/embed.js?api_key=<%#=ENV["IFRAMELY_API_KEY"]%>" type="text/javascript"></script> -->
     <script type="text/javascript" src="//api.filepicker.io/v2/filepicker.js"></script>
     
-    <%= javascript_include_tag "hub" %>
+    <%= javascript_pack_tag "hub" %>
     
     <script>
       //Initilize Hub and Global settings
       var Hub = Hub || {};
       
       $(function(){
-        
+        debugger
         //Global Settings
         Hub.settings = {    
           version: '<%=Sirn::Application::APP_VERSION%>',

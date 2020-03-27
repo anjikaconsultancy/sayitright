@@ -7,15 +7,11 @@
   <%= csrf_meta_tags %>
 
   <title><%#=Sirn::Application::APP_NAME%> - <%#=Sirn::Application::APP_VERSION%></title>
-  
-  <%#= stylesheet_link_tag "system", :media => "all" %>
-  <%= stylesheet_link_tag 'system', media: 'all', 'data-turbolinks-track': 'reload' %>
-
+  <%= stylesheet_link_tag "system", :media => "all" %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 </head>
 <%=content_tag :body, :class=>["controller_#{controller_name}","action_#{action_name}","namespace_#{controller_namespace}"] do %>
-<% binding.pry%>
   <nav class="top-bar fixed">
     <ul>
       <li class="name"><h1><a href="/"><%=current_site.title.presence || current_site.name %></a></h1></li>
