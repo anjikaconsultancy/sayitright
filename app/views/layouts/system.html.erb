@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <%= csrf_meta_tags %>
-
-  <title><%#=Sirn::Application::APP_NAME%> - <%#=Sirn::Application::APP_VERSION%></title>
-  <%= stylesheet_link_tag "system", :media => "all" %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-</head>
-<%=content_tag :body, :class=>["controller_#{controller_name}","action_#{action_name}","namespace_#{controller_namespace}"] do %>
-  <nav class="top-bar fixed">
-    <ul>
-      <li class="name"><h1><a href="/"><%=current_site.title.presence || current_site.name %></a></h1></li>
-      <li class="toggle-topbar"><a href="#"></a></li>
-    </ul>
-
-    <section>  
-      <ul class="right">
-        <%= content_tag(:li,link_to("Dashboard",system_root_path),:class=>("active" if controller_name == 'roots'))%>
-        <%= content_tag(:li,link_to("Users",system_users_path),:class=>("active" if controller_name == 'users'))%>
-        <%= content_tag(:li,link_to("Programs",system_programs_path),:class=>("active" if controller_name == 'programs'))%>
-        <%= content_tag(:li,link_to("Connections",system_connections_path),:class=>("active" if controller_name == 'connections'))%>
-        <%= content_tag(:li,link_to("Jobs",system_jobs_path),:class=>("active" if controller_name == 'jobs'))%>
-        <%= content_tag(:li,link_to("Sites",system_sites_path),:class=>("active" if controller_name == 'sites'))%>
-        <%= content_tag(:li,link_to("Clips",system_clips_path),:class=>("active" if controller_name == 'clips'))%>
-        <%= content_tag(:li,link_to("Settings",system_settings_path),:class=>("active" if controller_name == 'settings'))%>
-
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=Sirn::Application::APP_NAME%> - <%=Sirn::Application::APP_VERSION%></title>
+    <%#= stylesheet_link_tag "system", :media => "all" %>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  </head>
+  <%=content_tag :body, :class=>["controller_#{controller_name}","action_#{action_name}","namespace_#{controller_namespace}"] do %>
+    <nav class="top-bar fixed">
+      <ul>
+        <li class="name"><h1><a href="/"><%=current_site.title.presence || current_site.name %></a></h1></li>
+        <li class="toggle-topbar"><a href="#"></a></li>
       </ul>
-    </section>
-  </nav><br><br><br><br>
-  
-  <div class="row">
-    <div class="twelve columns">
-      <%=yield%>
+      <section>  
+        <ul class="right">
+          <%= content_tag(:li,link_to("Dashboard",system_root_path),:class=>("active" if controller_name == 'roots'))%>
+          <%= content_tag(:li,link_to("Users",system_users_path),:class=>("active" if controller_name == 'users'))%>
+          <%= content_tag(:li,link_to("Programs",system_programs_path),:class=>("active" if controller_name == 'programs'))%>
+          <%= content_tag(:li,link_to("Connections",system_connections_path),:class=>("active" if controller_name == 'connections'))%>
+          <%= content_tag(:li,link_to("Jobs",system_jobs_path),:class=>("active" if controller_name == 'jobs'))%>
+          <%= content_tag(:li,link_to("Sites",system_sites_path),:class=>("active" if controller_name == 'sites'))%>
+          <%= content_tag(:li,link_to("Clips",system_clips_path),:class=>("active" if controller_name == 'clips'))%>
+          <%= content_tag(:li,link_to("Settings",system_settings_path),:class=>("active" if controller_name == 'settings'))%>
+        </ul>
+      </section>
+    </nav><br><br><br><br>
+    <div class="row">
+      <div class="twelve columns">
+        <%=yield%>
+      </div>
     </div>
-  </div>
-  
-<%end%>
+  <%end%>
+  <!-- <body>
+    <%#= yield %>
+  </body> -->
 </html>

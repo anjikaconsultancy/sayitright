@@ -2,13 +2,14 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
-gem 'rails', '~> 6.0.2'
+# gem 'rails', '~> 6.0.2'
+gem 'rails', '~> 5.2', '>= 5.2.4.2'
+
 gem 'puma'#, '~>1.6'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass'#,                   '3.2'
+# group :assets do
   gem 'sass-rails'#,             '3.2.5'
   gem 'uglifier'#,               '~>1.0'
   gem 'coffee-rails'#,           '~>3.2'
@@ -16,9 +17,10 @@ group :assets do
 
   # gem 'compass-rails',          '1.0.3'
   gem 'zurb-foundation'#,        '~>3.2.3'
-  gem 'foundation-icons-sass-rails'#, '~>2.0'  
+  gem 'foundation-rails'
+  gem 'autoprefixer-rails' 
   gem 'handlebars_assets'#,      '0.15' #new version breaks temaplte loading for now?
-end
+# end
 
 # Need to force this to older version or heroku push fails (becuse of current fog gem, update should fix it)
 # gem 'net-scp',                '1.0.4' 
@@ -56,10 +58,11 @@ gem 'bson_ext'
 # gem "moped", github: "mongoid/moped"
 gem 'bootsnap', '~> 1.4', '>= 1.4.6'
 gem 'fog-aws'
-gem "webpacker"
 gem 'dotenv-rails', groups: [:development, :test]
-
-# gem 'activeresource'
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'backbone-on-rails'
+gem 'lodash-rails'
 
 # This breaks our assets
 # gem 'rails_12factor', group: :production

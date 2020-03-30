@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <%= csrf_meta_tags %>
-  <title><%=clean(current_site.title.presence || curent_site.host)%> - <%=yield :title %> </title>
-  
-  <%= stylesheet_pack_tag "security", :media => "all" %>
-  
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-</head>
-<%=content_tag :body, :class=>["controller_#{controller_name}","action_#{action_name}","namespace_#{controller_namespace}"] do %>
-  
-  <div class="row">
-    <div class="twelve columns">
-      <%=yield%>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%=clean(current_site.title.presence || curent_site.host)%> - <%=yield :title %> </title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%#= stylesheet_link_tag "security", :media => "all" %>
+    <%#= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <%=content_tag :body, :class=>["controller_#{controller_name}","action_#{action_name}","namespace_#{controller_namespace}"] do %>
+    <div class="row">
+      <div class="twelve columns">
+        <%=yield%>
+      </div>
     </div>
-  </div>
-  
-<%end%>
+  <%end%>
+  <!-- <body>
+    <%#= yield %>
+  </body> -->
 </html>
