@@ -63,6 +63,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'backbone-on-rails'
 gem 'lodash-rails'
+gem 'rails-backbone-generator'
 
 # This breaks our assets
 # gem 'rails_12factor', group: :production

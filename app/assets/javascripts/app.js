@@ -1,6 +1,7 @@
 var Hub = Hub || {};
 
 Hub.AppView = Backbone.View.extend({
+  
 
   el:'#hub',
 
