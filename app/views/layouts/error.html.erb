@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%if current_site.present? %><%=current_site.title %> / <%end%><%=@error[:title] %> [<%=@error[:status] %>]</title>
+    <title><%if current_site.present? %><%=current_site.try(:title) %> / <%end%><%=@error[:title] %> [<%=@error[:status] %>]</title>
 
     <!-- Bootstrap -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
     
-    <%if current_site.present? and current_site.background_image_url.present?%>
+    <%if current_site.present? and current_site.try(:background_image_url).present?%>
       <style>
         body{
           background:url(<%=current_site.background_image_url%>) no-repeat center center fixed;;             
@@ -39,7 +39,7 @@
               <p><%=@error[:message] %></p>
             </div>
             <div class="modal-footer">
-              <a href="/" class="btn btn-default" role="button">Home</a> <%if current_site.contact_email.present? %><a href="mailto:<%=current_site.contact_email%>" class="btn btn-default" role="button">Contact</a><%end%>  
+              <a href="/" class="btn btn-default" role="button">Home</a> <%if current_site.try(:contact_email).present? %><a href="mailto:<%=current_site.contact_email%>" class="btn btn-default" role="button">Contact</a><%end%>  
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

@@ -3,7 +3,6 @@
 
 class Site
   include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps
   include ActiveModel::ForbiddenAttributesProtection
 
@@ -41,9 +40,9 @@ class Site
     
   # The unique id for this station and host on our domain
   field :host, :type=>String  
-  # validates_presence_of :host 
-  # validates_uniqueness_of :host, :case_sensitive => false
-  # validates_length_of :host, :within => 4..40 
+  validates_presence_of :host 
+  validates_uniqueness_of :host, :case_sensitive => false
+  validates_length_of :host, :within => 4..40 
   # validates_format_of :host, :with => /^([[:alnum:]][-]?)+$/ ,:message=>"must contain only letters, numbers or dashes"
   # validates_format_of :host, :with => /^[[:alpha:]]/,:message=>"must start with a letter"
   # validates_format_of :host, :with => /[[:alnum:]]$/,:message=>"must end with a letter or number"
@@ -78,7 +77,7 @@ class Site
     if id.present?
       begin
         find(BSON::ObjectId(id))
-      rescue Mongoid::Errors::DocumentNotFound#,Moped::Errors::InvalidObjectId
+      rescue Mongoid::Errors::DocumentNotFound
         find_by(host: id)
       end
     else
@@ -96,7 +95,7 @@ class Site
 
   # Site Settings ===================================================================
   field :title, :type=>String  
-  #validates_presence_of :title 
+  validates_presence_of :title 
 
 
   field :summary, :type=>String  
@@ -161,8 +160,8 @@ class Site
         #puts ENV['S3_BUCKET'] + "/sites/#{self.id}/#{i}"
   
         #Cant remember why we do the encode/decode step - clips do it I think something todo with fog
-        # source_bucket = URI.decode(URI.parse(URI.encode(self["#{i}_source"].strip)).path.split('/')[1])  
-        # source_key = URI.decode(URI.parse(URI.encode(self["#{i}_source"].strip)).path.split('/')[2..-1].join('/'))
+        source_bucket = URI.decode(URI.parse(URI.encode(self["#{i}_source"].strip)).path.split('/')[1])  
+        source_key = URI.decode(URI.parse(URI.encode(self["#{i}_source"].strip)).path.split('/')[2..-1].join('/'))
         #puts self["#{i}_source"], source_bucket, source_key
         #This will throw an error and stop the save if there was a problem
         response = FogStorage.copy_object(source_bucket, source_key, ENV['S3_BUCKET'], "sites/#{self.id}/#{i}") 

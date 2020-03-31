@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :mailer_set_url_options
 
   protect_from_forgery with: :exception
-  
+
   # before_action do
   #   # Parameters for debugging
   #   ::NewRelic::Agent.add_custom_parameters(host: current_site.host) if current_site.present?
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def exception(exception)
     puts exception.inspect
     case exception
-    when ActionController::RoutingError, Mongoid::Errors::DocumentNotFound#, Moped::Errors::InvalidObjectId
+    when ActionController::RoutingError, Mongoid::Errors::DocumentNotFound
       @error = {status: 404,title: "Not Found", message: "There is nothing here."}
     when ActiveResource::UnauthorizedAccess
       @error = {status: 401,title: "Unauthorized", message: "You do not have access to this URL."}

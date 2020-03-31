@@ -1,12 +1,11 @@
-class Channel 
+class Channel     
   include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps
   include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :site
-  #validates_presence_of :site_id 
-  #validates :featured, presence: true, numericality: { only_integer: true }
+  validates_presence_of :site_id 
+  validates :featured, presence: true, numericality: { only_integer: true }
 
   # Connections authorised to post
   embeds_many :connections, as: :connectable
@@ -18,12 +17,12 @@ class Channel
     self.name = self.name.downcase.parameterize if self.name.present?
   end
 
-  # validates_uniqueness_of :name, case_sensitive: false, scope: :site_id, allow_blank: true
-  # validates_length_of :name, within: 4..40, allow_blank: true
+  validates_uniqueness_of :name, case_sensitive: false, scope: :site_id, allow_blank: true
+  validates_length_of :name, within: 4..40, allow_blank: true
   # validates_format_of :name, with: /^([[:alnum:]][-]?)+$/, allow_blank: true ,message: "must contain only letters, numbers or dashes"
   # validates_format_of :name, with: /^[[:alpha:]]/, allow_blank: true,message: "must start with a letter"
   # validates_format_of :name, with: /[[:alnum:]]$/, allow_blank: true,message: "must end with a letter or number"
-  # validates_exclusion_of :name,  in: %w(edit new index),message: "that name is not allowed"
+  validates_exclusion_of :name,  in: %w(edit new index),message: "that name is not allowed"
 
   # Path to this program
   def path
@@ -35,7 +34,7 @@ class Channel
     if id.present?
       begin
         find(BSON::ObjectId(id))
-      rescue Mongoid::Errors::DocumentNotFound#,#Moped::Errors::InvalidObjectId
+      rescue Mongoid::Errors::DocumentNotFound
         find_by(name: id)
       end
     else
@@ -45,7 +44,7 @@ class Channel
 
   # Settings
   field :title, type: String
-  #validates_presence_of :title
+  validates_presence_of :title
   
   field :summary, type: String
 
@@ -58,13 +57,13 @@ class Channel
 
   field :publish_at, type: DateTime, default: ->{ created_at.presence || Time.now.utc }
   def publish_at=(t)
-    # self["publish_at"] = Chronic.parse(t.to_s).presence || publish_at.presence || Time.now.utc
+    self["publish_at"] = Chronic.parse(t.to_s).presence || publish_at.presence || Time.now.utc
   end
 
   # Status
   STATES = [:draft,:deleted,:disabled,:hidden,:published,'draft','deleted','disabled','hidden','published']   
   field :status, type: Symbol, default: :published
-  #validates_inclusion_of :status, in: Channel::STATES
+  validates_inclusion_of :status, in: Channel::STATES
 
   # Publicity
   field :public, type: Boolean, default: false
@@ -94,8 +93,8 @@ class Channel
       puts ENV['S3_BUCKET'] + "/channels/#{self.id}/preview"
 
       #Cant remember why we do the encode/decode step - clips do it I think something todo with fog
-      # source_bucket = URI.decode(URI.parse(URI.encode(self.preview_source.strip)).path.split('/')[1])  
-      # source_key = URI.decode(URI.parse(URI.encode(self.preview_source.strip)).path.split('/')[2..-1].join('/'))
+      source_bucket = URI.decode(URI.parse(URI.encode(self.preview_source.strip)).path.split('/')[1])  
+      source_key = URI.decode(URI.parse(URI.encode(self.preview_source.strip)).path.split('/')[2..-1].join('/'))
       puts self.preview_source, source_bucket, source_key
       #This will throw an error and stop the save if there was a problem
       response = FogStorage.copy_object(source_bucket, source_key, ENV['S3_BUCKET'], "channels/#{self.id}/preview") 

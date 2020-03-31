@@ -12,6 +12,7 @@ Hub.DashboardView = Backbone.View.extend({
     this.model.fetch();
   },
   render: function(){
+    debugger
     this.$el.html(HandlebarsTemplates['hub/templates/dashboard']({user:Hub.appView.user.toJSON(),site:Hub.appView.site.toJSON(),system:Hub.appView.system.toJSON(),dashboard:this.model.toJSON()}));
     return this;
   }

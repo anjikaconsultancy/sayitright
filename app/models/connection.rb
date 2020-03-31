@@ -1,6 +1,5 @@
 class Connection
   include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
   include ActiveModel::ForbiddenAttributesProtection
   
   # Polymorphic embedded in site, channel or station

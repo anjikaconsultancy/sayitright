@@ -1,6 +1,6 @@
 class Element
   include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
+  include Mongoid::Timestamps
   include ActiveModel::ForbiddenAttributesProtection
   
   embedded_in :program, :inverse_of => :segments

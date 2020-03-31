@@ -1,6 +1,5 @@
 class Domain
   include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
   include ActiveModel::ForbiddenAttributesProtection
 
   embedded_in :site
@@ -13,9 +12,9 @@ class Domain
   field :path, type: String
 
   # Validate the host is unique across the whole system
-  # validate do |domain|
-  #   domain.errors.add :host, 'is already in use.' if Site.ne(_id: BSON::ObjectId(site.id)).elem_match(domains: { host: domain.host}).first
-  # end
+  validate do |domain|
+    domain.errors.add :host, 'is already in use.' if Site.ne(_id: BSON::ObjectId(site.id)).elem_match(domains: { host: domain.host}).first
+  end
 
   # Add the DNS entry on create
   #after_create do

@@ -1,6 +1,5 @@
 class Theme
   include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps  
   include ActiveModel::ForbiddenAttributesProtection
 
