@@ -8,7 +8,7 @@ Hub.PagesView = Backbone.View.extend({
     this.collection.fetch();
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/pages']({pages:this.collection.toJSON()}));
+    this.$el.html(HandlebarsTemplates['pages']({pages:this.collection.toJSON()}));
     return this;
   }
 });

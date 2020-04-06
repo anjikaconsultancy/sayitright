@@ -14,7 +14,7 @@ Hub.AccountView = Backbone.View.extend({
 
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/account']({errors:this.errors,user:Hub.appView.user.toJSON()}));
+    this.$el.html(HandlebarsTemplates['account']({errors:this.errors,user:Hub.appView.user.toJSON()}));
     return this;
   },
   save : function(e){

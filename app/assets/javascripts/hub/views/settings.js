@@ -24,7 +24,7 @@ Hub.SettingsView = Backbone.View.extend({
     this.listenTo(Hub.appView.site, 'sync', this.render);
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/settings']({site:Hub.appView.site.toJSON(),view_id:this.id}));
+    this.$el.html(HandlebarsTemplates['settings']({site:Hub.appView.site.toJSON(),view_id:this.id}));
     return this;
   },
   switchHostEdit:function(e){
@@ -153,7 +153,7 @@ Hub.SettingsView = Backbone.View.extend({
   addDomain : function(e){
     var domain = prompt("Enter a domain");
     if(domain != null){
-      var $i = $(HandlebarsTemplates['hub/templates/forms/domain']({is_new:true,id:'new_domain_'+new Date().getTime(),host:domain,view_id:this.id}));
+      var $i = $(HandlebarsTemplates['forms/domain']({is_new:true,id:'new_domain_'+new Date().getTime(),host:domain,view_id:this.id}));
       $i.appendTo(this.$('.site-domains'));
     }
   },

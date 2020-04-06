@@ -16,7 +16,7 @@ Hub.ChannelView = Backbone.View.extend({
     }
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/channel']({channel:this.model.toJSON(),view_id:this.id}));
+    this.$el.html(HandlebarsTemplates['channel']({channel:this.model.toJSON(),view_id:this.id}));
     //Need to do this in template somehow - also need to default if it is empty or save fails
     this.$('#'+this.id+'_channelStatus').val(this.model.get('status')||'published');
     

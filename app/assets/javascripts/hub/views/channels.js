@@ -13,7 +13,7 @@ Hub.ChannelsView = Backbone.View.extend({
     this.collection.fetch();
   },  
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/channels']({channels:this.collection.toJSON()}));
+    this.$el.html(HandlebarsTemplates['channels']({channels:this.collection.toJSON()}));
     return this;
   }
 });

@@ -8,7 +8,7 @@ Hub.ThemeView = Backbone.View.extend({
     'click .close-button' : 'close'
   },  
   initialize: function() {
-    this.$el.html(HandlebarsTemplates['hub/templates/theme']({model:this.model.toJSON(),view_id:this.id}));
+    this.$el.html(HandlebarsTemplates['theme']({model:this.model.toJSON(),view_id:this.id}));
     this.templateEditor = ace.edit(this.$('#'+this.id+'_modelTemplate')[0]);
     this.templateEditor.setTheme('ace/theme/chrome');
     this.templateEditor.setShowPrintMargin(false);

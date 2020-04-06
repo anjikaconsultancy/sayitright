@@ -33,11 +33,11 @@
               <textarea class="form-control" id="userBio" name="bio" placeholder="Enter a few details about yourself." rows="3">{{{user.bio}}}</textarea>
             </div>
 
-            {{$ "hub/templates/forms/input" title="Website" type="text" id="userWebsite" name="website" placeholder="http://" value=user.website}}
+            {{$ "forms/input" title="Website" type="text" id="userWebsite" name="website" placeholder="http://" value=user.website}}
 
 
-            {{$ "hub/templates/forms/input" title="Accept Marketing" type="checkbox" id="userAcceptMarketing" name="accept_marketing" checked=true value=user.accept_marketing}}
-            {{$ "hub/templates/forms/input" title="Accept Marketing From Network Partners" type="checkbox" id="userAcceptMarketingFromPartners" name="accept_marketing_from_partners" checked=true value=user.accept_marketing_from_partners}}
+            {{$ "forms/input" title="Accept Marketing" type="checkbox" id="userAcceptMarketing" name="accept_marketing" checked=true value=user.accept_marketing}}
+            {{$ "forms/input" title="Accept Marketing From Network Partners" type="checkbox" id="userAcceptMarketingFromPartners" name="accept_marketing_from_partners" checked=true value=user.accept_marketing_from_partners}}
 
 
             {{#if user.avatar_image_url}}

@@ -17,7 +17,7 @@
           <h4>Domains Targeting This Station</h4>
           <div class="site-domains">
           {{#site.domains}}
-            {{$ "hub/templates/forms/domain" }}
+            {{$ "forms/domain" }}
           {{/site.domains}}
           </div>
           <button type="button" class="btn btn-default site-domain-add">Add Domain</button>
@@ -41,19 +41,19 @@
           </div>
 
 
-          {{$ "hub/templates/forms/text_area" title="Summary" rows="2" id="siteSummary" name="summary" placeholder="Enter a short description of your site" value=site.summary}}
+          {{$ "forms/text_area" title="Summary" rows="2" id="siteSummary" name="summary" placeholder="Enter a short description of your site" value=site.summary}}
 
-          {{$ "hub/templates/forms/input" title="Copyright" type="text" id="siteCopyright" name="copyright" placeholder="Enter Copyright Message" value=site.copyright}}
+          {{$ "forms/input" title="Copyright" type="text" id="siteCopyright" name="copyright" placeholder="Enter Copyright Message" value=site.copyright}}
 
-          {{$ "hub/templates/forms/input" title="Allow Registrations" type="checkbox" id="siteRegisterable" name="registerable" checked=true value=site.registerable}}
+          {{$ "forms/input" title="Allow Registrations" type="checkbox" id="siteRegisterable" name="registerable" checked=true value=site.registerable}}
 
-          {{$ "hub/templates/forms/input" title="Contact Email" type="email" id="siteEmail" name="contact_email" placeholder="Enter Email Address" value=site.contact_email}}
+          {{$ "forms/input" title="Contact Email" type="email" id="siteEmail" name="contact_email" placeholder="Enter Email Address" value=site.contact_email}}
 
-          {{$ "hub/templates/forms/input" title="Google Analytics Id" type="text" id="siteGoogleAnalyticsId" name="google_analytics_id" placeholder="Enter Google Analytics Id" value=site.google_analytics_id}}
+          {{$ "forms/input" title="Google Analytics Id" type="text" id="siteGoogleAnalyticsId" name="google_analytics_id" placeholder="Enter Google Analytics Id" value=site.google_analytics_id}}
 
-          {{$ "hub/templates/forms/text_area" title="Message" rows="5" id="siteMessage" name="message" placeholder="Content to be shown on users dashboards." value=site.message}}
+          {{$ "forms/text_area" title="Message" rows="5" id="siteMessage" name="message" placeholder="Content to be shown on users dashboards." value=site.message}}
 
-          {{$ "hub/templates/forms/text_area" title="Warning" rows="2" id="siteWarning" name="warning" placeholder="Warning to be show on users dashboards" value=site.warning}}
+          {{$ "forms/text_area" title="Warning" rows="2" id="siteWarning" name="warning" placeholder="Warning to be show on users dashboards" value=site.warning}}
 
           
           <div class="form-group">
@@ -76,11 +76,11 @@
             <label for="siteContactUrl">Contact Page</label>
             <input type="text" class="form-control" id="siteContactUrl" name="contact_url" placeholder="http://" value="{{site.contact_url}}">
           </div>
-          {{$ "hub/templates/forms/input" title="Banner Link" type="text" id="siteBannerUrl" name="banner_url" placeholder="http://" value=site.banner_url}}
+          {{$ "forms/input" title="Banner Link" type="text" id="siteBannerUrl" name="banner_url" placeholder="http://" value=site.banner_url}}
 
-          {{$ "hub/templates/forms/input" title="Facebook Page Id" type="text" id="siteFacebookPageId" name="facebook_page_id" placeholder="Enter Facebook Page Id" value=site.facebook_page_id}}
-          {{$ "hub/templates/forms/input" title="Twitter Id" type="text" id="siteTwitterId" name="twitter_id" placeholder="Enter Twitter Id" value=site.twitter_id}}
-          {{$ "hub/templates/forms/input" title="Google+ Page Id" type="text" id="siteGooglePageId" name="google_page_id" placeholder="Enter Google+ Page Id" value=site.google_page_id}}
+          {{$ "forms/input" title="Facebook Page Id" type="text" id="siteFacebookPageId" name="facebook_page_id" placeholder="Enter Facebook Page Id" value=site.facebook_page_id}}
+          {{$ "forms/input" title="Twitter Id" type="text" id="siteTwitterId" name="twitter_id" placeholder="Enter Twitter Id" value=site.twitter_id}}
+          {{$ "forms/input" title="Google+ Page Id" type="text" id="siteGooglePageId" name="google_page_id" placeholder="Enter Google+ Page Id" value=site.google_page_id}}
 
 
           {{#if site.logo_image_url}}

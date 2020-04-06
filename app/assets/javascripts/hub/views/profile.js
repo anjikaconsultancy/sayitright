@@ -15,7 +15,7 @@ Hub.ProfileView = Backbone.View.extend({
     this.listenTo(Hub.appView.user, 'change', this.render);
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/profile']({user:Hub.appView.user.toJSON(),view_id:this.id}));
+    this.$el.html(HandlebarsTemplates['profile']({user:Hub.appView.user.toJSON(),view_id:this.id}));
     return this;
   },
   save : function(e){

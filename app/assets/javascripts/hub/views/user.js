@@ -14,7 +14,7 @@ Hub.UserView = Backbone.View.extend({
     }
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/user']({user:this.model.toJSON(),view_id:this.id,options:{roles:[{name:'Administrator',value:'administrator'},{name:'Manager',value:'manager'},{name:'Moderator',value:'moderator'},{name:'Publisher',value:'publisher'},{name:'User',value:'user'}]}}));
+    this.$el.html(HandlebarsTemplates['user']({user:this.model.toJSON(),view_id:this.id,options:{roles:[{name:'Administrator',value:'administrator'},{name:'Manager',value:'manager'},{name:'Moderator',value:'moderator'},{name:'Publisher',value:'publisher'},{name:'User',value:'user'}]}}));
     return this;
   },
   save : function(e){

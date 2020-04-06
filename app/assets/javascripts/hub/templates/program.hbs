@@ -11,7 +11,7 @@
       <div class="program-editor-segments-container scrollbars">
         <div class="program-editor-segments">
           {{#model.segments}}
-            {{$ "hub/templates/segments/:1" kind}}
+            {{$ "segments/:1" kind}}
           {{/model.segments}} 
           <div class="program-editor-segment program-editor-segment-buttons" style="margin-top:10px;">
             <div class="program-editor-segment-insert" style="display:block!important;">
@@ -23,7 +23,7 @@
       </div>
       <div class="program-editor-fragments">
         {{#model.fragments}}
-          {{$ "hub/templates/fragments/:1" kind}}
+          {{$ "fragments/:1" kind}}
         {{/model.fragments}}
       </div>
       <div class="text-center program-editor-fragment-buttons">
@@ -49,12 +49,12 @@
     </div><!--/navbar-->        
     <div id="programSideSettings" class="page-side-body scrollbars">
       <div class="grid">
-        {{$ "hub/templates/forms/input" title="Title" type="text" id="modelTitle" name="title" placeholder="Enter a title" value=model.title}}
-        {{$ "hub/templates/forms/input" title="Path" type="text" id="modelName" name="name" placeholder="Enter a unique path" value=model.name}}
-        {{$ "hub/templates/forms/text_area" title="Summary" rows="2" id="modelSummary" name="summary" placeholder="Enter a short description for this program" value=model.summary}}
-        {{$ "hub/templates/forms/input" title="Tags" type="text" id="modelTags" name="tags" placeholder="Enter tags" value=model.tags}}
-        {{$ "hub/templates/forms/input" title="Publish Date" type="text" id="modelPublishAt" name="publish_at" placeholder="Enter a date" value=model.publish_at}}
-        {{$ "hub/templates/forms/input" title="Related Content" type="url" id="modelRel" name="rel" placeholder="http://" value=model.rel}}
+        {{$ "forms/input" title="Title" type="text" id="modelTitle" name="title" placeholder="Enter a title" value=model.title}}
+        {{$ "forms/input" title="Path" type="text" id="modelName" name="name" placeholder="Enter a unique path" value=model.name}}
+        {{$ "forms/text_area" title="Summary" rows="2" id="modelSummary" name="summary" placeholder="Enter a short description for this program" value=model.summary}}
+        {{$ "forms/input" title="Tags" type="text" id="modelTags" name="tags" placeholder="Enter tags" value=model.tags}}
+        {{$ "forms/input" title="Publish Date" type="text" id="modelPublishAt" name="publish_at" placeholder="Enter a date" value=model.publish_at}}
+        {{$ "forms/input" title="Related Content" type="url" id="modelRel" name="rel" placeholder="http://" value=model.rel}}
 
         <div class="form-group">
           <label for="{{view_id}}_modelStatus">Status</label>
@@ -84,7 +84,7 @@
           </select>
           <div class="program-editor-allocations">
           {{#allocations}}
-            {{$ "hub/templates/forms/allocation-new" }}
+            {{$ "forms/allocation-new" }}
           {{/allocations}}
           </div>
         </div>

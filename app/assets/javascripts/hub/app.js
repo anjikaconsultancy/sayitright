@@ -66,7 +66,7 @@ Hub.AppView = Backbone.View.extend({
     //this.$('#menu_user_name').text(this.user.get('name'));
 
     //Render Menu
-    this.$('#menu').html(HandlebarsTemplates['hub/templates/menu']({user:this.user.toJSON()}));
+    this.$('#menu').html(HandlebarsTemplates['menu']({user:this.user.toJSON()}));
     
     //Bootstrap tooltips
     this.$('#menu [data-toggle="tooltip"]').tooltip({trigger:'manual'});    

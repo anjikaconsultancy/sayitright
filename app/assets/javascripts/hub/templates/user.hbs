@@ -17,20 +17,20 @@
           <div class="col-sm-4"><p>Change user details.</p></div>
           <div class="col-sm-8">
 
-            {{$ "hub/templates/forms/input" title="Screen Name" type="text" id="{{view_id}}_userUsername" name="username" placeholder="Choose a Screen Name" value=user.username}}
-            {{$ "hub/templates/forms/input" title="Full Name" type="text" id="{{view_id}}_userName" name="name" placeholder="Enter Your Name" value=user.name}}
+            {{$ "forms/input" title="Screen Name" type="text" id="{{view_id}}_userUsername" name="username" placeholder="Choose a Screen Name" value=user.username}}
+            {{$ "forms/input" title="Full Name" type="text" id="{{view_id}}_userName" name="name" placeholder="Enter Your Name" value=user.name}}
             
 
-            {{$ "hub/templates/forms/text_area" title="Bio" id="{{view_id}}_userBio" name="bio" placeholder="Enter a few details about yourself." value=user.bio}}
+            {{$ "forms/text_area" title="Bio" id="{{view_id}}_userBio" name="bio" placeholder="Enter a few details about yourself." value=user.bio}}
 
 
-            {{$ "hub/templates/forms/input" title="Website" type="url" id="{{view_id}}_userWebsite" name="website" placeholder="http://" value=user.website}}
+            {{$ "forms/input" title="Website" type="url" id="{{view_id}}_userWebsite" name="website" placeholder="http://" value=user.website}}
 
 
-            {{$ "hub/templates/forms/checkbox" title="Accept Marketing" id="{{view_id}}_userAcceptMarketing" name="accept_marketing" checked=true value=user.accept_marketing}}
-            {{$ "hub/templates/forms/checkbox" title="Accept Marketing From Network Partners" id="{{view_id}}_userAcceptMarketingFromPartners" name="accept_marketing_from_partners" checked=true value=user.accept_marketing_from_partners}}
+            {{$ "forms/checkbox" title="Accept Marketing" id="{{view_id}}_userAcceptMarketing" name="accept_marketing" checked=true value=user.accept_marketing}}
+            {{$ "forms/checkbox" title="Accept Marketing From Network Partners" id="{{view_id}}_userAcceptMarketingFromPartners" name="accept_marketing_from_partners" checked=true value=user.accept_marketing_from_partners}}
 
-            {{$ "hub/templates/forms/select" options=options.roles title="Role" id="{{view_id}}_userRole" name="role" value=user.role}}
+            {{$ "forms/select" options=options.roles title="Role" id="{{view_id}}_userRole" name="role" value=user.role}}
 
 
           </div>

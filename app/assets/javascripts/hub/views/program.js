@@ -111,7 +111,7 @@ Hub.ProgramView = Backbone.View.extend({
     
     // console.log('a',allocations, savedAllocations);
     
-    this.$el.html(HandlebarsTemplates['hub/templates/program']({model:this.model.toJSON(),allocatedSites: allocatedSites, allocations:allocations,view_id:this.id}));
+    this.$el.html(HandlebarsTemplates['program']({model:this.model.toJSON(),allocatedSites: allocatedSites, allocations:allocations,view_id:this.id}));
     
     var _this = this;
     
@@ -184,7 +184,7 @@ Hub.ProgramView = Backbone.View.extend({
                 //We need to fetch as put does not get data, and wait for response as we dont want to trigger full page refresh
                 clip.fetch({
                   success:function(model, response, options){
-                    var $i = $(HandlebarsTemplates['hub/templates/'+target+'s/clip']({is_new:true,id:'new_'+target+'_'+new Date().getTime(),kind:'clip',position:0,content:'',clip:model,view_id:_this.id}));
+                    var $i = $(HandlebarsTemplates[''+target+'s/clip']({is_new:true,id:'new_'+target+'_'+new Date().getTime(),kind:'clip',position:0,content:'',clip:model,view_id:_this.id}));
                     if($c.length>0){
                       $i.insertBefore($c);}
                     else{
@@ -336,7 +336,7 @@ Hub.ProgramView = Backbone.View.extend({
       case 'external':
         var url = prompt("Enter a url");
         if(url != null){
-          var $i = $(HandlebarsTemplates['hub/templates/'+target+'s/external']({is_new:true,id:'new_'+target+'_'+new Date().getTime(),kind:'external',position:0,content:'',url:url,view_id:this.id}));
+          var $i = $(HandlebarsTemplates[''+target+'s/external']({is_new:true,id:'new_'+target+'_'+new Date().getTime(),kind:'external',position:0,content:'',url:url,view_id:this.id}));
           
           if($c.length>0){
             $i.insertBefore($c);}
@@ -356,7 +356,7 @@ Hub.ProgramView = Backbone.View.extend({
                 //We need to fetch as put does not get data, and wait for response as we dont want to trigger full page refresh
                 clip.fetch({
                   success:function(model, response, options){
-                    var $i = $(HandlebarsTemplates['hub/templates/'+target+'s/clip']({is_new:true,id:'new_'+target+'_'+new Date().getTime(),kind:'clip',position:0,content:'',clip:model,view_id:_this.id}));
+                    var $i = $(HandlebarsTemplates[''+target+'s/clip']({is_new:true,id:'new_'+target+'_'+new Date().getTime(),kind:'clip',position:0,content:'',clip:model,view_id:_this.id}));
                     if($c.length>0){
                       $i.insertBefore($c);}
                     else{
@@ -374,7 +374,7 @@ Hub.ProgramView = Backbone.View.extend({
         break;
       default:
         if(target=='fragment'){
-          var $i = $(HandlebarsTemplates['hub/templates/'+target+'s/text']({is_new:true,id:'new_'+target+'_'+new Date().getTime(),kind:'text',position:0,content:'<p>Enter some text...</p>',view_id:this.id}));
+          var $i = $(HandlebarsTemplates[''+target+'s/text']({is_new:true,id:'new_'+target+'_'+new Date().getTime(),kind:'text',position:0,content:'<p>Enter some text...</p>',view_id:this.id}));
           if($c.length>0){
             $i.insertBefore($c);}
           else{
@@ -467,7 +467,7 @@ Hub.ProgramView = Backbone.View.extend({
       }
     }
     // Replace the whole allocation
-    var $i = $(HandlebarsTemplates['hub/templates/forms/allocation-new'](item.toJSON()));
+    var $i = $(HandlebarsTemplates['forms/allocation-new'](item.toJSON()));
     //console.log($i)
     $t.parent().replaceWith($i);
   },
@@ -513,7 +513,7 @@ Hub.ProgramView = Backbone.View.extend({
     
     var $t = this.$(e.currentTarget);
     var $a = this.$('.program-editor-allocations');
-    var $i = $(HandlebarsTemplates['hub/templates/forms/allocation']({is_new:true,id:'new_allocation_'+new Date().getTime(),status:'published',site:$t.data('site'),channel:$t.data('channel'),view_id:this.id}));
+    var $i = $(HandlebarsTemplates['forms/allocation']({is_new:true,id:'new_allocation_'+new Date().getTime(),status:'published',site:$t.data('site'),channel:$t.data('channel'),view_id:this.id}));
     $i.appendTo($a);
   }
 

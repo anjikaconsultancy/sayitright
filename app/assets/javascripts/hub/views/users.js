@@ -6,7 +6,7 @@ Hub.UsersView = Backbone.View.extend({
     this.collection.fetch();
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/users']({items:this.collection.toJSON()}));
+    this.$el.html(HandlebarsTemplates['users']({items:this.collection.toJSON()}));
     return this;
   }
 });

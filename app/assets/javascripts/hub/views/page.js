@@ -14,7 +14,7 @@ Hub.PageView = Backbone.View.extend({
     }
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/page']({model:this.model.toJSON(),view_id:this.id}));
+    this.$el.html(HandlebarsTemplates['page']({model:this.model.toJSON(),view_id:this.id}));
 
     //Need to do this in template somehow - also need to default if it is empty or save fails
     this.$('#'+this.id+'_modelStatus').val(this.model.get('status')||'published');

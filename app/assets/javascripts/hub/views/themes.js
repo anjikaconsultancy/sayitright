@@ -13,7 +13,7 @@ Hub.ThemesView = Backbone.View.extend({
     this.collection.fetch();
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/themes']({themes:this.collection.toJSON(),site:Hub.appView.site.toJSON()}));
+    this.$el.html(HandlebarsTemplates['themes']({themes:this.collection.toJSON(),site:Hub.appView.site.toJSON()}));
     return this;
   },
   

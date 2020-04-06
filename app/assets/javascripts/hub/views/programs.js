@@ -20,7 +20,7 @@ Hub.ProgramsView = Backbone.View.extend({
     $('.prev').addClass('disabled')
   },
   render: function(){
-    this.$el.html(HandlebarsTemplates['hub/templates/programs']({programs: this.collection.toJSON(), pages: this.collection.pageInfo()}));
+    this.$el.html(HandlebarsTemplates['programs']({programs: this.collection.toJSON(), pages: this.collection.pageInfo()}));
     if (typeof this.collection.pageInfo() != 'undefined'){
       $('#'+this.collection.pageInfo().page).addClass('current-page')
     }
