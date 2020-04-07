@@ -10,14 +10,14 @@ gem 'puma'
 # in pruction environments by default.
 # group :assets do
   # gem 'sass'
-  gem 'sass-rails'
-  gem 'uglifier'
-  gem 'coffee-rails'
-  # gem 'compass-rails'
-  gem 'compass-rails', '~> 3.0', '>= 3.0.2'
-  gem 'zurb-foundation'
-  gem 'foundation-icons-sass-rails'
-  gem 'handlebars_assets' #new version breaks temaplte loading for now?
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+# gem 'compass-rails'
+gem 'compass-rails', '~> 3.0', '>= 3.0.2'
+gem 'zurb-foundation'
+gem 'foundation-icons-sass-rails'
+gem 'handlebars_assets' #new version breaks temaplte loading for now?
 # end
 
 # Need to force this to older version or heroku push fails (becuse of current fog gem, update should fix it)
@@ -52,7 +52,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'bootsnap', require: false
 
 gem 'listen'
-gem 'kaminari-mongoid'
+gem 'kaminari-mongoid', '~> 0.1.0'
 
 # This breaks our assets
 # gem 'rails_12factor', group: :production
@@ -64,6 +64,5 @@ group :test do
 end
 
 group :development do
-  # gem 'debugger' 
   gem 'pry-rails'
 end

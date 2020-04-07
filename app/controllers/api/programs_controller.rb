@@ -7,7 +7,8 @@ class Api::ProgramsController < Api::AccessController
     if current_user.role != :user
       # This is correct for when we can stop editing from other sites
       # @programs = Program.elem_match(allocations: { site_id: current_site.id })
-      @programs = current_site.programs.order_by([:publish_at,:desc]).page(params[:page]).per(10)
+      # @programs = current_site.programs.order_by([:publish_at,:desc]).page(params[:page]).per(10)
+      @programs = current_site.programs.order("publish_at DESC").page(params[:page]).per(10)
       # @programs = pager(@programs,50)
       
       respond_with(@programs)

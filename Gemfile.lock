@@ -76,7 +76,7 @@ GEM
       sprockets (< 4.0)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
-    database_cleaner (1.8.3)
+    database_cleaner (1.8.4)
     delayed_job (4.1.8)
       activesupport (>= 3.0, < 6.1)
     delayed_job_mongoid (2.3.1)
@@ -144,13 +144,12 @@ GEM
       activerecord
       kaminari-core (= 1.2.0)
     kaminari-core (1.2.0)
-    kaminari-mongoid (1.0.1)
-      kaminari-core (~> 1.0)
-      mongoid
+    kaminari-mongoid (0.1.2)
+      kaminari
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.4.0)
+    loofah (2.5.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -296,7 +295,7 @@ DEPENDENCIES
   handlebars_assets
   heroku-api
   kaminari
-  kaminari-mongoid
+  kaminari-mongoid (~> 0.1.0)
   listen
   mime-types
   mongoid
