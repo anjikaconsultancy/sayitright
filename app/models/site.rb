@@ -43,9 +43,9 @@ class Site
   validates_presence_of :host 
   validates_uniqueness_of :host, :case_sensitive => false
   validates_length_of :host, :within => 4..40 
-  # validates_format_of :host, :with => /^([[:alnum:]][-]?)+$/ ,:message=>"must contain only letters, numbers or dashes"
-  # validates_format_of :host, :with => /^[[:alpha:]]/,:message=>"must start with a letter"
-  # validates_format_of :host, :with => /[[:alnum:]]$/,:message=>"must end with a letter or number"
+  validates :host, format: {with:/\A^([[a-zA-Z0-9]][-]?)+$\z/ ,message: "must contain only letters, numbers or dashes"}
+  validates :host, format: {with:/\A^[[:alpha:]]\z/,message: "must start with a letter"}
+  validates :host, format: {with:/\A[[a-zA-Z0-9]]$\z/,message: "must end with a letter or number"}
   before_save do
     self.host = self.host.downcase.parameterize if self.host.present?
   end

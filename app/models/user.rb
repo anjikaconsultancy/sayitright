@@ -21,7 +21,7 @@ class User
   # :disabled - you may not login your profile and content is hidden 
   # :suspended - you may login but your profile and content is hidden (usually when you need to fix something)
   # :deleted - schedule for delete
-  field :status, :type=>Symbol, default: :active
+  field :status, :type=> Symbol, default: :active
   validates_inclusion_of :status, in: [:active,:disabled,:deleted,'active','disabled','deleted']
 
   # Username for profile
@@ -32,9 +32,15 @@ class User
 
   validates_length_of :username, minimum: 4, maximum: 20, allow_blank: true
   validates_uniqueness_of :username, scope: :site_id, case_sensitive:  false, allow_blank: true
-  # validates_format_of :username, with: /^([[:alnum:]][-]?)+$/, allow_blank: true, message: "must contain only letters, numbers or dashes"
+  # validates_format_of :username, with: /^([[:alnum:]][-]?)+$/, allow_blank: true, 
+  # message: "must contain only letters, numbers or dashes"
   # validates_format_of :username, with: /^[[:alpha:]]/, allow_blank: true, message: "must start with a letter"
   # validates_format_of :username, with: /[[:alnum:]]$/, allow_blank: true, message: "must end with a letter or number"
+
+  # validation
+  validates :username, format: { with:  /\A[a-zA-Z0-9]+\z/, message: "must contain only letters, numbers or dashes" }, allow_blank: true
+  validates :username, format: { with: /\^[a-zA-Z]+\z/, message: "must start with a letter" }, allow_blank: true
+  validates :username, format: { with: /\A[a-zA-Z0-9]+$\z/, message: "must end with a letter or number"}, allow_blank: true
   validates_exclusion_of :username, in: %w(edit new index), message: "that name is not allowed"
 
   # Path to this user
@@ -87,8 +93,8 @@ class User
 
   
   # Devise   
-  devise :database_authenticatable, :registerable, :recoverable, :trackable,       
-         authentication_keys: {email: true,site_id: true}
+  devise :database_authenticatable, :registerable, :recoverable, :trackable,
+         authentication_keys: {email: true,site_id: true}#, :token_authenticatable
         #:request_keys, :validatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable           
 
   # before_save :ensure_authentication_token

@@ -6,7 +6,8 @@ class Element
   embedded_in :program, :inverse_of => :segments
   embedded_in :program, :inverse_of => :fragments
 
-  default_scope order_by([[:position, :asc]])
+  # default_scope order_by([[:position, :asc]])
+  default_scope { order(position: :asc) }
     
   # Order as elements array will not maintain it automatically, we use float as makes easy to re-order - just add the items positions of what its between and divide by 2
   field :position, type: Float, default: 0

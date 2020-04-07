@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  
+
   helper_method :current_site
   # rescue_from Exception, :with=> :exception
   before_action :mailer_set_url_options
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     else
       @error = {status: 500,title: "Internal Server Error", message: "An unknown error occurred."}
     end
-    
+
     respond_to do |format|
       format.html { render layout: "error", text: "",status:@error[:status]}
       format.json { render json: @error,status:@error[:status]}
@@ -33,31 +33,31 @@ class ApplicationController < ActionController::Base
   end
 
   def current_site
+    # @current_site ||= Site.find('51fe326d9d1e88274000000f')
+    # return @current_site if @current_site.present?
+
     if params[:site_host].present?
       # Switch site
       @current_site = nil
       session[:site_host] = params[:site_host]
     end
-        
+
     if defined? @current_site and @current_site.present?
       @current_site
     else
       if session[:site_host].present?
         # Grab the site from a session id
         @current_site = Site.find_by(host: session[:site_host])
-      else  
+      else
         # Count parts so we can detect subdomain on either .com .co.uk etc.
         parts = ENV['DEFAULT_HOST'].count "."
         sub_domain = request.subdomain(parts)
-        sub_domain = 'localhost'
         if request.domain(parts) == ENV['DEFAULT_HOST'] and sub_domain != "www"
-          # @current_site = Site.find_by(host: request.subdomain(parts))
-          @current_site =  Site.find_by(host: "localhost")
+          @current_site = Site.find_by(host: request.subdomain(parts))
         else
-          #Site.elem_match(domains: { host: domain.host})  
+          #Site.elem_match(domains: { host: domain.host})
           @current_site = Site.find_by(:domains.elem_match => { host: request.host })
-        end  
-
+        end
       end
     end
   end

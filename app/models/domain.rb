@@ -6,7 +6,7 @@ class Domain
       
   # Host name
   field :host, type: String
-  # validates_format_of :host, :with => /^[a-z][\.\-a-z0-9]*\.[a-z]+$/
+  validates :host, format: { with: /\A^[a-z][\.\-a-z0-9]*\.[a-z]+$\z/ }
 
   # Redirect path
   field :path, type: String

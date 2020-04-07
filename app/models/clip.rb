@@ -6,7 +6,7 @@ class Clip
   field :version, type: Integer, default: 0   
 
   # Status for running jobs - :created,:importing,:encoding,:ready,:failed
-  field :status, type: Symbol, default: :created  
+  field :status, type: Symbol, default: :created
   
   # There is no success status for encodes, we simply set the status to ready and encoded to false for failed
   # This means we still store the files and make them available for download and can re-encode when we can

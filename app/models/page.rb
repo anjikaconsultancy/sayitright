@@ -14,9 +14,10 @@ class Page
   end
   validates_uniqueness_of :name, case_sensitive: false, scope: :site_id, allow_blank: true
   validates_length_of :name, within: 4..40, allow_blank: true
-  # validates_format_of :name, with: /^([[:alnum:]][-]?)+$/ , allow_blank: true, message: "must contain only letters, numbers or dashes"
-  # validates_format_of :name, with: /^[[:alpha:]]/, allow_blank: true, message: "must start with a letter"
-  # validates_format_of :name, with: /[[:alnum:]]$/, allow_blank: true, message: "must end with a letter or number"
+  validates :name, format: { with: /\A^([[a-zA-Z0-9]][-]?)+$\z/, message: "must contain only letters, numbers or dashes" }, allow_blank: true
+  validates :name,format: { with: /\A^[[a-zA-Z]]\z/, message: "must start with a letter" }, allow_blank: true
+  validates :name,format: { with: /[[a-zA-Z0-9]]$\z/, message: "must end with a letter or number" }, allow_blank: true
+
   validates_exclusion_of :name,  in: %w(edit new index),message: "that name is not allowed"
 
   # Path to this program
