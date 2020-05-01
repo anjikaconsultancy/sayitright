@@ -59,7 +59,15 @@ class ApplicationController < ActionController::Base
           @current_site = Site.find_by(:domains.elem_match => { host: request.host })
         end
       end
+      @current_site = Site.first if @current_site.blank?
     end
+    puts "==============================================================="
+    puts "#{ENV['DEFAULT_HOST']}"
+    puts "#{parts}"
+    puts "#{sub_domain}"
+    puts "#{request.host}"
+    puts "#{@current}"
+    puts "==============================================================="
   end
 
   def mailer_set_url_options
