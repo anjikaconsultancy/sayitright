@@ -91,8 +91,7 @@ class Presentation::AccessController < ApplicationController
     #This renders a mustache template and injects our footer code
     insertion_index = template&.index("</body") || template&.length
     template = template[0...insertion_index] << render_footer << template[insertion_index..-1] rescue ''
-
-    Mustache.render(template,data)    
+    Mustache.render(template,data) 
   end
   
   def render_with(locals)
@@ -101,17 +100,17 @@ class Presentation::AccessController < ApplicationController
         rabl = Rabl::Renderer.new("presentation/#{controller_name}/#{action_name}",nil,:locals=>locals,:scope=>self, :view_path => 'app/views', :format => 'hash').render
 
         if params[:theme].present?
-          render text: render_mustache(Theme.find(params[:theme]).template, rabl) 
+          render html: render_mustache(Theme.find(params[:theme]).template, rabl) 
         elsif current_site.theme.present?
-          render text: render_mustache(current_site.theme.template, rabl)
+          render html: render_mustache(current_site.theme.template, rabl).html_safe
         else          
-          render text: render_mustache(Theme.find(ENV['DEFAULT_THEME_ID']).template, rabl)
+          render html: render_mustache(Theme.find(ENV['DEFAULT_THEME_ID']).template, rabl)
         end
       }
       format.pop {
         rabl = Rabl::Renderer.new("presentation/#{controller_name}/#{action_name}",nil,:locals=>locals,:scope=>self, :view_path => 'app/views', :format => 'hash').render
         
-        render text: render_mustache(Theme.find(ENV['POPUP_THEME_ID']).template, rabl)
+        render html: render_mustache(Theme.find(ENV['POPUP_THEME_ID']).template, rabl)
       }
       format.json {
         
@@ -128,9 +127,9 @@ class Presentation::AccessController < ApplicationController
         rabl = Rabl::Renderer.new("presentation/#{controller_name}/#{action_name}",nil,:locals=>locals,:scope=>self, :view_path => 'app/views', :format => 'hash').render
 
         if current_site.theme.present?
-          render text: render_mustache(current_site.theme.template, rabl)
+          render html: render_mustache(current_site.theme.template, rabl)
         else          
-          render text: render_mustache(Theme.find(ENV['DEFAULT_THEME_ID']).template, rabl)
+          render html: render_mustache(Theme.find(ENV['DEFAULT_THEME_ID']).template, rabl)
         end
       }
     end    

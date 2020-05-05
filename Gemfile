@@ -66,3 +66,4 @@ end
 group :development do
   gem 'pry-rails'
 end
+gem 'newrelic_rpm', '~> 5.2', '>= 5.2.0.345'
