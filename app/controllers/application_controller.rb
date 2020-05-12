@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   # rescue_from Exception, :with=> :exception
   before_action :mailer_set_url_options
   protect_from_forgery with: :exception
+  skip_before_action :verify_authenticity_token
 
   before_action do
     # Parameters for debugging

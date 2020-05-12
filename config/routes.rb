@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   # API
-  namespace :api do
+  namespace :api, defaults: {format: 'json'} do
     resource :system, only: [:show]
     resource :user, only: [:show,:update]
     resource :site, only: [:show,:update]
