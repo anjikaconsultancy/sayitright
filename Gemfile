@@ -53,6 +53,7 @@ gem 'bootsnap', require: false
 
 gem 'listen'
 gem 'kaminari-mongoid', '~> 0.1.0'
+gem 'activeresource'
 
 # This breaks our assets
 # gem 'rails_12factor', group: :production
@@ -68,4 +69,3 @@ group :development do
 end
 gem 'newrelic_rpm', '~> 5.2', '>= 5.2.0.345'
 gem 'rails_12factor', group: :production
-
