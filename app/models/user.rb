@@ -52,7 +52,7 @@ class User
   def self.find_from_path(id)
     if id.present?
       begin
-        find(BSON::ObjectId(id))
+        find(BSON::ObjectId(id)) rescue find_by(name: id)
       rescue Mongoid::Errors::DocumentNotFound
         find_by(username: id)
       end
