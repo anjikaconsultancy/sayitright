@@ -53,13 +53,12 @@ class Program
         program_id = id  
         external_site = nil
       end
-
       # First attempt to find by a bson id, if its not valid it will throw an error and try with the name
       begin
         if external_site
-          external_site.programs.find(BSON::ObjectId(program_id))
+          external_site.programs.find(program_id) || external_site.programs.find_by(name: program_id)
         elsif current_site.present?
-          current_site.programs.find(program_id)
+          current_site.programs.find(program_id) || current_site.programs.find_by_name_or_title(program_id)
         else
           find(BSON::ObjectId(program_id))
         end
@@ -75,6 +74,10 @@ class Program
     else
       raise ActionController::RoutingError.new('Bad Program Id')
     end    
+  end
+
+  def self.find_by_name_or_title program_id
+    self.find_by(title: program_id) || self.find_by(name: program_id)
   end
 
   # Our content elements - we seem to need inverse of to make this work with the same base class
