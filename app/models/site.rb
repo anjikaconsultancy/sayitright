@@ -29,7 +29,7 @@ class Site
   
   belongs_to :theme # Current theme
 
-  belongs_to :network, class_name: "Site", inverse_of: :stations # Our parent network
+  belongs_to :network, class_name: "Site", inverse_of: :stations, optional: true # Our parent network
   has_many   :stations, class_name: "Site", inverse_of: :network # Our child stations
   
   
@@ -44,8 +44,8 @@ class Site
   validates_uniqueness_of :host, :case_sensitive => false
   validates_length_of :host, :within => 4..40 
   validates :host, format: {with:/\A^([[a-zA-Z0-9]][-]?)+$\z/ ,message: "must contain only letters, numbers or dashes"}
-  validates :host, format: {with:/\A^[[:alpha:]]\z/,message: "must start with a letter"}
-  validates :host, format: {with:/\A[[a-zA-Z0-9]]$\z/,message: "must end with a letter or number"}
+  # validates :host, format: {with:/\A^[[:alpha:]]\z/,message: "must start with a letter"}
+  # validates :host, format: {with:/\A[[a-zA-Z0-9]]$\z/,message: "must end with a letter or number"}
   before_save do
     self.host = self.host.downcase.parameterize if self.host.present?
   end
