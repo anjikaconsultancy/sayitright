@@ -107,11 +107,11 @@ class Api::ProgramsController < Api::AccessController
         segment[:clip_id]    = segment[:clip][:id]    if segment.try(:[],:clip).try(:[],:id).present?
       end
     end
-    # if params[:fragments_attributes]
-    #   params[:fragments_attributes].each do |fragment|
-    #     fragment[:clip_id]    = fragment[:clip][:id]    if fragment.try(:[],:clip).try(:[],:id).present?
-    #   end
-    # end
+    if params[:fragments_attributes]
+      params[:fragments_attributes].each do |fragment|
+        fragment[:clip_id]    = fragment[:clip][:id]    if fragment.try(:[],:clip).try(:[],:id).present?
+      end
+    end
 
     # List of what were going to permit
     permits = []
@@ -122,7 +122,7 @@ class Api::ProgramsController < Api::AccessController
       
       permits.concat [:name,:title,:rel,:summary,:language,:status,:tags,:publish_at]
       permits << {segments_attributes: element_content}
-      # permits << {fragments_attributes: element_content}
+      permits << {fragments_attributes: element_content}
     end
 
     # First permit allocations access to moderators on any site or owners

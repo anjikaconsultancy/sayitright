@@ -27,7 +27,7 @@ class Site
   embeds_many :domains, cascade_callbacks: true # Site has many domains, we need to cascade callbacks so the DNS is updated
   accepts_nested_attributes_for :domains, allow_destroy: true
   
-  belongs_to :theme # Current theme
+  belongs_to :theme, optional: true # Current theme
 
   belongs_to :network, class_name: "Site", inverse_of: :stations, optional: true # Our parent network
   has_many   :stations, class_name: "Site", inverse_of: :network # Our child stations
