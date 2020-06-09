@@ -86,7 +86,7 @@ class Program
   accepts_nested_attributes_for :segments, allow_destroy: true
   accepts_nested_attributes_for :fragments, allow_destroy: true
 
-  belongs_to :preview, class_name: "Clip"
+  belongs_to :preview, class_name: "Clip", optional: true
   before_save do
     self[:preview_id] = segments.where(kind: :clip).first.try(:clip_id) || fragments.where(kind: :clip).first.try(:clip_id)
   end
