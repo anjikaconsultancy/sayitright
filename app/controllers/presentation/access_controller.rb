@@ -1,13 +1,13 @@
 class Presentation::AccessController < ApplicationController
-     
+
   respond_to :html,:json,:xml,:pop
-  
+
   layout nil
-  
+
   before_action do
     # For timing this request and viewing cached pages
     @request_time = Time.now
-    
+
     # Set cache header
     unless params[:nocache].present?
       expires_in 10.seconds, public: true
@@ -23,7 +23,7 @@ class Presentation::AccessController < ApplicationController
       true
     end
   end
-  
+
   before_action do
     # Redirect if not on domain when present and not development server
 
@@ -35,9 +35,8 @@ class Presentation::AccessController < ApplicationController
         # redirect_to request.fullpath, host: current_site.domains.first.host
         redirect_to request.protocol + current_site.domains.first.host + request.port_string + request.fullpath
       end
-    end      
-    
-  end  
+    end
+  end
 
   # Our pager helper
   def pager(items,limit)
@@ -46,7 +45,7 @@ class Presentation::AccessController < ApplicationController
     # pages start at 1
     page = [[(params[:page].presence || 1).to_i,1].max,pages].min #>0 <pages
     OpenStruct.new({
-      items: items&.page(page).per(limit).cache.entries,  
+      items: items&.page(page).per(limit).cache.entries,
       count: count,
       page: page,
       pages: pages,
@@ -57,16 +56,15 @@ class Presentation::AccessController < ApplicationController
     
   # When we render Rabl inline it does not get all the helpers, so wrap cloudinary in our own
   #helper_method :cdn_image_path
-  
+
   #def cdn_image_path(source,options)
   #  Cloudinary::Utils.cloudinary_url(source, options)
   #end
-  
-  
+
   def render_rabl
     render_with({})
   end
-  
+
   def render_footer
     footer = ""
     if current_site.google_analytics_id.present? or (current_site.network.present? and current_site.network.google_analytics_id.present?)
@@ -91,36 +89,35 @@ class Presentation::AccessController < ApplicationController
     #This renders a mustache template and injects our footer code
     insertion_index = template&.index("</body") || template&.length
     template = template[0...insertion_index] << render_footer << template[insertion_index..-1] rescue ''
-
-    Mustache.render(template,data)    
+    Mustache.render(template,data) 
   end
-  
+
   def render_with(locals)
     respond_with do |format|
       format.html { # This needs to be first for IE
         rabl = Rabl::Renderer.new("presentation/#{controller_name}/#{action_name}",nil,:locals=>locals,:scope=>self, :view_path => 'app/views', :format => 'hash').render
 
         if params[:theme].present?
-          render text: render_mustache(Theme.find(params[:theme]).template, rabl) 
+          render plain: render_mustache(Theme.find(params[:theme]).template, rabl)
         elsif current_site.theme.present?
-          render text: render_mustache(current_site.theme.template, rabl)
+          render plain: render_mustache(current_site.theme.template, rabl)
         else          
-          render text: render_mustache(Theme.find(ENV['DEFAULT_THEME_ID']).template, rabl)
+          render plain: render_mustache(Theme.find(ENV['DEFAULT_THEME_ID']).template, rabl)
         end
       }
       format.pop {
         rabl = Rabl::Renderer.new("presentation/#{controller_name}/#{action_name}",nil,:locals=>locals,:scope=>self, :view_path => 'app/views', :format => 'hash').render
         
-        render text: render_mustache(Theme.find(ENV['POPUP_THEME_ID']).template, rabl)
+        render plain: render_mustache(Theme.find(ENV['POPUP_THEME_ID']).template, rabl)
       }
       format.json {
-        
+
         headers['Access-Control-Allow-Origin'] = '*'
         headers['Access-Control-Allow-Methods'] = '*'
         headers['Access-Control-Request-Method'] = '*'
         headers['Access-Control-Max-Age'] = '10000'
         headers['Access-Control-Allow-Headers'] = '*' #'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        
+
         Rabl::Renderer.new("presentation/#{controller_name}/#{action_name}",nil,:locals=>locals,:scope=>self, :view_path => 'app/views', :format => 'json').render
       }
       format.xml {Rabl::Renderer.new("presentation/#{controller_name}/#{action_name}",nil,:locals=>locals,:scope=>self, :view_path => 'app/views', :format => 'xml').render}
@@ -128,11 +125,12 @@ class Presentation::AccessController < ApplicationController
         rabl = Rabl::Renderer.new("presentation/#{controller_name}/#{action_name}",nil,:locals=>locals,:scope=>self, :view_path => 'app/views', :format => 'hash').render
 
         if current_site.theme.present?
-          render text: render_mustache(current_site.theme.template, rabl)
+          render plain: render_mustache(current_site.theme.template, rabl)
         else          
-          render text: render_mustache(Theme.find(ENV['DEFAULT_THEME_ID']).template, rabl)
+          render plain: render_mustache(Theme.find(ENV['DEFAULT_THEME_ID']).template, rabl)
         end
       }
-    end    
+    end
   end
+
 end

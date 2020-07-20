@@ -52,7 +52,7 @@
 		$(document).ready(function(){
 		  //Lets us set the slide from a hash e.g. /playlist#2
 		  //But, maybe this should be by element id?
-      // var currentSlide = parseInt(window.location.hash.substr(1))||0;
+      var currentSlide = parseInt(window.location.hash.substr(1))||0;
       var slideCount = $(".slide").length;
       if(currentSlide >= slideCount){
         currentSlide = slideCount -1;

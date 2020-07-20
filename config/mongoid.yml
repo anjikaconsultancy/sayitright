@@ -11,8 +11,8 @@ development:
       # hosts:
       #   - localhost:27017
       # uri: mongodb://deepti:sirn2020pass@candidate.17.mongolayer.com:10482,candidate.16.mongolayer.com:10505/sirn_staging?replicaSet=set-53d1bd0ec20f0b79e800085b
-
-      uri: mongodb://tester:2020pin_tester@candidate.17.mongolayer.com:10482,candidate.16.mongolayer.com:10505/sirn_staging?replicaSet=set-53d1bd0ec20f0b79e800085b
+      uri: "<%=ENV['MONGOHQ_URL']%>"
+      # uri: mongodb://tester:2020pin_tester@candidate.17.mongolayer.com:10482,candidate.16.mongolayer.com:10505/sirn_staging?replicaSet=set-53d1bd0ec20f0b79e800085b
 
       options:
         # Note that all options listed below are Ruby driver client options (the mongo gem).

@@ -2,7 +2,7 @@ class Program
   include Mongoid::Document
   include Mongoid::Timestamps
   include ActiveModel::ForbiddenAttributesProtection
-    
+
   # Allocations - where this program is listed, together with the status this determines visibility.
   embeds_many :allocations
   accepts_nested_attributes_for :allocations, allow_destroy: true #, reject_if: proc {|a| a['site_id'].blank?}
@@ -14,7 +14,7 @@ class Program
   # Owner
   belongs_to :user
   validates_presence_of :user_id  
-  
+
   # The unique id for everything which maps to url paths
   field :name, type: String  
   before_save do
@@ -23,8 +23,7 @@ class Program
   validates_uniqueness_of :name, case_sensitive: false, scope: :site_id, allow_blank: true
   validates_length_of :name, within: 4..40, allow_blank: true
   validates :name, format: { with: /\A^([[a-zA-Z0-9]][-]?)+$\z/, message: "must contain only letters, numbers or dashes"}, allow_blank: true
-  validates :name, format: { with: /\A^[[a-zA-Z]]\z/, message: "must start with a letter"}, allow_blank: true
-  validates :name, format: { with: /\A[[a-zA-Z0-9]]$\z/, message: "must end with a letter or number"}, allow_blank: true
+
   validates_exclusion_of :name,  in: %w(edit new index),message: "that name is not allowed"
 
 
@@ -53,15 +52,14 @@ class Program
         program_id = id  
         external_site = nil
       end
-
       # First attempt to find by a bson id, if its not valid it will throw an error and try with the name
       begin
         if external_site
-          external_site.programs.find(BSON::ObjectId(program_id))
+          external_site.programs.find(program_id) || external_site.programs.find_by(name: program_id)
         elsif current_site.present?
-          current_site.programs.find(program_id)
+          current_site.programs.find(program_id) || current_site.programs.find_by_name_or_title(program_id)
         else
-          find(BSON::ObjectId(program_id))
+          find_by(name: program_id) # find(BSON::ObjectId(program_id))
         end
       rescue Mongoid::Errors::DocumentNotFound
         if external_site
@@ -74,7 +72,11 @@ class Program
       end
     else
       raise ActionController::RoutingError.new('Bad Program Id')
-    end    
+    end
+  end
+
+  def self.find_by_name_or_title program_id
+    self.find_by(title: program_id) || self.find_by(name: program_id)
   end
 
   # Our content elements - we seem to need inverse of to make this work with the same base class
@@ -84,23 +86,23 @@ class Program
   accepts_nested_attributes_for :segments, allow_destroy: true
   accepts_nested_attributes_for :fragments, allow_destroy: true
 
-  belongs_to :preview, class_name: "Clip"
+  belongs_to :preview, class_name: "Clip", optional: true
   before_save do
     self[:preview_id] = segments.where(kind: :clip).first.try(:clip_id) || fragments.where(kind: :clip).first.try(:clip_id)
   end
-  
+
   def preview_original
     preview.preview_original if preview_id.present?
   end
-  
+
   def preview_url
     preview.preview_url if preview_id.present?
   end
-  
+
   def image_url
     preview.image_url if preview_id.present?
   end  
-  
+
   def preview_resize_url(width,height,fit)
     preview.preview_resize_url(width,height,fit) if preview_id.present?  
   end
@@ -156,9 +158,9 @@ class Program
   end
 
   # For random queries
-  field :random,  type: Float, default:0.0 
+  field :random,  type: Float, default:0.0
   before_save do
-    self.random  = rand 
+    self.random  = rand
   end
-          
+
 end
