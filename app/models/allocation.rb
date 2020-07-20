@@ -1,16 +1,16 @@
 class Allocation
   include Mongoid::Document
   include Mongoid::Timestamps
-  include ActiveModel::ForbiddenAttributesProtection
+  # include ActiveModel::ForbiddenAttributesProtection
 
   embedded_in :program
   
   # Can be listed on a site or site and channel
   # - You must also set the parent heirachy e.g. :site or :site and :channel
-  belongs_to :site
+  belongs_to :site, optional: true
   validates_presence_of :site_id
   
-  belongs_to :channel
+  belongs_to :channel, optional: true
 
   validate :channel_is_public_or_owned_by_site 
 

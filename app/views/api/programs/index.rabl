@@ -9,7 +9,7 @@ node(:publish_at){|this| this.publish_at.to_formatted_s(:long)}
 node(:description){|p| Sanitize.clean(p.description).truncate(128, :separator => ' ', :omission => '...') }
 node(:total) { @programs.total_count }
 node(:page) { @programs.current_page }
-node(:pages) { @programs.num_pages }
+node(:pages) { @programs.total_pages }
 node :previews, :if => lambda { |m| m.has_preview? } do |program|
   {
     :limit_1920_url  => program.preview.limit_1920_url,

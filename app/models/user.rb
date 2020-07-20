@@ -38,9 +38,8 @@ class User
   # validates_format_of :username, with: /[[:alnum:]]$/, allow_blank: true, message: "must end with a letter or number"
 
   # validation
-  validates :username, format: { with:  /\A[a-zA-Z0-9]+\z/, message: "must contain only letters, numbers or dashes" }, allow_blank: true
-  validates :username, format: { with: /\^[a-zA-Z]+\z/, message: "must start with a letter" }, allow_blank: true
-  validates :username, format: { with: /\A[a-zA-Z0-9]+$\z/, message: "must end with a letter or number"}, allow_blank: true
+  validates :username, format: { with: /\A[a-zA-Z0-9-]+\Z/, message: "must contain only letters, numbers or dashes" }, allow_blank: true
+
   validates_exclusion_of :username, in: %w(edit new index), message: "that name is not allowed"
 
   # Path to this user
@@ -52,7 +51,7 @@ class User
   def self.find_from_path(id)
     if id.present?
       begin
-        find(BSON::ObjectId(id))
+        find(BSON::ObjectId(id)) rescue find_by(name: id)
       rescue Mongoid::Errors::DocumentNotFound
         find_by(username: id)
       end

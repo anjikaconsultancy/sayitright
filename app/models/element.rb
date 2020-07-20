@@ -23,6 +23,5 @@ class Element
   field :url, type: String
   
   # Clip
-  belongs_to :clip
-
+  belongs_to :clip, optional: true
 end

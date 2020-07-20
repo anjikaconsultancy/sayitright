@@ -24,7 +24,6 @@ class Api::UsersController < Api::AccessController
   end
   
   def update  
-  
     if params[:id] and params[:id] != current_user.id.to_s # json includes id on current_user so allow for that
       if [:administrator,:manager].include?(current_user.role)
         @user = current_site.users.find(params[:id])
@@ -35,7 +34,7 @@ class Api::UsersController < Api::AccessController
       @user = current_user
     end 
     
-    @user.update_attributes(resource_params)
+    @user.update_attributes!(resource_params)
             
     respond_with(@user) 
   end
