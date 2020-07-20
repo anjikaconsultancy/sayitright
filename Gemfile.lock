@@ -180,6 +180,7 @@ GEM
     net-scp (2.0.0)
       net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
+    newrelic_rpm (5.7.0.350)
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
@@ -271,7 +272,7 @@ GEM
       rack (>= 2.0.6)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
     zencoder (2.5.1)
       multi_json
     zurb-foundation (4.3.2)
@@ -302,6 +303,7 @@ DEPENDENCIES
   mustache (~> 1.1)
   net-scp
   net-ssh
+  newrelic_rpm (~> 5.2, >= 5.2.0.345)
   nokogiri
   oauth
   oauth2

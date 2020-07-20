@@ -1,17 +1,16 @@
 class ApplicationController < ActionController::Base
+  include Presentation::AccessHelper
 
-  helper_method :current_site
   # rescue_from Exception, :with=> :exception
   before_action :mailer_set_url_options
-
   protect_from_forgery with: :exception
 
-  # before_action do
-  #   # Parameters for debugging
-  #   ::NewRelic::Agent.add_custom_parameters(host: current_site.host) if current_site.present?
-  #   ::NewRelic::Agent.add_custom_parameters(site: current_site.id.to_s) if current_site.present?
-  #   ::NewRelic::Agent.add_custom_parameters(user: current_user.id.to_s) if current_user.present?
-  # end
+  before_action do
+    # Parameters for debugging
+    ::NewRelic::Agent.add_custom_attributes(host: current_site.host) if current_site.present?
+    ::NewRelic::Agent.add_custom_attributes(site: current_site.id.to_s) if current_site.present?
+    ::NewRelic::Agent.add_custom_attributes(user: current_user.id.to_s) if current_user.present?
+  end
 
   def exception(exception)
     puts exception.inspect
@@ -30,36 +29,6 @@ class ApplicationController < ActionController::Base
       format.xml { render xml: @error, root: "error",status:@error[:status]}
       format.all  { render nothing: true, status:@error[:status] }
     end    
-  end
-
-  def current_site
-    # @current_site ||= Site.find('51fe326d9d1e88274000000f')
-    # return @current_site if @current_site.present?
-
-    if params[:site_host].present?
-      # Switch site
-      @current_site = nil
-      session[:site_host] = params[:site_host]
-    end
-
-    if defined? @current_site and @current_site.present?
-      @current_site
-    else
-      if session[:site_host].present?
-        # Grab the site from a session id
-        @current_site = Site.find_by(host: session[:site_host])
-      else
-        # Count parts so we can detect subdomain on either .com .co.uk etc.
-        parts = ENV['DEFAULT_HOST'].count "."
-        sub_domain = request.subdomain(parts)
-        if request.domain(parts) == ENV['DEFAULT_HOST'] and sub_domain != "www"
-          @current_site = Site.find_by(host: request.subdomain(parts))
-        else
-          #Site.elem_match(domains: { host: domain.host})
-          @current_site = Site.find_by(:domains.elem_match => { host: request.host })
-        end
-      end
-    end
   end
 
   def mailer_set_url_options
